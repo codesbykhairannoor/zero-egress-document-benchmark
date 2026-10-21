@@ -1,35 +1,31 @@
-@article{haas2017bringing,
+@inproceedings{haas2017bringing,
   author    = {Haas, Andreas and Rossberg, Andreas and Schuff, Derek L. and Titzer, Ben L. and Holman, Michael and Gohman, Dan and Wagner, Luke and Zakai, Alon and Bastien, JF},
   title     = {Bringing the Web up to Speed with {WebAssembly}},
-  journal   = {ACM SIGPLAN Notices},
-  volume    = {52},
-  number    = {6},
+  booktitle = {Proc. 38th ACM SIGPLAN Conference on Programming Language Design and Implementation (PLDI)},
   pages     = {185--200},
   year      = {2017},
-  publisher = {ACM New York, NY, USA},
+  organization = {ACM},
   doi       = {10.1145/3062341.3062363}
 }
 
-@inproceedings{jang2014quark,
+@inproceedings{jang2012quark,
   author    = {Jang, Dongseok and Tatlock, Zachary and Lerner, Sorin},
-  title     = {Establishing Browser Security Guarantees through Formal Verification},
-  booktitle = {Proc. 2014 IEEE Symposium on Security and Privacy (SP)},
+  title     = {Establishing Browser Security Guarantees through Formal Shim Verification},
+  booktitle = {Proc. 21st USENIX Security Symposium (USENIX Security 12)},
   pages     = {113--128},
-  year      = {2014},
-  organization = {IEEE},
-  doi       = {10.1109/SP.2014.15}
+  year      = {2012},
+  organization = {USENIX Association},
+  address   = {Bellevue, WA}
 }
 
-@article{banescu2016code,
+@inproceedings{banescu2016code,
   author    = {Banescu, Sebastian and Collberg, Christian and Ganesh, Vijay and Newsham, Zack and Pretschner, Alexander},
-  title     = {Code Obfuscation against Symbolic Execution and {SMT} Solvers},
-  journal   = {IEEE Transactions on Information Forensics and Security},
-  volume    = {11},
-  number    = {12},
-  pages     = {2684--2699},
+  title     = {Code Obfuscation against Symbolic Execution Attacks},
+  booktitle = {Proc. 32nd Annual Conference on Computer Security Applications (ACSAC)},
+  pages     = {189--200},
   year      = {2016},
-  publisher = {IEEE},
-  doi       = {10.1109/TIFS.2016.2592004}
+  organization = {ACM},
+  doi       = {10.1145/2991079.2991114}
 }
 
 @article{dolev1983security,
@@ -60,6 +56,7 @@
   booktitle = {Proc. 26th ACM SIGPLAN-SIGACT Symposium on Principles of Programming Languages (POPL)},
   pages     = {147--160},
   year      = {1999},
+  organization = {ACM},
   doi       = {10.1145/292540.292555}
 }
 
@@ -75,7 +72,7 @@
   doi       = {10.1109/JSAC.2002.806121}
 }
 
-@article{castiglione2010forensic,
+@article{castiglione2010security,
   author    = {Castiglione, Aniello and De Santis, Alfredo and Soriente, Claudio},
   title     = {Security and Privacy Issues in the Portable Document Format},
   journal   = {Journal of Systems and Software},
@@ -84,19 +81,19 @@
   pages     = {1813--1822},
   year      = {2010},
   publisher = {Elsevier},
-  doi       = {10.1016/j.jss.2010.05.021}
+  doi       = {10.1016/j.jss.2010.04.062}
 }
 
-@article{byers2013information,
-  author    = {Byers, David},
-  title     = {Information Leakage through Document Metadata: Analysis and Solutions},
-  journal   = {Digital Investigation},
-  volume    = {10},
-  number    = {4},
-  pages     = {312--324},
-  year      = {2013},
-  publisher = {Elsevier},
-  doi       = {10.1016/j.diin.2013.08.004}
+@article{byers2004information,
+  author    = {Byers, Simon D.},
+  title     = {Information Leakage Caused by Hidden Data in Published Documents},
+  journal   = {IEEE Security \& Privacy Magazine},
+  volume    = {2},
+  number    = {2},
+  pages     = {23--27},
+  year      = {2004},
+  publisher = {IEEE},
+  doi       = {10.1109/MSECP.2004.1281241}
 }
 
 @article{garfinkel2003remembrance,
@@ -111,17 +108,18 @@
   doi       = {10.1109/MSECP.2003.1176992}
 }
 
-@standard{iso32000,
+@standard{iso2008pdf,
   author    = {{International Organization for Standardization}},
   title     = {Document Management -- Portable Document Format -- Part 1: {PDF} 1.7},
   organization = {ISO},
   number    = {ISO 32000-1:2008},
-  year      = {2008}
+  year      = {2008},
+  address   = {Geneva, Switzerland}
 }
 
 @misc{mozilla2024corpus,
   author    = {{Mozilla Corporation}},
-  title     = {Mozilla {PDF.js} Corpus of Document Formats and Traces},
+  title     = {Mozilla {PDF.js} Standard Test Corpus},
   year      = {2024},
   howpublished = {\url{https://github.com/mozilla/pdf.js}}
 }
@@ -134,7 +132,8 @@
   number    = {1},
   pages     = {1--25},
   year      = {1908},
-  publisher = {Oxford University Press}
+  publisher = {Oxford University Press},
+  doi       = {10.2307/2331554}
 }
 
 @techreport{w3c2023wasm,
@@ -148,7 +147,7 @@
 
 @misc{fadhlillah2026artifact,
   author    = {Fadhlillah, Khairan Noor},
-  title     = {Zero-Egress Document Benchmark Suite: Public Artifact Evaluation and Empirical Traces},
+  title     = {Zero-Egress Document Systems Using Client-Side {WebAssembly}: Benchmark Reproduction Package and Empirical Traces},
   year      = {2026},
   publisher = {GitHub and Zenodo},
   howpublished = {\url{https://github.com/codesbykhairannoor/zero-egress-document-benchmark}}
