@@ -88,53 +88,59 @@ $\downarrow$ \textit{In-Memory ArrayBuffer Result} \\
 \subsection{Reactive Worker Dispatching}
 Document operations run inside dedicated Web Workers. As outlined in Algorithm 1, when a user selects a file, the main thread reads the binary data into an \texttt{ArrayBuffer}. The buffer ownership is transferred to the worker thread without memory duplication. Upon completion, the worker yields a \texttt{Uint8Array}, constructs a local \texttt{Blob}, generates an ephemeral Object URL, and terminates immediately to release memory.
 
-\begin{algorithm}[!t]
-\caption{Reactive In-Browser Document Ingestion and Worker Dispatching}
-\label{alg_worker}
-\begin{algorithmic}[1]
-\REQUIRE User File $F$, Operation $Op$, Configuration $C$
-\ENSURE Ephemeral Object URL $DownloadLink$
-\STATE $ArrayBuf \leftarrow \text{File.readAsArrayBuffer}(F)$
-\STATE $Worker \leftarrow \text{AllocateDedicatedWebWorker}()$
-\STATE $Worker.\text{postMessage}(\{ \text{buffer}: ArrayBuf, op: Op, config: C \}, [ArrayBuf])$ \COMMENT{$\triangleright$ Zero-copy transfer}
-\STATE \textbf{upon} message receipt from $Worker$ \textbf{do}
-\STATE \quad \textbf{if} $Op \in \{\text{Structural}, \text{Compression}, \text{Security}\}$ \textbf{then}
-\STATE \quad \quad $Doc \leftarrow \text{PDFDocument.load}(ArrayBuf, \{ \text{ignoreEncryption}: \text{true} \})$
-\STATE \quad \quad $ResultBytes \leftarrow \text{ExecuteEngineLogic}(Doc, Op, C)$
-\STATE \quad \textbf{else if} $Op == \text{OCR}$ \textbf{then}
-\STATE \quad \quad $ResultBytes \leftarrow \text{TesseractWasm.recognize}(ArrayBuf)$
-\STATE \quad \textbf{end if}
-\STATE \quad $OutBlob \leftarrow \text{Blob.create}([ResultBytes], \{ \text{type}: \text{ResolveMimeType}(Op) \})$
-\STATE \quad $DownloadLink \leftarrow \text{URL.createObjectURL}(OutBlob)$
-\STATE \quad $Worker.\text{terminate}()$ \COMMENT{$\triangleright$ Immediate memory reclamation}
-\STATE \quad \textbf{return} $DownloadLink$
-\end{algorithmic}
-\end{algorithm}
+\vspace{4pt}
+\noindent\rule{\columnwidth}{1.5pt} \\
+\textbf{Algorithm 1: Reactive In-Browser Document Ingestion and Worker Dispatching} \\
+\rule{\columnwidth}{0.75pt}
+\begin{enumerate}
+\item[\textbf{Input:}] User File $F$, Operation $Op$, Configuration $C$
+\item[\textbf{Output:}] Ephemeral Object URL $DownloadLink$
+\item $ArrayBuf \leftarrow \text{File.readAsArrayBuffer}(F)$
+\item $Worker \leftarrow \text{AllocateDedicatedWebWorker}()$
+\item $Worker.\text{postMessage}(\{ \text{buffer}: ArrayBuf, op: Op, config: C \}, [ArrayBuf])$ \hfill $\triangleright$ \textit{Zero-copy transfer}
+\item \textbf{upon} message receipt from $Worker$ \textbf{do}
+\item \quad \textbf{if} $Op \in \{\text{Structural}, \text{Compression}, \text{Security}\}$ \textbf{then}
+\item \quad\quad $Doc \leftarrow \text{PDFDocument.load}(ArrayBuf, \{ \text{ignoreEncryption}: \text{true} \})$
+\item \quad\quad $ResultBytes \leftarrow \text{ExecuteEngineLogic}(Doc, Op, C)$
+\item \quad \textbf{else if} $Op == \text{OCR}$ \textbf{then}
+\item \quad\quad $ResultBytes \leftarrow \text{TesseractWasm.recognize}(ArrayBuf)$
+\item \quad \textbf{end if}
+\item \quad $OutBlob \leftarrow \text{Blob.create}([ResultBytes], \{ \text{type}: \text{ResolveMimeType}(Op) \})$
+\item \quad $DownloadLink \leftarrow \text{URL.createObjectURL}(OutBlob)$
+\item \quad $Worker.\text{terminate}()$ \hfill $\triangleright$ \textit{Immediate memory reclamation}
+\item \quad \textbf{return} $DownloadLink$
+\end{enumerate}
+\vspace{-4pt}
+\noindent\rule{\columnwidth}{1.5pt}
+\vspace{6pt}
 
 \subsection{ISO 32000-1 Catalog Detachment and Sanitization}
 Document metadata in PDF structures is stored across two channels: the document Information Dictionary (\texttt{/Info}) and Extensible Metadata Platform streams (\texttt{/Metadata}) \cite{iso32000, castiglione2010forensic}. As shown in Algorithm 2, HandleMyFile strips all tracking keys, detaches catalog pointers, removes PieceInfo vendor streams, and unlinks modification histories before serialization.
 
-\begin{algorithm}[!t]
-\caption{ISO 32000-1 Catalog Detachment and Sanitization}
-\label{alg_sanitize}
-\begin{algorithmic}[1]
-\REQUIRE In-memory document object $Doc$
-\ENSURE Sanitized document object $Doc^*$
-\STATE $Context \leftarrow Doc.\text{context}$
-\STATE $Trailer \leftarrow Doc.\text{trailer}$
-\STATE $Trailer.\text{delete}(\text{PDFName.of}(\text{'Info'}))$
-\STATE $Catalog \leftarrow Doc.\text{catalog}$
-\STATE $Catalog.\text{delete}(\text{PDFName.of}(\text{'Metadata'}))$
-\STATE $Catalog.\text{delete}(\text{PDFName.of}(\text{'PieceInfo'}))$
-\STATE $Catalog.\text{delete}(\text{PDFName.of}(\text{'Names'}))$
-\FORALL{$Page \in Doc.\text{getPages}()$}
-\STATE \quad $Page.\text{node}.\text{delete}(\text{PDFName.of}(\text{'PieceInfo'}))$
-\STATE \quad $Page.\text{node}.\text{delete}(\text{PDFName.of}(\text{'Metadata'}))$
-\ENDFOR
-\STATE $Doc^* \leftarrow Doc.\text{save}(\{ \text{useObjectStreams}: \text{true} \})$
-\STATE \textbf{return} $Doc^*$
-\end{algorithmic}
-\end{algorithm}
+\vspace{4pt}
+\noindent\rule{\columnwidth}{1.5pt} \\
+\textbf{Algorithm 2: ISO 32000-1 Catalog Detachment and Sanitization} \\
+\rule{\columnwidth}{0.75pt}
+\begin{enumerate}
+\item[\textbf{Input:}] In-memory document object $Doc$
+\item[\textbf{Output:}] Sanitized document object $Doc^*$
+\item $Context \leftarrow Doc.\text{context}$
+\item $Trailer \leftarrow Doc.\text{trailer}$
+\item $Trailer.\text{delete}(\text{PDFName.of}(\text{'Info'}))$
+\item $Catalog \leftarrow Doc.\text{catalog}$
+\item $Catalog.\text{delete}(\text{PDFName.of}(\text{'Metadata'}))$
+\item $Catalog.\text{delete}(\text{PDFName.of}(\text{'PieceInfo'}))$
+\item $Catalog.\text{delete}(\text{PDFName.of}(\text{'Names'}))$
+\item \textbf{for all} $Page \in Doc.\text{getPages}()$ \textbf{do}
+\item \quad $Page.\text{node}.\text{delete}(\text{PDFName.of}(\text{'PieceInfo'}))$
+\item \quad $Page.\text{node}.\text{delete}(\text{PDFName.of}(\text{'Metadata'}))$
+\item \textbf{end for}
+\item $Doc^* \leftarrow Doc.\text{save}(\{ \text{useObjectStreams}: \text{true} \})$
+\item \textbf{return} $Doc^*$
+\end{enumerate}
+\vspace{-4pt}
+\noindent\rule{\columnwidth}{1.5pt}
+\vspace{6pt}
 
 \subsection{Mathematical Model of Network Transit Latency}
 To understand the performance advantage of client-side execution, we model the total turnaround latency for a document of size $S_{\text{in}}$ producing output size $S_{\text{out}}$ under remote cloud processing as:
