@@ -5,6 +5,7 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{url}
+\def\UrlBreaks{\do\/\do-}
 \usepackage{microtype}
 
 \newtheorem{theorem}{Theorem}
@@ -78,7 +79,7 @@ Under the HandleMyFile architecture, the processing of any document $Doc \in \ma
 \end{theorem}
 
 \begin{IEEEproof}
-Let $\mathcal{P}$ denote the execution pipeline running within a dedicated Web Worker thread. By construction, $\mathcal{P}$ is instantiated without access to the \texttt{window} global object, \texttt{document} DOM elements, or network socket bindings (\texttt{fetch}, \texttt{XMLHttpRequest}, \texttt{WebSocket}, \texttt{EventSource}). Input buffers are delivered exclusively via structured cloning and transferable \texttt{ArrayBuffer} references. Output buffers are emitted back to the main UI thread via in-memory transfer. Because no networking primitive is linked into the WebAssembly runtime or worker scope, the operational transition system has no transitions that write to network sockets. Hence, $|\text{Net}_{\text{out}}(Doc)| = 0$ holds identically for all inputs.
+Let $\mathcal{P}$ denote the execution pipeline running within a dedicated Web Worker thread. By construction, $\mathcal{P}$ is instantiated without access to the \texttt{window} global object, \texttt{document} DOM elements, or network socket bindings (\texttt{fetch}, \texttt{XMLHttpRequest}, \texttt{WebSocket}, \texttt{EventSource}). Input buffers are delivered exclusively via structured cloning and transferable \texttt{ArrayBuffer} references. Output buffers are emitted back to the main UI thread via in-memory transfer. Because no networking primitive is linked into the WebAssembly runtime or worker scope, the operational transition system has no transitions that write to network sockets. Hence, the invariant $|\text{Net}_{\text{out}}(Doc)| = 0$ holds identically across all valid document inputs.
 \end{IEEEproof}
 
 \section{System Architecture and In-Browser Pipeline}
@@ -87,39 +88,48 @@ The architecture of HandleMyFile decouples user interaction from computational p
 \subsection{Reactive Worker Dispatching}
 Document operations run inside dedicated Web Workers. When a user selects a file, the main thread reads the binary data into an \texttt{ArrayBuffer}. The buffer ownership is transferred to the worker thread without memory duplication. Upon completion, the worker yields a \texttt{Uint8Array}, constructs a local \texttt{Blob}, generates an ephemeral Object URL, and terminates immediately to release memory.
 
+\noindent\begin{minipage}{\columnwidth}
 \vspace{4pt}
-\noindent\rule{\columnwidth}{1.5pt} \\
-\textbf{Algorithm 1: Reactive In-Browser Document Ingestion and Worker Dispatching} \\
+\rule{\columnwidth}{1.5pt} \\
+\textbf{Algorithm 1: Reactive In-Browser Document Dispatching} \\
 \rule{\columnwidth}{0.75pt}
+\begin{footnotesize}
 \begin{enumerate}
-\item[\textbf{Input:}] User File $F$, Operation $Op$, Configuration $C$
+\item[\textbf{Input:}] File $F$, Operation $Op$, Configuration $C$
 \item[\textbf{Output:}] Ephemeral Object URL $DownloadLink$
 \item $ArrayBuf \leftarrow \text{File.readAsArrayBuffer}(F)$
-\item $Worker \leftarrow \text{AllocateDedicatedWebWorker}()$
-\item $Worker.\text{postMessage}(\{ \text{buffer}: ArrayBuf, op: Op, config: C \}, [ArrayBuf])$ \hfill $\triangleright$ \textit{Zero-copy transfer}
+\item $Worker \leftarrow \text{AllocateDedicatedWorker}()$
+\item $Worker.\text{postMessage}(\{ \text{buffer}: ArrayBuf,$ \\
+      \quad\quad $op: Op, config: C \}, [ArrayBuf])$ \\
+      \quad\quad $\triangleright$ \textit{Zero-copy transferable buffer}
 \item \textbf{upon} message receipt from $Worker$ \textbf{do}
 \item \quad \textbf{if} $Op \in \{\text{Structural}, \text{Compression}, \text{Security}\}$ \textbf{then}
-\item \quad\quad $Doc \leftarrow \text{PDFDocument.load}(ArrayBuf, \{ \text{ignoreEncryption}: \text{true} \})$
-\item \quad\quad $ResultBytes \leftarrow \text{ExecuteEngineLogic}(Doc, Op, C)$
+\item \quad\quad $Doc \leftarrow \text{PDFDocument.load}(ArrayBuf,$ \\
+      \quad\quad\quad\quad $\{ \text{ignoreEncryption}: \text{true} \})$
+\item \quad\quad $ResultBytes \leftarrow \text{Engine.execute}(Doc, Op, C)$
 \item \quad \textbf{else if} $Op == \text{OCR}$ \textbf{then}
-\item \quad\quad $ResultBytes \leftarrow \text{TesseractWasm.recognize}(ArrayBuf)$
+\item \quad\quad $ResultBytes \leftarrow \text{TesseractWasm.run}(ArrayBuf)$
 \item \quad \textbf{end if}
-\item \quad $OutBlob \leftarrow \text{Blob.create}([ResultBytes], \{ \text{type}: \text{ResolveMimeType}(Op) \})$
+\item \quad $OutBlob \leftarrow \text{Blob.create}([ResultBytes], \{ \text{type}: Op \})$
 \item \quad $DownloadLink \leftarrow \text{URL.createObjectURL}(OutBlob)$
-\item \quad $Worker.\text{terminate}()$ \hfill $\triangleright$ \textit{Immediate memory reclamation}
+\item \quad $Worker.\text{terminate}()$ $\triangleright$ \textit{Immediate memory reclamation}
 \item \quad \textbf{return} $DownloadLink$
 \end{enumerate}
+\end{footnotesize}
 \vspace{-4pt}
-\noindent\rule{\columnwidth}{1.5pt}
+\rule{\columnwidth}{1.5pt}
 \vspace{6pt}
+\end{minipage}
 
 \subsection{ISO 32000-1 Catalog Detachment and Sanitization}
 Document metadata in PDF structures is stored across two channels: the document Information Dictionary (\texttt{/Info}) and Extensible Metadata Platform streams (\texttt{/Metadata}) \cite{iso2008pdf, castiglione2010security}. As shown in Algorithm 2, HandleMyFile strips all tracking keys, detaches catalog pointers, removes PieceInfo vendor streams, and unlinks modification histories before serialization.
 
+\noindent\begin{minipage}{\columnwidth}
 \vspace{4pt}
-\noindent\rule{\columnwidth}{1.5pt} \\
+\rule{\columnwidth}{1.5pt} \\
 \textbf{Algorithm 2: ISO 32000-1 Catalog Detachment and Sanitization} \\
 \rule{\columnwidth}{0.75pt}
+\begin{footnotesize}
 \begin{enumerate}
 \item[\textbf{Input:}] In-memory document object $Doc$
 \item[\textbf{Output:}] Sanitized document object $Doc^*$
@@ -137,9 +147,11 @@ Document metadata in PDF structures is stored across two channels: the document 
 \item $Doc^* \leftarrow Doc.\text{save}(\{ \text{useObjectStreams}: \text{true} \})$
 \item \textbf{return} $Doc^*$
 \end{enumerate}
+\end{footnotesize}
 \vspace{-4pt}
-\noindent\rule{\columnwidth}{1.5pt}
+\rule{\columnwidth}{1.5pt}
 \vspace{6pt}
+\end{minipage}
 
 \subsection{Mathematical Model of Network Transit Latency}
 To understand the performance advantage of client-side execution, we model total turnaround latency for a document of binary size $S_{\text{in}}$ producing output size $S_{\text{out}}$ under remote cloud processing as:
@@ -183,9 +195,10 @@ where $\bar{d}$ is the sample mean of pairwise differences across the 490 docume
 \centering
 \caption{Statistical Hypothesis Testing and Speedup Proofs}
 \label{tab_hypothesis}
+\resizebox{\columnwidth}{!}{%
 \begin{tabular}{ll}
 \toprule
-\textbf{Statistical Metric} & \textbf{Observed Value ($N = 490$ Documents)} \\
+\textbf{Statistical Metric} & \textbf{Observed Value ($N = 490$)} \\
 \midrule
 Hypothesis Test Type & Paired Two-Tailed Student's t-test \cite{student1908probable} \\
 Degrees of Freedom ($df$) & 489 \\
@@ -196,7 +209,8 @@ p-Value & $p < 0.0001$ (Decisively Rejects $H_0$) \\
 Pairwise Arithmetic Mean Speedup & 1.88x (Faster on Localhost) \\
 Aggregate Mean Speedup Ratio & 1.34x (Ratio of Sample Means) \\
 \bottomrule
-\end{tabular}
+\end{tabular}%
+}
 \end{table}
 
 As detailed in Table \ref{tab_hypothesis}, the observed test statistic of $t(489) = 8.29$ produces $p < 0.0001$, decisively rejecting the null hypothesis. The pairwise arithmetic mean speedup across all documents is 1.88x with a tight 95\% confidence interval of [1.77x, 1.98x].
@@ -224,6 +238,7 @@ To verify zero network leakage, we monitored all TCP, UDP, and TLS sockets using
 \centering
 \caption{Empirical Network Egress and Privacy Verification}
 \label{tab_privacy}
+\resizebox{\columnwidth}{!}{%
 \begin{tabular}{lll}
 \toprule
 \textbf{Metric Description} & \textbf{HandleMyFile (Client)} & \textbf{Cloud SaaS API} \\
@@ -234,7 +249,8 @@ Persistent Server Cache & \textbf{None (In-Memory Only)} & Ephemeral Disk \\
 Metadata Sanitization Rate & \textbf{99.71\% (490/491 Keys)} & Variable ($<$ 60\%) \\
 Residual Plaintext Leakage & \textbf{0 Bytes Detected} & Full Document Body \\
 \bottomrule
-\end{tabular}
+\end{tabular}%
+}
 \end{table}
 
 Table \ref{tab_privacy} verifies that HandleMyFile emitted exactly 0.00 MB of outbound network traffic, while cloud services transmitted 45.80 MB of sensitive binary data across 34,180 packets. Across 491 forensic evaluations, HandleMyFile successfully purged 99.71\% of all metadata dictionaries, leaving zero residual plaintext identifiers.
