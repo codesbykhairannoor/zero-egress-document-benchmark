@@ -1,0 +1,27 @@
+{
+  "name": "zero-egress-document-benchmark",
+  "version": "1.0.0",
+  "description": "Scientific Benchmark Suite and Empirical Proof Artifacts for Zero-Egress Document Systems Using Client-Side WebAssembly",
+  "main": "benchmark/benchmark_comprehensive_fair_evaluation.cjs",
+  "scripts": {
+    "benchmark:fair": "node benchmark/benchmark_comprehensive_fair_evaluation.cjs",
+    "benchmark:statistical": "node benchmark/statistical_analysis.cjs",
+    "benchmark:bias": "node benchmark/check_repeatability_and_bias.cjs",
+    "benchmark:security": "node benchmark/security_and_privacy_proof.cjs",
+    "generate:paper": "python benchmark/generate_scopus_q1_paper.py"
+  },
+  "keywords": [
+    "webassembly",
+    "document-systems",
+    "zero-egress",
+    "privacy",
+    "benchmarking",
+    "pdf-processing",
+    "scopus-q1"
+  ],
+  "author": "Khairan Noor",
+  "license": "MIT",
+  "dependencies": {
+    "pdf-lib": "^1.17.1"
+  }
+}

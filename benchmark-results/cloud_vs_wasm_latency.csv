@@ -1,0 +1,17 @@
+file_label,size_mb,network_type,upload_sec,server_compute_sec,download_sec,cloud_total_sec,wasm_total_sec,speedup_factor
+"0.5 MB (Single Invoice / Form)",0.5,"3G Mobile",2.67,0.20,1.20,4.52,0.009,531.6
+"0.5 MB (Single Invoice / Form)",0.5,"4G LTE (Average ID)",0.33,0.20,0.14,0.81,0.009,95.8
+"0.5 MB (Single Invoice / Form)",0.5,"5G Ultra / High-Speed",0.08,0.20,0.02,0.35,0.009,41.3
+"0.5 MB (Single Invoice / Form)",0.5,"Fiber Broadband (Home/Office)",0.08,0.20,0.04,0.35,0.009,41.0
+"2.0 MB (Short Contract, 10 pgs)",2,"3G Mobile",10.67,0.21,4.80,16.13,0.023,695.2
+"2.0 MB (Short Contract, 10 pgs)",2,"4G LTE (Average ID)",1.33,0.21,0.58,2.26,0.023,97.2
+"2.0 MB (Short Contract, 10 pgs)",2,"5G Ultra / High-Speed",0.32,0.21,0.10,0.67,0.023,29.0
+"2.0 MB (Short Contract, 10 pgs)",2,"Fiber Broadband (Home/Office)",0.32,0.21,0.14,0.70,0.023,30.4
+"10.0 MB (Annual Report / Scanned)",10,"3G Mobile",53.33,0.25,24.00,78.03,0.089,871.9
+"10.0 MB (Annual Report / Scanned)",10,"4G LTE (Average ID)",6.67,0.25,2.88,9.93,0.089,111.0
+"10.0 MB (Annual Report / Scanned)",10,"5G Ultra / High-Speed",1.60,0.25,0.48,2.38,0.089,26.5
+"10.0 MB (Annual Report / Scanned)",10,"Fiber Broadband (Home/Office)",1.60,0.25,0.72,2.60,0.089,29.1
+"50.0 MB (Technical Blueprint / Book)",50,"3G Mobile",266.67,0.39,120.00,387.51,0.325,1192.3
+"50.0 MB (Technical Blueprint / Book)",50,"4G LTE (Average ID)",33.33,0.39,14.40,48.26,0.325,148.5
+"50.0 MB (Technical Blueprint / Book)",50,"5G Ultra / High-Speed",8.00,0.39,2.40,10.84,0.325,33.3
+"50.0 MB (Technical Blueprint / Book)",50,"Fiber Broadband (Home/Office)",8.00,0.39,3.60,12.02,0.325,37.0

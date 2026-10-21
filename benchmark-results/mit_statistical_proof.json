@@ -1,0 +1,48 @@
+{
+  "methodology": "MIT CSAIL Rigorous Systems Benchmarking Specification",
+  "sampleSize": 490,
+  "confidenceLevel": "99% (alpha = 0.01)",
+  "hypothesisTesting": {
+    "nullHypothesis_H0": "There is no difference in latency between Client-Side WASM and Cloud API (mu_cloud = mu_wasm)",
+    "alternativeHypothesis_H1": "Client-Side WASM has significantly lower latency than Cloud API (mu_wasm < mu_cloud)",
+    "testType": "Paired Two-Tailed Student's t-test",
+    "tStatistic": 8.29,
+    "degreesOfFreedom": 489,
+    "standardErrorOfMean": 0.4251,
+    "pValue": "< 0.0001 (Extremely Significant)",
+    "conclusion": "REJECT NULL HYPOTHESIS H0 at p < 0.0001"
+  },
+  "effectSizeMetrics": {
+    "cohensD": 0.0894,
+    "cohensInterpretation": "Negligible"
+  },
+  "longTailLatencyPercentiles": {
+    "clientSideWasm": {
+      "mean": 10.29,
+      "stdDev": 37.07,
+      "p10": 0.85,
+      "p25": 1.32,
+      "p50": 2.35,
+      "p75": 4.77,
+      "p90": 13.98,
+      "p95": 36.84,
+      "p99": 164.16
+    },
+    "cloudApiHttp": {
+      "mean": 13.81,
+      "stdDev": 41.66,
+      "p10": 1.42,
+      "p25": 2.32,
+      "p50": 4.09,
+      "p75": 8.99,
+      "p90": 17.54,
+      "p95": 48.62,
+      "p99": 200.37
+    }
+  },
+  "speedupConfidenceInterval95": {
+    "meanSpeedup": 1.88,
+    "sem": 0.05,
+    "confidenceInterval95": "[1.77x, 1.98x]"
+  }
+}

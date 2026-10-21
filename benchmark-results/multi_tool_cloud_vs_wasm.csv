@@ -1,0 +1,95 @@
+tool_name,doc_id,filename,original_kb,output_kb,savings_percent,wasm_ms,cloud_ms,speedup_factor,wasm_egress_kb,cloud_egress_kb
+COMPRESS_PDF,1,"90ms_rksj_h_sample.pdf",1.01,0.95,6.6,37.37,14.58,0.39,0,1.01
+MERGE_PDF,1,"90ms_rksj_h_sample.pdf + ContentStreamCycleType3insideType3.pdf",3.40,2.31,0,9.28,3.88,0.42,0,3.40
+COMPRESS_PDF,2,"ContentStreamCycleType3insideType3.pdf",2.38,2.07,13.1,5.86,7.85,1.34,0,2.38
+MERGE_PDF,2,"ContentStreamCycleType3insideType3.pdf + ContentStreamNoCycleType3insideType3.pdf",4.77,3.26,0,3.50,1.91,0.55,0,4.77
+COMPRESS_PDF,3,"ContentStreamNoCycleType3insideType3.pdf",2.38,2.07,13,3.82,5.77,1.51,0,2.38
+MERGE_PDF,3,"ContentStreamNoCycleType3insideType3.pdf + Embedded_font.pdf",5.63,4.15,0,3.26,2.24,0.69,0,5.63
+COMPRESS_PDF,4,"Embedded_font.pdf",3.25,2.79,14.1,2.99,5.63,1.89,0,3.25
+MERGE_PDF,4,"Embedded_font.pdf + GHOSTSCRIPT-698804-1-fuzzed.pdf",3.86,2.81,0,4.20,1.58,0.38,0,3.86
+COMPRESS_PDF,5,"GHOSTSCRIPT-698804-1-fuzzed.pdf",0.61,0.71,-16.3,1.08,3.56,3.30,0,0.61
+MERGE_PDF,5,"GHOSTSCRIPT-698804-1-fuzzed.pdf + IdentityToUnicodeMap_charCodeOf.pdf",1.25,0.84,0,2.53,1.29,0.51,0,1.25
+COMPRESS_PDF,6,"IdentityToUnicodeMap_charCodeOf.pdf",0.64,0.79,-24.3,0.95,1.81,1.90,0,0.64
+MERGE_PDF,6,"IdentityToUnicodeMap_charCodeOf.pdf + IndexedCS_negative_and_high.pdf",2.39,1.91,0,1.68,1.06,0.63,0,2.39
+COMPRESS_PDF,7,"IndexedCS_negative_and_high.pdf",1.76,1.76,0,0.96,2.87,2.98,0,1.76
+MERGE_PDF,7,"IndexedCS_negative_and_high.pdf + ArabicCIDTrueType.pdf",40.20,35.60,0,15.61,1.46,0.09,0,40.20
+COMPRESS_PDF,8,"ArabicCIDTrueType.pdf",38.45,34.62,10,13.04,15.47,1.19,0,38.45
+MERGE_PDF,8,"ArabicCIDTrueType.pdf + PDFBOX-3148-2-fuzzed.pdf",277.07,264.53,0,14.81,11.41,0.77,0,277.07
+COMPRESS_PDF,9,"PDFBOX-3148-2-fuzzed.pdf",238.62,236.43,0.9,6.40,8.55,1.34,0,238.62
+MERGE_PDF,9,"PDFBOX-3148-2-fuzzed.pdf + PDFJS-7562-reduced.pdf",251.96,239.47,0,9.07,10.15,1.12,0,251.96
+COMPRESS_PDF,10,"PDFJS-7562-reduced.pdf",13.33,12.86,3.6,5.21,3.76,0.72,0,13.33
+MERGE_PDF,10,"PDFJS-7562-reduced.pdf + PDFBOX-4352-0.pdf",14.78,9.58,0,5.34,2.05,0.38,0,14.78
+COMPRESS_PDF,11,"PDFBOX-4352-0.pdf",1.45,1.48,-2.6,1.72,3.42,1.99,0,1.45
+COMPRESS_PDF,15,"ShowText-ShadingPattern.pdf",4.56,3.68,19.2,1.93,4.30,2.23,0,4.56
+MERGE_PDF,15,"ShowText-ShadingPattern.pdf + SimFang-variant.pdf",8.57,4.00,0,5.17,3.72,0.72,0,8.57
+COMPRESS_PDF,16,"SimFang-variant.pdf",4.01,2.61,35,1.43,3.22,2.25,0,4.01
+MERGE_PDF,16,"SimFang-variant.pdf + TAMReview.pdf",662.83,631.17,0,183.27,2.65,0.01,0,662.83
+COMPRESS_PDF,17,"TAMReview.pdf",658.82,631.98,4.1,165.70,176.61,1.07,0,658.82
+SPLIT_PDF,17,"TAMReview.pdf",658.82,216.30,0,42.68,51.52,1.21,0,658.82
+MERGE_PDF,17,"TAMReview.pdf + Test-plusminus.pdf",686.55,654.78,0,161.63,57.35,0.35,0,686.55
+COMPRESS_PDF,18,"Test-plusminus.pdf",27.74,26.30,5.2,6.17,15.19,2.46,0,27.74
+MERGE_PDF,18,"Test-plusminus.pdf + PDFJS-9279-reduced.pdf",3045.56,3000.44,0,37.86,2.12,0.06,0,3045.56
+COMPRESS_PDF,19,"PDFJS-9279-reduced.pdf",3017.82,2974.87,1.4,23.05,59.75,2.59,0,3017.82
+MERGE_PDF,19,"PDFJS-9279-reduced.pdf + ThuluthFeatures.pdf",3132.74,3083.99,0,36.01,65.44,1.82,0,3132.74
+COMPRESS_PDF,20,"ThuluthFeatures.pdf",114.92,109.74,4.5,2.73,9.67,3.54,0,114.92
+MERGE_PDF,20,"ThuluthFeatures.pdf + TrueType_without_cmap.pdf",118.81,112.22,0,3.73,3.02,0.81,0,118.81
+COMPRESS_PDF,21,"TrueType_without_cmap.pdf",3.90,3.20,17.9,2.99,3.06,1.02,0,3.90
+MERGE_PDF,21,"TrueType_without_cmap.pdf + Type3WordSpacing.pdf",6.53,4.75,0,1.83,1.05,0.58,0,6.53
+COMPRESS_PDF,22,"Type3WordSpacing.pdf",2.63,2.21,16,1.02,1.30,1.27,0,2.63
+MERGE_PDF,22,"Type3WordSpacing.pdf + XiaoBiaoSong.pdf",8.15,4.58,0,4.82,1.09,0.23,0,8.15
+COMPRESS_PDF,23,"XiaoBiaoSong.pdf",5.52,3.11,43.6,1.22,1.95,1.60,0,5.52
+MERGE_PDF,23,"XiaoBiaoSong.pdf + ZapfDingbats.pdf",22.71,13.45,0,16.68,1.98,0.12,0,22.71
+COMPRESS_PDF,24,"ZapfDingbats.pdf",17.19,15.09,12.2,4.46,3.41,0.77,0,17.19
+SPLIT_PDF,24,"ZapfDingbats.pdf",17.19,8.40,0,2.20,3.62,1.65,0,17.19
+MERGE_PDF,24,"ZapfDingbats.pdf + acroform_calculation_order.pdf",18.21,11.27,0,10.17,3.73,0.37,0,18.21
+COMPRESS_PDF,25,"acroform_calculation_order.pdf",1.02,0.89,12.9,0.94,1.73,1.83,0,1.02
+MERGE_PDF,25,"acroform_calculation_order.pdf + alphatrans.pdf",17.53,10.97,0,1.90,0.94,0.49,0,17.53
+COMPRESS_PDF,26,"alphatrans.pdf",16.51,15.22,7.8,1.28,2.63,2.06,0,16.51
+MERGE_PDF,26,"alphatrans.pdf + annotation-border-styles.pdf",104.24,90.92,0,2.79,1.38,0.49,0,104.24
+COMPRESS_PDF,27,"annotation-border-styles.pdf",87.73,84.79,3.4,2.08,3.57,1.71,0,87.73
+MERGE_PDF,27,"annotation-border-styles.pdf + annotation-button-widget.pdf",110.96,91.90,0,15.83,2.25,0.14,0,110.96
+COMPRESS_PDF,28,"annotation-button-widget.pdf",23.23,22.83,1.7,24.86,23.39,0.94,0,23.23
+MERGE_PDF,28,"annotation-button-widget.pdf + annotation-caret-ink.pdf",114.71,102.00,0,15.61,2.89,0.18,0,114.71
+COMPRESS_PDF,29,"annotation-caret-ink.pdf",91.48,91.39,0.1,14.26,17.10,1.20,0,91.48
+MERGE_PDF,29,"annotation-caret-ink.pdf + annotation-choice-widget.pdf",180.89,161.36,0,10.60,7.79,0.73,0,180.89
+COMPRESS_PDF,30,"annotation-choice-widget.pdf",89.41,83.71,6.4,4.32,10.72,2.48,0,89.41
+MERGE_PDF,30,"annotation-choice-widget.pdf + annotation-fileattachment.pdf",180.54,158.16,0,6.25,5.83,0.93,0,180.54
+COMPRESS_PDF,31,"annotation-fileattachment.pdf",91.13,91.34,-0.2,1.98,3.81,1.92,0,91.13
+MERGE_PDF,31,"annotation-fileattachment.pdf + annotation-highlight-without-appearance.pdf",107.05,100.65,0,4.13,4.53,1.10,0,107.05
+COMPRESS_PDF,32,"annotation-highlight-without-appearance.pdf",15.92,13.62,14.4,1.53,4.96,3.24,0,15.92
+MERGE_PDF,32,"annotation-highlight-without-appearance.pdf + annotation-freetext.pdf",99.93,96.38,0,3.64,1.79,0.49,0,99.93
+COMPRESS_PDF,33,"annotation-freetext.pdf",84.01,83.90,0.1,1.90,2.70,1.42,0,84.01
+MERGE_PDF,33,"annotation-freetext.pdf + annotation-highlight.pdf",174.24,172.17,0,2.51,3.52,1.40,0,174.24
+COMPRESS_PDF,34,"annotation-highlight.pdf",90.23,90.14,0.1,1.54,3.00,1.95,0,90.23
+MERGE_PDF,34,"annotation-highlight.pdf + annotation-ink-without-appearance.pdf",96.37,90.84,0,12.83,2.04,0.16,0,96.37
+COMPRESS_PDF,35,"annotation-ink-without-appearance.pdf",6.14,1.73,71.9,1.85,14.11,7.62,0,6.14
+MERGE_PDF,35,"annotation-ink-without-appearance.pdf + annotation-line-without-appearance-empty-Rect.pdf",7.09,1.96,0,2.32,4.10,1.76,0,7.09
+COMPRESS_PDF,36,"annotation-line-without-appearance-empty-Rect.pdf",0.95,0.93,1.3,0.79,1.39,1.76,0,0.95
+MERGE_PDF,36,"annotation-line-without-appearance-empty-Rect.pdf + annotation-line-without-appearance.pdf",14.78,12.96,0,2.04,0.85,0.42,0,14.78
+COMPRESS_PDF,37,"annotation-line-without-appearance.pdf",13.84,12.73,8,1.50,6.14,4.11,0,13.84
+MERGE_PDF,37,"annotation-line-without-appearance.pdf + annotation-line.pdf",96.79,94.40,0,3.12,2.88,0.92,0,96.79
+COMPRESS_PDF,38,"annotation-line.pdf",82.95,82.84,0.1,4.79,4.44,0.93,0,82.95
+MERGE_PDF,38,"annotation-line.pdf + annotation-link-text-popup.pdf",179.63,171.52,0,3.47,1.91,0.55,0,179.63
+COMPRESS_PDF,39,"annotation-link-text-popup.pdf",96.68,97.02,-0.4,16.12,17.64,1.09,0,96.68
+MERGE_PDF,39,"annotation-link-text-popup.pdf + 22060_A1_01_Plans.pdf",6214.18,6204.73,0,31.41,6.65,0.21,0,6214.18
+COMPRESS_PDF,40,"22060_A1_01_Plans.pdf",6117.50,6116.67,0,30.89,118.16,3.82,0,6117.50
+MERGE_PDF,40,"22060_A1_01_Plans.pdf + annotation-polyline-polygon-without-appearance.pdf",6206.79,6199.86,0,34.94,90.77,2.60,0,6206.79
+COMPRESS_PDF,41,"annotation-polyline-polygon-without-appearance.pdf",89.28,86.46,3.2,1.69,3.16,1.86,0,89.28
+MERGE_PDF,41,"annotation-polyline-polygon-without-appearance.pdf + annotation-square-circle-without-appearance.pdf",104.92,98.25,0,3.90,2.04,0.52,0,104.92
+COMPRESS_PDF,42,"annotation-square-circle-without-appearance.pdf",15.63,13.69,12.4,2.42,3.64,1.51,0,15.63
+MERGE_PDF,42,"annotation-square-circle-without-appearance.pdf + annotation-polyline-polygon.pdf",102.24,98.94,0,4.81,2.29,0.48,0,102.24
+COMPRESS_PDF,43,"annotation-polyline-polygon.pdf",86.61,86.49,0.1,1.72,6.38,3.70,0,86.61
+MERGE_PDF,43,"annotation-polyline-polygon.pdf + annotation-square-circle.pdf",173.27,170.95,0,4.58,2.04,0.45,0,173.27
+COMPRESS_PDF,44,"annotation-square-circle.pdf",86.66,86.54,0.1,1.55,3.78,2.44,0,86.66
+MERGE_PDF,44,"annotation-square-circle.pdf + annotation-squiggly-without-appearance.pdf",101.88,99.41,0,2.77,1.80,0.65,0,101.88
+COMPRESS_PDF,45,"annotation-squiggly-without-appearance.pdf",15.22,14.08,7.5,2.03,2.20,1.08,0,15.22
+MERGE_PDF,45,"annotation-squiggly-without-appearance.pdf + annotation-stamp.pdf",102.04,99.71,0,4.69,1.59,0.34,0,102.04
+COMPRESS_PDF,46,"annotation-stamp.pdf",86.82,86.77,0.1,11.15,17.56,1.57,0,86.82
+MERGE_PDF,46,"annotation-stamp.pdf + annotation-squiggly.pdf",178.27,176.19,0,3.88,2.12,0.54,0,178.27
+COMPRESS_PDF,47,"annotation-squiggly.pdf",91.45,91.33,0.1,1.52,3.34,2.19,0,91.45
+MERGE_PDF,47,"annotation-squiggly.pdf + annotation-strikeout-without-appearance.pdf",106.83,103.87,0,2.78,1.90,0.68,0,106.83
+COMPRESS_PDF,48,"annotation-strikeout-without-appearance.pdf",15.38,13.69,11,1.72,2.14,1.24,0,15.38
+MERGE_PDF,48,"annotation-strikeout-without-appearance.pdf + annotation-strikeout.pdf",105.04,102.07,0,4.39,1.49,0.34,0,105.04
+COMPRESS_PDF,49,"annotation-strikeout.pdf",89.65,89.55,0.1,1.43,2.78,1.94,0,89.65
+MERGE_PDF,49,"annotation-strikeout.pdf + annotation-text-widget.pdf",180.64,161.42,0,6.68,4.56,0.68,0,180.64
+COMPRESS_PDF,50,"annotation-text-widget.pdf",90.99,84.99,6.6,8.21,12.43,1.51,0,90.99

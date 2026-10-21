@@ -1,0 +1,291 @@
+tool,filename,size_kb,page_count,wasm_ms,cloud_compute_ms,cloud_localhost_total_ms,cloud_wifi_total_ms,cloud_mobile_4g_total_ms,speedup_localhost,speedup_wifi,speedup_mobile_4g
+rotate,"90ms_rksj_h_sample.pdf",1.01,1,16.54,5.25,15.19,30.59,71.11,0.92,1.85,4.30
+rotate,"ContentStreamCycleType3insideType3.pdf",2.38,1,4.46,3.56,5.43,29.36,70.57,1.22,6.58,15.81
+rotate,"ContentStreamNoCycleType3insideType3.pdf",2.38,1,4.61,3.75,6.18,29.56,70.77,1.34,6.41,15.34
+rotate,"Embedded_font.pdf",3.25,1,3.79,1.66,7.95,27.76,69.41,2.10,7.33,18.33
+rotate,"GHOSTSCRIPT-698804-1-fuzzed.pdf",0.61,1,2.26,2.18,3.76,27.38,67.70,1.66,12.09,29.90
+rotate,"IdentityToUnicodeMap_charCodeOf.pdf",0.64,1,1.58,1.54,3.50,26.75,67.08,2.21,16.94,42.48
+rotate,"IndexedCS_negative_and_high.pdf",1.76,1,1.90,1.85,3.16,27.44,68.33,1.66,14.40,35.87
+rotate,"ArabicCIDTrueType.pdf",38.45,1,15.16,14.66,16.39,52.68,112.20,1.08,3.47,7.40
+rotate,"PDFBOX-3148-2-fuzzed.pdf",238.62,1,3.80,6.33,10.03,112.12,273.29,2.64,29.49,71.87
+rotate,"PDFJS-7562-reduced.pdf",13.33,1,4.94,2.98,4.13,32.50,79.27,0.84,6.58,16.05
+rotate,"PDFBOX-4352-0.pdf",1.45,1,4.15,2.26,3.73,27.75,68.49,0.90,6.69,16.51
+rotate,"ShowText-ShadingPattern.pdf",4.56,1,1.65,1.63,2.51,28.17,70.49,1.52,17.06,42.69
+rotate,"SimFang-variant.pdf",4.01,1,2.68,2.45,3.72,28.81,70.85,1.39,10.75,26.45
+rotate,"TAMReview.pdf",658.82,23,183.39,182.55,204.55,430.58,805.14,1.12,2.35,4.39
+rotate,"Test-plusminus.pdf",27.74,1,2.19,2.75,4.40,37.14,91.23,2.01,16.95,41.64
+rotate,"PDFJS-9279-reduced.pdf",3017.82,1,43.19,32.21,75.66,1078.87,2651.36,1.75,24.98,61.39
+rotate,"ThuluthFeatures.pdf",114.92,1,5.28,3.65,10.05,67.56,165.92,1.91,12.80,31.45
+rotate,"TrueType_without_cmap.pdf",3.9,1,1.49,1.13,2.16,27.44,69.42,1.45,18.40,46.56
+rotate,"Type3WordSpacing.pdf",2.63,1,0.95,1.63,3.17,27.52,68.85,3.34,28.99,72.52
+rotate,"XiaoBiaoSong.pdf",5.52,1,2.42,1.45,2.91,28.32,71.12,1.20,11.68,29.33
+rotate,"ZapfDingbats.pdf",17.19,2,9.13,7.82,10.09,38.64,87.37,1.10,4.23,9.57
+rotate,"acroform_calculation_order.pdf",1.02,1,3.10,1.93,3.23,27.27,67.79,1.04,8.78,21.84
+rotate,"alphatrans.pdf",16.51,1,3.10,1.99,3.31,32.58,80.96,1.07,10.52,26.15
+rotate,"annotation-border-styles.pdf",87.73,1,5.13,4.49,7.01,59.19,143.73,1.37,11.53,27.99
+rotate,"annotation-button-widget.pdf",23.23,1,13.93,25.50,26.94,58.36,110.16,1.93,4.19,7.91
+rotate,"annotation-caret-ink.pdf",91.48,1,13.86,14.74,17.71,70.71,157.16,1.28,5.10,11.34
+rotate,"annotation-choice-widget.pdf",89.41,1,3.70,3.90,5.63,59.17,144.57,1.52,15.99,39.08
+rotate,"annotation-fileattachment.pdf",91.13,1,5.18,1.90,4.25,57.76,144.04,0.82,11.14,27.79
+rotate,"annotation-highlight-without-appearance.pdf",15.92,1,1.61,1.49,2.41,31.88,79.96,1.50,19.85,49.80
+rotate,"annotation-freetext.pdf",84.01,1,4.55,5.80,10.03,59.24,141.90,2.20,13.01,31.17
+rotate,"annotation-highlight.pdf",90.23,1,3.72,2.15,4.26,57.69,143.51,1.14,15.50,38.55
+rotate,"annotation-ink-without-appearance.pdf",6.14,1,1.67,1.81,3.86,28.89,72.01,2.31,17.27,43.04
+rotate,"annotation-line-without-appearance-empty-Rect.pdf",0.95,1,0.81,1.83,3.26,27.15,67.63,4.04,33.68,83.89
+rotate,"annotation-line-without-appearance.pdf",13.84,1,1.52,1.39,2.23,31.08,78.10,1.47,20.41,51.29
+rotate,"annotation-line.pdf",82.95,1,1.47,1.68,3.17,54.76,136.89,2.16,37.37,93.41
+rotate,"annotation-link-text-popup.pdf",96.68,1,12.53,13.96,16.78,71.69,160.79,1.34,5.72,12.83
+rotate,"22060_A1_01_Plans.pdf",6117.5,1,33.08,24.74,116.98,2120.77,5267.32,3.54,64.12,159.24
+rotate,"annotation-polyline-polygon-without-appearance.pdf",89.28,1,2.20,1.72,3.59,56.95,142.29,1.64,25.91,64.74
+rotate,"annotation-square-circle-without-appearance.pdf",15.63,1,1.61,1.59,2.38,31.89,79.82,1.48,19.78,49.52
+rotate,"annotation-polyline-polygon.pdf",86.61,1,2.15,1.97,3.98,56.29,140.27,1.85,26.21,65.31
+rotate,"annotation-square-circle.pdf",86.66,1,1.77,1.70,2.98,56.04,140.04,1.69,31.70,79.22
+rotate,"annotation-squiggly-without-appearance.pdf",15.22,1,1.43,1.66,2.50,31.81,79.54,1.74,22.19,55.48
+rotate,"annotation-stamp.pdf",86.82,1,3.18,1.75,3.15,56.14,140.23,0.99,17.68,44.15
+rotate,"annotation-squiggly.pdf",91.45,1,1.65,5.96,12.20,61.92,148.35,7.41,37.61,90.10
+rotate,"annotation-strikeout-without-appearance.pdf",15.38,1,1.62,1.39,2.22,31.60,79.41,1.37,19.45,48.89
+rotate,"annotation-strikeout.pdf",89.65,1,1.62,2.56,5.25,57.91,143.44,3.24,35.77,88.59
+rotate,"annotation-text-widget.pdf",90.99,1,13.96,15.19,18.03,70.99,157.20,1.29,5.09,11.26
+rotate,"annotation-text-without-popup.pdf",23.71,1,5.79,7.79,9.67,40.82,92.86,1.67,7.05,16.03
+rotate,"annotation-tx.pdf",11.4,1,1.17,1.15,1.89,30.00,75.79,1.62,25.67,64.86
+rotate,"annotation-tx3.pdf",30.9,1,6.12,11.77,23.05,47.23,102.92,3.77,7.72,16.83
+rotate,"annotation-tx2.pdf",20.79,1,2.78,4.63,6.06,36.67,87.23,2.18,13.18,31.36
+rotate,"annotation-underline-without-appearance.pdf",14.95,1,1.45,1.34,2.07,31.40,78.99,1.43,21.63,54.40
+rotate,"annotation_hidden_noview.pdf",11.83,1,1.46,1.37,2.17,30.38,76.38,1.49,20.81,52.31
+rotate,"annotation_hidden_print.pdf",6.39,1,2.40,1.41,2.45,28.57,71.81,1.02,11.89,29.89
+rotate,"annotation-underline.pdf",89.99,1,1.75,1.70,3.18,57.16,142.86,1.82,32.67,81.64
+rotate,"arial_unicode_en_cidfont.pdf",15.41,1,1.45,1.36,2.13,31.58,79.40,1.47,21.85,54.93
+rotate,"arial_unicode_ab_cidfont.pdf",12.8,1,2.40,1.30,2.17,30.64,77.14,0.90,12.75,32.10
+watermark,"90ms_rksj_h_sample.pdf",1.01,1,19.55,2.63,6.48,27.97,68.49,0.33,1.43,3.50
+watermark,"ContentStreamCycleType3insideType3.pdf",2.38,1,2.95,2.05,2.94,27.86,69.07,1.00,9.45,23.42
+watermark,"ContentStreamNoCycleType3insideType3.pdf",2.38,1,1.73,1.95,2.68,27.76,68.97,1.55,16.07,39.94
+watermark,"Embedded_font.pdf",3.25,1,1.99,1.75,2.57,27.85,69.50,1.29,14.02,35.00
+watermark,"GHOSTSCRIPT-698804-1-fuzzed.pdf",0.61,1,2.58,2.28,3.32,27.48,67.79,1.29,10.65,26.27
+watermark,"IdentityToUnicodeMap_charCodeOf.pdf",0.64,1,1.84,1.53,2.42,26.75,67.07,1.32,14.56,36.50
+watermark,"IndexedCS_negative_and_high.pdf",1.76,1,1.67,1.57,2.66,27.17,68.06,1.59,16.22,40.64
+watermark,"ArabicCIDTrueType.pdf",38.45,1,6.79,16.33,18.63,54.35,113.87,2.74,8.01,16.78
+watermark,"PDFBOX-3148-2-fuzzed.pdf",238.62,1,3.09,2.91,6.20,108.70,269.87,2.01,35.18,87.33
+watermark,"PDFJS-7562-reduced.pdf",13.33,1,3.07,3.14,4.24,32.65,79.42,1.38,10.63,25.86
+watermark,"PDFBOX-4352-0.pdf",1.45,1,2.85,3.46,4.24,28.95,69.69,1.49,10.15,24.43
+watermark,"ShowText-ShadingPattern.pdf",4.56,1,20.10,2.90,7.02,29.44,71.76,0.35,1.46,3.57
+watermark,"SimFang-variant.pdf",4.01,1,3.63,3.10,4.46,29.46,71.50,1.23,8.13,19.72
+watermark,"TAMReview.pdf",658.82,23,104.89,183.62,212.40,431.66,806.21,2.02,4.12,7.69
+watermark,"Test-plusminus.pdf",27.74,1,6.23,10.73,13.89,45.12,99.21,2.23,7.24,15.92
+watermark,"PDFJS-9279-reduced.pdf",3017.82,1,25.48,27.09,83.03,1073.75,2646.24,3.26,42.15,103.87
+watermark,"ThuluthFeatures.pdf",114.92,1,3.92,4.31,6.26,68.21,166.57,1.60,17.38,42.44
+watermark,"TrueType_without_cmap.pdf",3.9,1,6.03,5.58,8.20,31.90,73.88,1.36,5.29,12.25
+watermark,"Type3WordSpacing.pdf",2.63,1,4.59,3.68,6.95,29.57,70.91,1.51,6.44,15.43
+watermark,"XiaoBiaoSong.pdf",5.52,1,2.21,2.48,3.80,29.35,72.15,1.72,13.27,32.62
+watermark,"ZapfDingbats.pdf",17.19,2,4.47,4.31,5.53,35.13,83.86,1.24,7.86,18.76
+watermark,"acroform_calculation_order.pdf",1.02,1,1.46,3.19,4.76,28.54,69.05,3.26,19.53,47.26
+watermark,"alphatrans.pdf",16.51,1,2.23,1.83,2.62,32.42,80.81,1.17,14.53,36.21
+watermark,"annotation-border-styles.pdf",87.73,1,2.42,3.79,5.18,58.49,143.04,2.14,24.20,59.17
+watermark,"annotation-button-widget.pdf",23.23,1,33.68,30.54,32.21,63.41,115.20,0.96,1.88,3.42
+watermark,"annotation-caret-ink.pdf",91.48,1,6.40,7.36,9.38,63.33,149.79,1.47,9.90,23.41
+watermark,"annotation-choice-widget.pdf",89.41,1,10.84,13.50,17.67,68.77,154.18,1.63,6.35,14.23
+watermark,"annotation-fileattachment.pdf",91.13,1,4.03,3.39,5.09,59.24,145.52,1.26,14.69,36.08
+watermark,"annotation-highlight-without-appearance.pdf",15.92,1,8.97,14.37,18.26,44.76,92.84,2.03,4.99,10.34
+watermark,"annotation-freetext.pdf",84.01,1,2.30,3.19,4.88,56.63,139.29,2.12,24.64,60.61
+watermark,"annotation-highlight.pdf",90.23,1,2.27,2.32,3.72,57.87,143.69,1.64,25.44,63.16
+watermark,"annotation-ink-without-appearance.pdf",6.14,1,2.71,2.96,4.49,30.03,73.15,1.66,11.08,26.99
+watermark,"annotation-line-without-appearance-empty-Rect.pdf",0.95,1,1.61,1.57,2.30,26.89,67.37,1.43,16.70,41.85
+watermark,"annotation-line-without-appearance.pdf",13.84,1,2.86,2.67,3.83,32.35,79.38,1.34,11.31,27.75
+watermark,"annotation-line.pdf",82.95,1,5.34,3.27,6.45,56.36,138.48,1.21,10.55,25.91
+watermark,"annotation-link-text-popup.pdf",96.68,1,5.78,16.77,19.94,74.50,163.59,3.45,12.89,28.31
+watermark,"22060_A1_01_Plans.pdf",6117.5,1,25.99,35.04,137.63,2131.07,5277.61,5.30,81.99,203.05
+watermark,"annotation-polyline-polygon-without-appearance.pdf",89.28,1,2.90,5.38,7.14,60.60,145.94,2.46,20.88,50.28
+watermark,"annotation-square-circle-without-appearance.pdf",15.63,1,3.67,9.04,11.02,39.34,87.28,3.00,10.71,23.76
+watermark,"annotation-polyline-polygon.pdf",86.61,1,2.79,2.90,4.44,57.23,141.21,1.59,20.52,50.62
+watermark,"annotation-square-circle.pdf",86.66,1,3.58,2.54,3.98,56.88,140.89,1.11,15.88,39.34
+watermark,"annotation-squiggly-without-appearance.pdf",15.22,1,3.34,5.74,9.58,35.89,83.62,2.87,10.75,25.04
+watermark,"annotation-stamp.pdf",86.82,1,2.61,2.44,3.90,56.83,140.92,1.49,21.76,53.96
+watermark,"annotation-squiggly.pdf",91.45,1,9.43,14.75,16.85,70.71,157.15,1.79,7.50,16.67
+watermark,"annotation-strikeout-without-appearance.pdf",15.38,1,3.72,4.78,6.57,34.99,82.80,1.77,9.41,22.26
+watermark,"annotation-strikeout.pdf",89.65,1,2.41,3.37,5.64,58.72,144.25,2.34,24.39,59.92
+watermark,"annotation-text-widget.pdf",90.99,1,18.45,20.00,24.03,75.81,162.01,1.30,4.11,8.78
+watermark,"annotation-text-without-popup.pdf",23.71,1,2.48,5.42,6.42,38.45,90.49,2.59,15.49,36.47
+watermark,"annotation-tx.pdf",11.4,1,1.95,2.32,3.15,31.18,76.97,1.62,15.97,39.43
+watermark,"annotation-tx3.pdf",30.9,1,21.26,14.68,17.86,50.14,105.84,0.84,2.36,4.98
+watermark,"annotation-tx2.pdf",20.79,1,15.66,7.49,13.93,39.53,90.09,0.89,2.52,5.75
+watermark,"annotation-underline-without-appearance.pdf",14.95,1,3.91,1.53,2.31,31.59,79.18,0.59,8.08,20.26
+watermark,"annotation_hidden_noview.pdf",11.83,1,15.60,15.00,16.34,44.01,90.01,1.05,2.82,5.77
+watermark,"annotation_hidden_print.pdf",6.39,1,4.16,3.22,4.91,30.38,73.62,1.18,7.31,17.70
+watermark,"annotation-underline.pdf",89.99,1,4.39,9.79,12.89,65.26,150.96,2.94,14.86,34.38
+watermark,"arial_unicode_en_cidfont.pdf",15.41,1,1.92,7.41,12.92,37.63,85.45,6.72,19.58,44.45
+watermark,"arial_unicode_ab_cidfont.pdf",12.8,1,3.13,2.26,3.73,31.60,78.10,1.19,10.10,24.97
+remove-metadata,"90ms_rksj_h_sample.pdf",1.01,1,1.53,0.81,1.63,26.15,66.67,1.07,17.12,43.66
+remove-metadata,"ContentStreamCycleType3insideType3.pdf",2.38,1,0.86,0.83,1.39,26.64,67.85,1.62,31.14,79.31
+remove-metadata,"ContentStreamNoCycleType3insideType3.pdf",2.38,1,0.89,0.83,1.42,26.64,67.85,1.59,29.82,75.95
+remove-metadata,"Embedded_font.pdf",3.25,1,0.82,1.89,2.76,27.99,69.64,3.37,34.08,84.80
+remove-metadata,"GHOSTSCRIPT-698804-1-fuzzed.pdf",0.61,1,0.92,0.71,1.42,25.92,66.23,1.55,28.30,72.30
+remove-metadata,"IdentityToUnicodeMap_charCodeOf.pdf",0.64,1,0.55,0.61,1.22,25.83,66.15,2.21,46.72,119.64
+remove-metadata,"IndexedCS_negative_and_high.pdf",1.76,1,0.66,0.67,1.24,26.26,67.15,1.87,39.66,101.42
+remove-metadata,"ArabicCIDTrueType.pdf",38.45,1,1.88,5.24,7.09,43.26,102.78,3.77,23.04,54.74
+remove-metadata,"PDFBOX-3148-2-fuzzed.pdf",238.62,1,2.11,1.93,4.88,107.72,268.89,2.31,51.08,127.51
+remove-metadata,"PDFJS-7562-reduced.pdf",13.33,1,1.21,1.08,1.74,30.59,77.36,1.44,25.36,64.13
+remove-metadata,"PDFBOX-4352-0.pdf",1.45,1,1.30,0.97,2.00,26.46,67.20,1.54,20.33,51.63
+remove-metadata,"ShowText-ShadingPattern.pdf",4.56,1,1.09,1.03,1.74,27.57,69.89,1.60,25.38,64.33
+remove-metadata,"SimFang-variant.pdf",4.01,1,1.10,1.05,1.73,27.41,69.45,1.57,24.93,63.17
+remove-metadata,"TAMReview.pdf",658.82,23,173.75,165.13,178.73,413.17,787.73,1.03,2.38,4.53
+remove-metadata,"Test-plusminus.pdf",27.74,1,2.56,2.38,4.41,36.77,90.86,1.72,14.37,35.50
+remove-metadata,"PDFJS-9279-reduced.pdf",3017.82,1,41.37,26.94,84.62,1073.60,2646.08,2.05,25.95,63.96
+remove-metadata,"ThuluthFeatures.pdf",114.92,1,2.11,2.00,3.53,65.91,164.26,1.68,31.25,77.88
+remove-metadata,"TrueType_without_cmap.pdf",3.9,1,0.80,0.72,1.66,27.04,69.02,2.08,33.97,86.71
+remove-metadata,"Type3WordSpacing.pdf",2.63,1,0.79,0.55,1.30,26.44,67.78,1.65,33.60,86.14
+remove-metadata,"XiaoBiaoSong.pdf",5.52,1,1.07,0.97,1.60,27.84,70.64,1.50,26.11,66.26
+remove-metadata,"ZapfDingbats.pdf",17.19,2,2.11,6.44,9.51,37.26,85.98,4.50,17.62,40.65
+remove-metadata,"acroform_calculation_order.pdf",1.02,1,1.46,0.71,1.40,26.05,66.57,0.96,17.83,45.56
+remove-metadata,"alphatrans.pdf",16.51,1,1.04,0.93,1.67,31.52,79.91,1.61,30.28,76.78
+remove-metadata,"annotation-border-styles.pdf",87.73,1,1.72,1.85,4.78,56.55,141.10,2.77,32.80,81.84
+remove-metadata,"annotation-button-widget.pdf",23.23,1,22.15,31.42,32.84,64.28,116.08,1.48,2.90,5.24
+remove-metadata,"annotation-caret-ink.pdf",91.48,1,12.16,13.95,16.84,69.92,156.38,1.39,5.75,12.86
+remove-metadata,"annotation-choice-widget.pdf",89.41,1,6.89,6.25,8.83,61.52,146.92,1.28,8.93,21.32
+remove-metadata,"annotation-fileattachment.pdf",91.13,1,6.29,3.24,6.50,59.09,145.37,1.03,9.39,23.10
+remove-metadata,"annotation-highlight-without-appearance.pdf",15.92,1,2.39,4.64,9.09,35.03,83.12,3.80,14.65,34.77
+remove-metadata,"annotation-freetext.pdf",84.01,1,2.16,5.49,10.53,58.93,141.59,4.88,27.34,65.69
+remove-metadata,"annotation-highlight.pdf",90.23,1,1.51,1.20,2.48,56.75,142.57,1.65,37.68,94.66
+remove-metadata,"annotation-ink-without-appearance.pdf",6.14,1,1.42,1.81,3.35,28.89,72.01,2.36,20.39,50.82
+remove-metadata,"annotation-line-without-appearance-empty-Rect.pdf",0.95,1,1.14,0.55,1.26,25.87,66.35,1.11,22.76,58.38
+remove-metadata,"annotation-line-without-appearance.pdf",13.84,1,1.16,1.08,1.81,30.77,77.79,1.56,26.53,67.08
+remove-metadata,"annotation-line.pdf",82.95,1,1.27,1.29,2.44,54.37,136.49,1.93,42.94,107.80
+remove-metadata,"annotation-link-text-popup.pdf",96.68,1,16.16,8.65,12.22,66.38,155.47,0.76,4.11,9.62
+remove-metadata,"22060_A1_01_Plans.pdf",6117.5,1,15.51,20.75,106.88,2116.77,5263.32,6.89,136.47,339.34
+remove-metadata,"annotation-polyline-polygon-without-appearance.pdf",89.28,1,1.64,1.61,3.12,56.83,142.17,1.91,34.70,86.81
+remove-metadata,"annotation-square-circle-without-appearance.pdf",15.63,1,2.72,1.41,2.24,31.70,79.64,0.82,11.64,29.24
+remove-metadata,"annotation-polyline-polygon.pdf",86.61,1,1.81,1.63,2.87,55.95,139.94,1.58,30.87,77.20
+remove-metadata,"annotation-square-circle.pdf",86.66,1,1.59,3.19,4.61,57.53,141.53,2.90,36.13,88.89
+remove-metadata,"annotation-squiggly-without-appearance.pdf",15.22,1,1.47,1.53,2.30,31.68,79.41,1.57,21.62,54.20
+remove-metadata,"annotation-stamp.pdf",86.82,1,13.43,15.38,17.38,69.77,153.86,1.29,5.19,11.46
+remove-metadata,"annotation-squiggly.pdf",91.45,1,2.66,2.13,4.09,58.09,144.53,1.54,21.80,54.25
+remove-metadata,"annotation-strikeout-without-appearance.pdf",15.38,1,2.98,6.35,13.39,36.56,84.37,4.49,12.26,28.29
+remove-metadata,"annotation-strikeout.pdf",89.65,1,4.01,1.44,2.96,56.79,142.31,0.74,14.17,35.52
+remove-metadata,"annotation-text-widget.pdf",90.99,1,19.60,14.97,18.41,70.77,156.98,0.94,3.61,8.01
+remove-metadata,"annotation-text-without-popup.pdf",23.71,1,1.66,2.06,3.33,35.09,87.13,2.01,21.16,52.54
+remove-metadata,"annotation-tx.pdf",11.4,1,1.53,1.15,2.02,30.01,75.79,1.32,19.63,49.57
+remove-metadata,"annotation-tx3.pdf",30.9,1,4.59,1.98,2.86,37.44,93.13,0.62,8.16,20.30
+remove-metadata,"annotation-tx2.pdf",20.79,1,1.80,1.63,2.41,33.67,84.23,1.34,18.68,46.72
+remove-metadata,"annotation-underline-without-appearance.pdf",14.95,1,2.94,2.11,3.54,32.17,79.76,1.20,10.94,27.12
+remove-metadata,"annotation_hidden_noview.pdf",11.83,1,1.74,3.16,6.93,32.16,78.17,3.97,18.44,44.82
+remove-metadata,"annotation_hidden_print.pdf",6.39,1,1.17,1.02,1.74,28.18,71.43,1.49,24.18,61.28
+remove-metadata,"annotation-underline.pdf",89.99,1,1.61,1.60,2.90,57.06,142.76,1.80,35.40,88.56
+remove-metadata,"arial_unicode_en_cidfont.pdf",15.41,1,1.37,3.55,4.68,33.77,81.59,3.41,24.62,59.49
+remove-metadata,"arial_unicode_ab_cidfont.pdf",12.8,1,1.57,1.35,2.22,30.68,77.19,1.42,19.56,49.22
+compress,"90ms_rksj_h_sample.pdf",1.01,1,1.27,0.90,1.78,26.24,66.76,1.41,20.71,52.69
+compress,"ContentStreamCycleType3insideType3.pdf",2.38,1,1.03,0.99,2.33,26.79,68.00,2.26,26.05,66.11
+compress,"ContentStreamNoCycleType3insideType3.pdf",2.38,1,1.27,0.88,1.59,26.68,67.89,1.25,21.06,53.60
+compress,"Embedded_font.pdf",3.25,1,0.85,0.80,1.38,26.89,68.54,1.62,31.54,80.40
+compress,"GHOSTSCRIPT-698804-1-fuzzed.pdf",0.61,1,0.68,0.64,1.16,25.85,66.16,1.71,38.08,97.45
+compress,"IdentityToUnicodeMap_charCodeOf.pdf",0.64,1,0.64,0.82,1.98,26.03,66.36,3.09,40.63,103.59
+compress,"IndexedCS_negative_and_high.pdf",1.76,1,2.16,1.90,6.34,27.49,68.39,2.94,12.73,31.67
+compress,"ArabicCIDTrueType.pdf",38.45,1,3.30,14.68,16.37,52.70,112.22,4.96,15.97,34.00
+compress,"PDFBOX-3148-2-fuzzed.pdf",238.62,1,2.97,4.30,7.47,110.09,271.26,2.51,37.03,91.25
+compress,"PDFJS-7562-reduced.pdf",13.33,1,1.20,1.11,1.85,30.63,77.40,1.54,25.52,64.48
+compress,"PDFBOX-4352-0.pdf",1.45,1,1.56,1.30,2.71,26.79,67.53,1.74,17.19,43.33
+compress,"ShowText-ShadingPattern.pdf",4.56,1,1.42,0.96,1.78,27.50,69.82,1.25,19.31,49.02
+compress,"SimFang-variant.pdf",4.01,1,1.26,5.57,7.33,31.93,73.97,5.84,25.43,58.90
+compress,"TAMReview.pdf",658.82,23,143.40,163.01,177.37,411.05,785.60,1.24,2.87,5.48
+compress,"Test-plusminus.pdf",27.74,1,2.54,2.29,4.69,36.68,90.76,1.85,14.46,35.79
+compress,"PDFJS-9279-reduced.pdf",3017.82,1,32.70,28.67,111.64,1075.33,2647.82,3.41,32.89,80.98
+compress,"ThuluthFeatures.pdf",114.92,1,5.29,3.57,6.49,67.48,165.83,1.23,12.76,31.36
+compress,"TrueType_without_cmap.pdf",3.9,1,1.19,1.10,1.89,27.42,69.40,1.59,23.00,58.21
+compress,"Type3WordSpacing.pdf",2.63,1,1.81,0.66,1.42,26.55,67.88,0.79,14.67,37.50
+compress,"XiaoBiaoSong.pdf",5.52,1,1.54,1.30,2.05,28.17,70.97,1.33,18.26,46.00
+compress,"ZapfDingbats.pdf",17.19,2,2.73,2.26,3.03,33.08,81.81,1.11,12.11,29.96
+compress,"acroform_calculation_order.pdf",1.02,1,0.89,1.09,2.23,26.43,66.95,2.50,29.75,75.35
+compress,"alphatrans.pdf",16.51,1,1.01,0.88,1.58,31.47,79.86,1.57,31.17,79.10
+compress,"annotation-border-styles.pdf",87.73,1,1.60,5.63,8.11,60.33,144.88,5.08,37.74,90.63
+compress,"annotation-button-widget.pdf",23.23,1,27.32,29.86,31.70,62.72,114.51,1.16,2.30,4.19
+compress,"annotation-caret-ink.pdf",91.48,1,11.98,15.04,17.39,71.01,157.47,1.45,5.93,13.15
+compress,"annotation-choice-widget.pdf",89.41,1,5.17,3.06,4.45,58.33,143.74,0.86,11.28,27.80
+compress,"annotation-fileattachment.pdf",91.13,1,2.56,4.07,5.87,59.92,146.20,2.29,23.37,57.01
+compress,"annotation-highlight-without-appearance.pdf",15.92,1,1.56,1.42,2.18,31.81,79.89,1.39,20.34,51.09
+compress,"annotation-freetext.pdf",84.01,1,2.11,3.23,8.13,56.67,139.33,3.86,26.92,66.18
+compress,"annotation-highlight.pdf",90.23,1,4.08,3.43,6.94,58.98,144.80,1.70,14.47,35.53
+compress,"annotation-ink-without-appearance.pdf",6.14,1,1.42,1.26,1.97,28.34,71.46,1.39,20.01,50.45
+compress,"annotation-line-without-appearance-empty-Rect.pdf",0.95,1,0.63,0.61,1.27,25.93,66.41,2.02,41.39,106.00
+compress,"annotation-line-without-appearance.pdf",13.84,1,1.36,2.39,3.82,32.07,79.10,2.82,23.67,58.38
+compress,"annotation-line.pdf",82.95,1,1.79,2.00,3.60,55.09,137.21,2.01,30.73,76.55
+compress,"annotation-link-text-popup.pdf",96.68,1,11.79,15.13,17.04,72.86,161.96,1.45,6.18,13.74
+compress,"22060_A1_01_Plans.pdf",6117.5,1,15.63,22.61,107.96,2118.64,5265.19,6.91,135.57,336.93
+compress,"annotation-polyline-polygon-without-appearance.pdf",89.28,1,1.81,1.67,3.50,56.90,142.24,1.93,31.37,78.42
+compress,"annotation-square-circle-without-appearance.pdf",15.63,1,2.05,1.35,3.56,31.64,79.58,1.73,15.42,38.77
+compress,"annotation-polyline-polygon.pdf",86.61,1,1.79,1.61,3.07,55.94,139.92,1.72,31.29,78.26
+compress,"annotation-square-circle.pdf",86.66,1,1.58,1.33,2.53,55.67,139.68,1.60,35.13,88.15
+compress,"annotation-squiggly-without-appearance.pdf",15.22,1,1.40,1.17,2.12,31.32,79.05,1.52,22.40,56.55
+compress,"annotation-stamp.pdf",86.82,1,11.73,14.83,17.12,69.22,153.31,1.46,5.90,13.07
+compress,"annotation-squiggly.pdf",91.45,1,3.22,2.10,3.52,58.06,144.50,1.10,18.06,44.94
+compress,"annotation-strikeout-without-appearance.pdf",15.38,1,1.25,1.53,2.33,31.74,79.56,1.87,25.43,63.75
+compress,"annotation-strikeout.pdf",89.65,1,1.36,2.34,4.59,57.69,143.22,3.38,42.56,105.66
+compress,"annotation-text-widget.pdf",90.99,1,20.02,12.94,18.67,68.74,154.95,0.93,3.43,7.74
+compress,"annotation-text-without-popup.pdf",23.71,1,1.40,1.36,2.30,34.39,86.43,1.64,24.53,61.64
+compress,"annotation-tx.pdf",11.4,1,1.89,1.24,2.31,30.10,75.89,1.22,15.90,40.10
+compress,"annotation-tx3.pdf",30.9,1,3.54,5.69,7.62,41.15,96.84,2.15,11.63,27.37
+compress,"annotation-tx2.pdf",20.79,1,3.91,2.33,3.43,34.37,84.93,0.88,8.78,21.71
+compress,"annotation-underline-without-appearance.pdf",14.95,1,1.24,2.54,3.57,32.59,80.18,2.88,26.36,64.85
+compress,"annotation_hidden_noview.pdf",11.83,1,1.32,1.25,1.95,30.26,76.27,1.48,22.98,57.93
+compress,"annotation_hidden_print.pdf",6.39,1,1.09,1.07,1.65,28.23,71.47,1.52,25.92,65.62
+compress,"annotation-underline.pdf",89.99,1,1.78,2.57,3.92,58.03,143.73,2.21,32.67,80.93
+compress,"arial_unicode_en_cidfont.pdf",15.41,1,1.43,1.38,2.12,31.60,79.42,1.48,22.08,55.50
+compress,"arial_unicode_ab_cidfont.pdf",12.8,1,1.23,1.19,1.92,30.53,77.03,1.55,24.76,62.47
+split,"TAMReview.pdf",658.82,23,46.88,25.66,31.39,273.70,648.26,0.67,5.84,13.83
+split,"ZapfDingbats.pdf",17.19,2,2.45,2.32,3.16,33.14,81.87,1.29,13.51,33.37
+split,"basicapi.pdf",103.3,3,4.98,2.93,4.42,62.90,155.36,0.89,12.64,31.21
+split,"boundingBox_invalid.pdf",1.23,3,0.82,0.88,1.65,26.30,66.93,2.01,32.00,81.43
+split,"bug1708041.pdf",37.26,6,10.05,7.07,8.47,44.68,103.60,0.84,4.45,10.31
+split,"bug1907000_reduced.pdf",15.03,2,2.96,4.75,8.16,34.84,82.47,2.76,11.76,27.85
+split,"bug1997343.pdf",185.02,2,74.11,106.40,110.53,194.04,328.00,1.49,2.62,4.43
+split,"bug793632.pdf",22.98,4,5.01,1.60,2.41,34.38,86.05,0.48,6.87,17.19
+split,"bug1992868.pdf",994.09,14,164.03,160.19,174.44,521.73,1066.54,1.06,3.18,6.50
+split,"calgray.pdf",14.74,3,2.04,0.83,4.27,30.82,78.30,2.10,15.14,38.47
+split,"canvas.pdf",147.37,2,8.97,14.39,16.99,89.28,204.12,1.89,9.95,22.75
+split,"calrgb.pdf",314.5,17,1.81,1.76,3.92,133.24,332.95,2.16,73.53,183.74
+split,"colors.pdf",2.53,2,0.95,0.84,1.45,26.69,67.98,1.53,28.15,71.69
+split,"doc_1_3_pages.pdf",11.81,3,5.06,3.10,3.86,32.10,78.09,0.76,6.34,15.43
+split,"doc_2_3_pages.pdf",38.67,3,10.86,13.69,23.27,51.78,111.41,2.14,4.77,10.26
+split,"comments.pdf",1040.78,14,111.74,113.39,124.80,490.74,1059.26,1.12,4.39,9.48
+split,"doc_3_3_pages.pdf",39.79,3,8.65,7.69,10.92,46.16,106.37,1.26,5.34,12.30
+split,"doc_actions.pdf",8.55,3,1.56,1.55,2.48,29.45,73.79,1.59,18.82,47.15
+split,"extract_link.pdf",9.97,2,3.62,3.66,5.09,32.03,77.10,1.40,8.84,21.28
+split,"evaljs.pdf",54.15,2,2.03,1.90,2.66,45.23,112.73,1.31,22.30,55.58
+split,"file_pdfjs_test.pdf",147.08,5,44.65,45.26,49.28,120.05,234.74,1.10,2.69,5.26
+split,"firefox_stamp.pdf",47.53,2,1.37,1.11,2.02,42.20,106.34,1.47,30.76,77.51
+split,"form_two_pages.pdf",22.59,2,7.74,6.80,8.02,39.45,90.92,1.04,5.10,11.74
+split,"function_based_shading_cmyk.pdf",3.19,2,2.62,1.46,2.35,27.54,69.16,0.90,10.50,26.36
+split,"hello_world_rotated.pdf",1.29,5,0.79,0.77,3.49,26.21,66.87,4.44,33.32,85.02
+split,"freeculture.pdf",2537.82,352,184.23,192.69,238.29,1076.85,2405.59,1.29,5.85,13.06
+split,"highlights.pdf",946.56,14,113.69,111.33,125.51,456.78,977.45,1.10,4.02,8.60
+split,"issue11878_reduced.pdf",2,10,1.45,3.83,6.15,29.51,70.52,4.26,20.41,48.78
+split,"issue12337.pdf",993.12,14,144.91,150.64,161.48,511.85,1056.17,1.11,3.53,7.29
+split,"issue12963.pdf",589.2,8,259.14,198.44,208.75,422.91,762.11,0.81,1.63,2.94
+split,"issue13343.pdf",2.27,2,1.90,1.54,3.08,27.30,68.46,1.62,14.36,36.02
+split,"issue1350.pdf",115.62,3,2.73,3.37,5.81,67.51,166.22,2.13,24.73,60.88
+split,"issue14023.pdf",12.66,5,7.08,14.48,15.95,43.77,90.20,2.25,6.19,12.75
+split,"issue14814.pdf",409.93,2,3.88,2.25,8.01,166.03,414.20,2.06,42.77,106.70
+merge,"Pair: 90ms_rksj_h_sample.pdf + ContentStreamCycleType3insideType3.pdf",3.40,2,3.05,5.13,9.63,31.28,73.00,3.16,10.26,23.93
+merge,"Pair: ContentStreamNoCycleType3insideType3.pdf + Embedded_font.pdf",5.63,2,4.13,1.85,6.35,28.76,71.62,1.54,6.96,17.33
+merge,"Pair: GHOSTSCRIPT-698804-1-fuzzed.pdf + IdentityToUnicodeMap_charCodeOf.pdf",1.25,2,1.41,1.33,5.83,26.75,67.38,4.14,19.02,47.91
+merge,"Pair: IndexedCS_negative_and_high.pdf + ArabicCIDTrueType.pdf",40.20,2,22.34,15.59,20.09,54.20,114.61,0.90,2.43,5.13
+merge,"Pair: PDFBOX-3148-2-fuzzed.pdf + PDFJS-7562-reduced.pdf",251.96,2,3.59,2.91,7.41,113.21,281.16,2.06,31.50,78.22
+merge,"Pair: ShowText-ShadingPattern.pdf + SimFang-variant.pdf",8.57,2,2.16,2.66,7.16,30.56,74.91,3.32,14.16,34.71
+merge,"Pair: TAMReview.pdf + Test-plusminus.pdf",686.55,24,180.24,187.75,192.25,445.18,833.82,1.07,2.47,4.63
+merge,"Pair: PDFJS-9279-reduced.pdf + ThuluthFeatures.pdf",3132.74,2,46.73,34.67,39.17,1120.23,2751.08,0.84,23.97,58.87
+merge,"Pair: TrueType_without_cmap.pdf + Type3WordSpacing.pdf",6.53,2,2.37,1.11,5.61,28.32,71.63,2.37,11.97,30.27
+merge,"Pair: XiaoBiaoSong.pdf + ZapfDingbats.pdf",22.71,3,16.48,15.92,20.42,48.61,100.14,1.24,2.95,6.07
+merge,"Pair: acroform_calculation_order.pdf + alphatrans.pdf",17.53,2,2.17,1.63,6.13,32.56,81.46,2.83,15.03,37.59
+merge,"Pair: annotation-border-styles.pdf + annotation-button-widget.pdf",110.96,2,7.74,10.75,15.25,73.31,169.66,1.97,9.47,21.92
+merge,"Pair: annotation-caret-ink.pdf + annotation-choice-widget.pdf",180.89,2,6.26,4.37,8.87,90.61,222.48,1.42,14.48,35.56
+merge,"Pair: annotation-fileattachment.pdf + annotation-highlight-without-appearance.pdf",107.05,2,5.22,5.14,9.64,66.38,160.74,1.85,12.71,30.77
+merge,"Pair: annotation-freetext.pdf + annotation-highlight.pdf",174.24,2,7.15,4.53,9.03,88.52,217.00,1.26,12.37,30.33
+merge,"Pair: annotation-ink-without-appearance.pdf + annotation-line-without-appearance-empty-Rect.pdf",7.09,2,4.52,4.03,8.53,31.43,75.03,1.89,6.95,16.58
+merge,"Pair: annotation-line-without-appearance.pdf + annotation-line.pdf",96.79,2,2.28,1.92,6.42,59.68,148.83,2.82,26.19,65.31
+merge,"Pair: annotation-link-text-popup.pdf + 22060_A1_01_Plans.pdf",6214.18,2,20.29,25.71,30.21,2154.47,5350.11,1.49,106.20,263.73
+merge,"Pair: annotation-polyline-polygon-without-appearance.pdf + annotation-square-circle-without-appearance.pdf",104.92,2,2.43,3.71,8.21,64.23,157.50,3.38,26.47,64.91
+merge,"Pair: annotation-polyline-polygon.pdf + annotation-square-circle.pdf",173.27,2,2.58,2.30,6.80,85.96,213.95,2.63,33.30,82.88
+merge,"Pair: annotation-squiggly-without-appearance.pdf + annotation-stamp.pdf",102.04,2,2.78,3.73,8.23,63.28,155.10,2.96,22.78,55.85
+merge,"Pair: annotation-squiggly.pdf + annotation-strikeout-without-appearance.pdf",106.83,2,2.22,2.02,6.52,63.19,157.44,2.94,28.45,70.89
+merge,"Pair: annotation-strikeout.pdf + annotation-text-widget.pdf",180.64,2,14.18,10.19,14.69,96.34,228.07,1.04,6.79,16.08
+merge,"Pair: annotation-text-without-popup.pdf + annotation-tx.pdf",35.11,2,2.74,2.08,6.58,38.97,96.80,2.40,14.22,35.32
+merge,"Pair: annotation-tx3.pdf + annotation-tx2.pdf",51.69,2,5.64,7.55,12.05,50.05,116.30,2.14,8.87,20.60
+merge,"Pair: annotation-underline-without-appearance.pdf + annotation_hidden_noview.pdf",26.78,2,6.37,3.45,7.95,37.51,91.11,1.25,5.89,14.30
+merge,"Pair: annotation_hidden_print.pdf + annotation-underline.pdf",96.38,2,2.07,1.81,6.31,59.44,148.38,3.04,28.65,71.53
+merge,"Pair: arial_unicode_en_cidfont.pdf + arial_unicode_ab_cidfont.pdf",28.21,2,3.51,2.20,6.70,36.75,91.08,1.91,10.46,25.92

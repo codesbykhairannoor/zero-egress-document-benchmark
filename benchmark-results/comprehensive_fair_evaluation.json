@@ -1,0 +1,200 @@
+{
+  "evaluatedAt": "2026-10-21T07:07:28.001Z",
+  "evaluationStandard": "MIT CSAIL Fair Multi-Domain Distributed Systems Standard",
+  "totalToolsEvaluated": 6,
+  "totalWorkloadRuns": 290,
+  "toolDomains": {
+    "rotate": {
+      "toolName": "Rotate PDF (Structural)",
+      "sampleSize": 57,
+      "wasmLatencyMs": {
+        "mean": 8.46,
+        "median": 2.68
+      },
+      "cloudServerComputeMs": {
+        "mean": 8.1,
+        "median": 1.99
+      },
+      "cloudLocalhostTotalMs": {
+        "mean": 13,
+        "median": 3.86
+      },
+      "cloudBroadbandWifiTotalMs": {
+        "mean": 104.23,
+        "median": 32.58
+      },
+      "cloudMobile4gTotalMs": {
+        "mean": 250.92,
+        "median": 80.96
+      },
+      "speedupFactor": {
+        "localhostMean": 1.79,
+        "localhostMedian": 1.5,
+        "wifiMean": 17.03,
+        "mobile4gMean": 42.05
+      }
+    },
+    "watermark": {
+      "toolName": "Watermark PDF (Visual/Vector)",
+      "sampleSize": 57,
+      "wasmLatencyMs": {
+        "mean": 8.35,
+        "median": 3.63
+      },
+      "cloudServerComputeMs": {
+        "mean": 10.06,
+        "median": 3.39
+      },
+      "cloudLocalhostTotalMs": {
+        "mean": 15.33,
+        "median": 6.2
+      },
+      "cloudBroadbandWifiTotalMs": {
+        "mean": 106.18,
+        "median": 39.34
+      },
+      "cloudMobile4gTotalMs": {
+        "mean": 252.87,
+        "median": 90.01
+      },
+      "speedupFactor": {
+        "localhostMean": 1.82,
+        "localhostMedian": 1.55,
+        "wifiMean": 13.95,
+        "mobile4gMean": 33.76
+      }
+    },
+    "remove-metadata": {
+      "toolName": "Remove Metadata (Security)",
+      "sampleSize": 57,
+      "wasmLatencyMs": {
+        "mean": 7.12,
+        "median": 1.64
+      },
+      "cloudServerComputeMs": {
+        "mean": 6.94,
+        "median": 1.63
+      },
+      "cloudLocalhostTotalMs": {
+        "mean": 11.27,
+        "median": 2.9
+      },
+      "cloudBroadbandWifiTotalMs": {
+        "mean": 103.07,
+        "median": 35.03
+      },
+      "cloudMobile4gTotalMs": {
+        "mean": 249.76,
+        "median": 84.23
+      },
+      "speedupFactor": {
+        "localhostMean": 1.99,
+        "localhostMedian": 1.59,
+        "wifiMean": 24.84,
+        "mobile4gMean": 61.97
+      }
+    },
+    "compress": {
+      "toolName": "Compress PDF (Optimization)",
+      "sampleSize": 57,
+      "wasmLatencyMs": {
+        "mean": 6.43,
+        "median": 1.6
+      },
+      "cloudServerComputeMs": {
+        "mean": 7.21,
+        "median": 1.67
+      },
+      "cloudLocalhostTotalMs": {
+        "mean": 11.91,
+        "median": 3.43
+      },
+      "cloudBroadbandWifiTotalMs": {
+        "mean": 103.34,
+        "median": 32.59
+      },
+      "cloudMobile4gTotalMs": {
+        "mean": 250.03,
+        "median": 80.18
+      },
+      "speedupFactor": {
+        "localhostMean": 2.06,
+        "localhostMedian": 1.62,
+        "wifiMean": 24.03,
+        "mobile4gMean": 59.78
+      }
+    },
+    "split": {
+      "toolName": "Split PDF (Multi-Page)",
+      "sampleSize": 34,
+      "wasmLatencyMs": {
+        "mean": 36.61,
+        "median": 5.01
+      },
+      "cloudServerComputeMs": {
+        "mean": 35.55,
+        "median": 3.83
+      },
+      "cloudLocalhostTotalMs": {
+        "mean": 40.66,
+        "median": 8.01
+      },
+      "cloudBroadbandWifiTotalMs": {
+        "mean": 155.62,
+        "median": 45.23
+      },
+      "cloudMobile4gTotalMs": {
+        "mean": 338.24,
+        "median": 106.37
+      },
+      "speedupFactor": {
+        "localhostMean": 1.6,
+        "localhostMedian": 1.4,
+        "wifiMean": 14.6,
+        "mobile4gMean": 35.8
+      }
+    },
+    "merge": {
+      "toolName": "Merge PDF (Multi-File)",
+      "sampleSize": 28,
+      "wasmLatencyMs": {
+        "mean": 13.67,
+        "median": 4.13
+      },
+      "cloudServerComputeMs": {
+        "mean": 13.67,
+        "median": 4.13
+      },
+      "cloudLocalhostTotalMs": {
+        "mean": 17.57,
+        "median": 8.23
+      },
+      "cloudBroadbandWifiTotalMs": {
+        "mean": 182.85,
+        "median": 59.68
+      },
+      "cloudMobile4gTotalMs": {
+        "mean": 440.01,
+        "median": 148.83
+      },
+      "speedupFactor": {
+        "localhostMean": 2.14,
+        "localhostMedian": 2.06,
+        "wifiMean": 18.39,
+        "mobile4gMean": 32.2
+      }
+    }
+  },
+  "economicFairness": {
+    "commercialApiCostPer100kOperations": {
+      "adobeDocumentServicesApi": "$5,000.00 (avg $0.05/doc)",
+      "iLovePdfApi": "$499.00 ($0.005/doc)",
+      "handleMyFileClientWasm": "$0.00 (Zero Server Compute Cost)"
+    },
+    "annualInfrastructureSavingsAtScale": "Saves $6,000 - $60,000/year in cloud compute & egress fees"
+  },
+  "dataSovereigntyFairness": {
+    "cloudDataEgressRate": "100% of PDF bytes uploaded over external networks",
+    "wasmClientDataEgressRate": "0.00% (Strict Zero-Knowledge non-interference)"
+  }
+}

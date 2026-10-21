@@ -1,0 +1,25 @@
+{
+  "evaluatedAt": "2026-10-21T06:22:44.668Z",
+  "totalDocsEvaluated": 46,
+  "tools": {
+    "compressPdf": {
+      "testedCount": 47,
+      "meanWasmLatencyMs": 9.24,
+      "meanCloudLatencyMs": 13.72,
+      "meanSpeedupFactor": 2.01,
+      "meanSavingsPercent": 7.36
+    },
+    "splitPdf": {
+      "testedCount": 2,
+      "meanWasmLatencyMs": 22.44,
+      "meanCloudLatencyMs": 27.57,
+      "meanSpeedupFactor": 1.43
+    },
+    "mergePdf": {
+      "testedCount": 45,
+      "meanWasmLatencyMs": 16.05,
+      "meanCloudLatencyMs": 7.54,
+      "meanSpeedupFactor": 0.62
+    }
+  }
+}

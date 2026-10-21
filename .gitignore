@@ -1,0 +1,4 @@
+node_modules/
+dataset/raw/
+.DS_Store
+*.log

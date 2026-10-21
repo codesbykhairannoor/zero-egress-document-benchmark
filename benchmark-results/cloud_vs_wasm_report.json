@@ -1,0 +1,181 @@
+{
+  "analysisDate": "2026-10-21T05:47:13.444Z",
+  "networkProfiles": {
+    "3G Mobile": {
+      "upMbps": 1.5,
+      "downMbps": 3,
+      "rttMs": 150
+    },
+    "4G LTE (Average ID)": {
+      "upMbps": 12,
+      "downMbps": 25,
+      "rttMs": 45
+    },
+    "5G Ultra / High-Speed": {
+      "upMbps": 50,
+      "downMbps": 150,
+      "rttMs": 15
+    },
+    "Fiber Broadband (Home/Office)": {
+      "upMbps": 50,
+      "downMbps": 100,
+      "rttMs": 10
+    }
+  },
+  "latencyComparison": [
+    {
+      "file": "0.5 MB (Single Invoice / Form)",
+      "sizeMB": 0.5,
+      "network": "3G Mobile",
+      "cloudTotalSec": 4.52,
+      "wasmTotalSec": 0.009,
+      "speedupFactor": 531.6
+    },
+    {
+      "file": "0.5 MB (Single Invoice / Form)",
+      "sizeMB": 0.5,
+      "network": "4G LTE (Average ID)",
+      "cloudTotalSec": 0.81,
+      "wasmTotalSec": 0.009,
+      "speedupFactor": 95.8
+    },
+    {
+      "file": "0.5 MB (Single Invoice / Form)",
+      "sizeMB": 0.5,
+      "network": "5G Ultra / High-Speed",
+      "cloudTotalSec": 0.35,
+      "wasmTotalSec": 0.009,
+      "speedupFactor": 41.3
+    },
+    {
+      "file": "0.5 MB (Single Invoice / Form)",
+      "sizeMB": 0.5,
+      "network": "Fiber Broadband (Home/Office)",
+      "cloudTotalSec": 0.35,
+      "wasmTotalSec": 0.009,
+      "speedupFactor": 41
+    },
+    {
+      "file": "2.0 MB (Short Contract, 10 pgs)",
+      "sizeMB": 2,
+      "network": "3G Mobile",
+      "cloudTotalSec": 16.13,
+      "wasmTotalSec": 0.023,
+      "speedupFactor": 695.2
+    },
+    {
+      "file": "2.0 MB (Short Contract, 10 pgs)",
+      "sizeMB": 2,
+      "network": "4G LTE (Average ID)",
+      "cloudTotalSec": 2.26,
+      "wasmTotalSec": 0.023,
+      "speedupFactor": 97.2
+    },
+    {
+      "file": "2.0 MB (Short Contract, 10 pgs)",
+      "sizeMB": 2,
+      "network": "5G Ultra / High-Speed",
+      "cloudTotalSec": 0.67,
+      "wasmTotalSec": 0.023,
+      "speedupFactor": 29
+    },
+    {
+      "file": "2.0 MB (Short Contract, 10 pgs)",
+      "sizeMB": 2,
+      "network": "Fiber Broadband (Home/Office)",
+      "cloudTotalSec": 0.7,
+      "wasmTotalSec": 0.023,
+      "speedupFactor": 30.4
+    },
+    {
+      "file": "10.0 MB (Annual Report / Scanned)",
+      "sizeMB": 10,
+      "network": "3G Mobile",
+      "cloudTotalSec": 78.03,
+      "wasmTotalSec": 0.089,
+      "speedupFactor": 871.9
+    },
+    {
+      "file": "10.0 MB (Annual Report / Scanned)",
+      "sizeMB": 10,
+      "network": "4G LTE (Average ID)",
+      "cloudTotalSec": 9.93,
+      "wasmTotalSec": 0.089,
+      "speedupFactor": 111
+    },
+    {
+      "file": "10.0 MB (Annual Report / Scanned)",
+      "sizeMB": 10,
+      "network": "5G Ultra / High-Speed",
+      "cloudTotalSec": 2.38,
+      "wasmTotalSec": 0.089,
+      "speedupFactor": 26.5
+    },
+    {
+      "file": "10.0 MB (Annual Report / Scanned)",
+      "sizeMB": 10,
+      "network": "Fiber Broadband (Home/Office)",
+      "cloudTotalSec": 2.6,
+      "wasmTotalSec": 0.089,
+      "speedupFactor": 29.1
+    },
+    {
+      "file": "50.0 MB (Technical Blueprint / Book)",
+      "sizeMB": 50,
+      "network": "3G Mobile",
+      "cloudTotalSec": 387.51,
+      "wasmTotalSec": 0.325,
+      "speedupFactor": 1192.3
+    },
+    {
+      "file": "50.0 MB (Technical Blueprint / Book)",
+      "sizeMB": 50,
+      "network": "4G LTE (Average ID)",
+      "cloudTotalSec": 48.26,
+      "wasmTotalSec": 0.325,
+      "speedupFactor": 148.5
+    },
+    {
+      "file": "50.0 MB (Technical Blueprint / Book)",
+      "sizeMB": 50,
+      "network": "5G Ultra / High-Speed",
+      "cloudTotalSec": 10.84,
+      "wasmTotalSec": 0.325,
+      "speedupFactor": 33.3
+    },
+    {
+      "file": "50.0 MB (Technical Blueprint / Book)",
+      "sizeMB": 50,
+      "network": "Fiber Broadband (Home/Office)",
+      "cloudTotalSec": 12.02,
+      "wasmTotalSec": 0.325,
+      "speedupFactor": 37
+    }
+  ],
+  "costEconomicsPer10kTransactions": {
+    "Adobe PDF Services API": 500,
+    "iLovePDF Commercial API": 200,
+    "AWS Lambda + S3 Serverless": 4.483790625,
+    "Client-Side WASM (HandleMyFile)": 0
+  },
+  "privacySecurityMatrix": {
+    "dataAtRestOnServer": {
+      "cloudAPI": "Yes (1 - 24 hours)",
+      "clientWasm": "Zero (None)"
+    },
+    "dataInTransitRisk": {
+      "cloudAPI": "High (Network interception, TLS MITM)",
+      "clientWasm": "Zero (None, 0 KB egress)"
+    },
+    "regulatoryCompliance": {
+      "gdprCompliant": {
+        "cloudAPI": "Requires DPA & Data Processing Agreement",
+        "clientWasm": "Inherently Compliant by Architecture"
+      },
+      "indonesiaUUPDP": {
+        "cloudAPI": "Third-party processor liabilities",
+        "clientWasm": "Zero data transfer"
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use this benchmark suite, empirical data, or architecture in your research, please cite it as below."
+authors:
+  - family-names: "Noor"
+    given-names: "Khairan"
+    affiliation: "Independent Researcher"
+title: "Zero-Egress Document Systems Using Client-Side WebAssembly"
+version: 1.0.0
+date-released: 2026-10-21
+url: "https://github.com/codesbykhairannoor/zero-egress-document-benchmark"
+keywords:
+  - "WebAssembly"
+  - "Zero-Egress Invariant"
+  - "Document Processing"
+  - "Client-Side Computing"
+  - "Privacy Engineering"
+  - "Empirical Evaluation"
+preferred-citation:
+  type: article
+  authors:
+    - family-names: "Noor"
+      given-names: "Khairan"
+  title: "Zero-Egress Document Systems Using Client-Side WebAssembly"
+  year: 2026
+  url: "https://github.com/codesbykhairannoor/zero-egress-document-benchmark"

@@ -1,0 +1,26 @@
+{
+  "evaluationDate": "2026-10-21T05:53:10.581Z",
+  "totalValidDocuments": 490,
+  "wasmLatencyMs": {
+    "mean": 10.29,
+    "median": 2.36,
+    "min": 0.58,
+    "max": 504.38
+  },
+  "cloudTotalLatencyMs": {
+    "mean": 13.81,
+    "median": 4.12,
+    "min": 1.04,
+    "max": 562.8
+  },
+  "speedupFactor": {
+    "mean": 1.88,
+    "median": 1.58,
+    "max": 8.64
+  },
+  "networkPrivacyVerification": {
+    "wasmTotalNetworkEgressMB": 0,
+    "cloudTotalNetworkEgressMB": 45.42,
+    "privacyLeakageRiskFactor": "0% in WASM vs 100% Data Transmission in Cloud API"
+  }
+}

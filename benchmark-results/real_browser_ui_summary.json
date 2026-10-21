@@ -1,0 +1,25 @@
+{
+  "evaluatedAt": "2026-10-21T06:17:38.964Z",
+  "environment": "Real Chromium Browser Window via Puppeteer",
+  "webTarget": "http://localhost:5173/en/remove-pdf-metadata",
+  "totalTested": 17,
+  "uiMountLatencyMs": {
+    "mean": 236.52,
+    "min": 117.61,
+    "max": 716.35
+  },
+  "wasmProcessLatencyMs": {
+    "mean": 211.02,
+    "min": 92.11,
+    "max": 878.87
+  },
+  "totalEndToEndMs": {
+    "mean": 447.55,
+    "min": 219.74,
+    "max": 1073.13
+  },
+  "browserJsHeapMB": {
+    "mean": 80.17,
+    "max": 126.45
+  }
+}
