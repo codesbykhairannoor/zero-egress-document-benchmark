@@ -7,6 +7,7 @@
 \usepackage{url}
 \def\UrlBreaks{\do\/\do-}
 \usepackage{microtype}
+\usepackage{enumitem}
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
@@ -19,7 +20,7 @@
 \title{Zero-Egress Document Systems Using Client-Side WebAssembly}
 
 \author{Khairan~Noor~Fadhlillah%
-\thanks{K. N. Fadhlillah is an independent researcher based in Jakarta, Indonesia (e-mail: dev@khairan.tech). Code artifacts and empirical datasets are available at https://github.com/codesbykhairannoor/zero-egress-document-benchmark and the production implementation is deployed at https://handlemyfile.com.}%
+\thanks{K. N. Fadhlillah is with the Program Studi Sistem Informasi, Universitas Ary Ginanjar, Jakarta, Indonesia (e-mail: dev@khairan.tech). Code artifacts and empirical datasets are available at https://github.com/codesbykhairannoor/zero-egress-document-benchmark and the production implementation is deployed at https://handlemyfile.com.}%
 }
 
 \markboth{IEEE Transactions on Dependable and Secure Computing,~Vol.~XX, No.~X,~Month~2026}%
@@ -47,7 +48,7 @@ Recent advancements in WebAssembly (WASM) and browser sandboxing \cite{haas2017b
 In this paper, we introduce \textbf{HandleMyFile}, a production-tested zero-egress document processing system that executes comprehensive PDF workflows directly inside the client browser. By leveraging dedicated Web Workers with zero-copy \texttt{ArrayBuffer} transfers and isolated WebAssembly runtimes, HandleMyFile executes complex operations without transmitting a single byte of user data over the network.
 
 The explicit contributions of this work are:
-\begin{itemize}
+\begin{itemize}[leftmargin=12pt, topsep=2pt, itemsep=2pt]
 \item \textbf{Zero-Egress Architectural Design:} We formalize an in-browser execution architecture that guarantees zero network egress ($|\text{Net}_{\text{out}}| = 0$) during document parsing, manipulation, OCR, and cryptographic sanitization.
 \item \textbf{Formal Security Guarantees:} We model document privacy under the Dolev-Yao network adversary model and prove non-interference over the client socket interface.
 \item \textbf{Mathematical Transit Latency Model:} We formulate an analytical model characterizing the performance inflection point between cloud transit overhead and client-side WebAssembly execution.
@@ -58,7 +59,7 @@ The explicit contributions of this work are:
 \section{Threat Model and Privacy Guarantees}
 \subsection{Adversary and Network Model}
 We adopt the classic Dolev-Yao threat model \cite{dolev1983security} over the transit network, augmented with an honest-but-curious cloud infrastructure adversary. We assume:
-\begin{enumerate}
+\begin{enumerate}[leftmargin=14pt, topsep=2pt, itemsep=1pt]
 \item Network adversaries can intercept, inspect, and log all packets exiting the client device.
 \item Cloud conversion servers may store unencrypted document artifacts on volatile or non-volatile media, exposing records to forensic extraction \cite{garfinkel2003remembrance, byers2004information}.
 \item The client execution environment (browser engine and operating system) maintains basic process isolation, as formally validated in browser security verification literature \cite{jang2012quark, banescu2016code}.
@@ -94,9 +95,9 @@ Document operations run inside dedicated Web Workers. When a user selects a file
 \textbf{Algorithm 1: Reactive In-Browser Document Dispatching} \\
 \rule{\columnwidth}{0.75pt}
 \begin{footnotesize}
-\begin{enumerate}
-\item[\textbf{Input:}] File $F$, Operation $Op$, Configuration $C$
-\item[\textbf{Output:}] Ephemeral Object URL $DownloadLink$
+\noindent\textbf{Input:} File $F$, Operation $Op$, Configuration $C$ \\
+\noindent\textbf{Output:} Ephemeral Object URL $DownloadLink$
+\begin{enumerate}[leftmargin=14pt, topsep=2pt, itemsep=1pt]
 \item $ArrayBuf \leftarrow \text{File.readAsArrayBuffer}(F)$
 \item $Worker \leftarrow \text{AllocateDedicatedWorker}()$
 \item $Worker.\text{postMessage}(\{ \text{buffer}: ArrayBuf,$ \\
@@ -127,12 +128,12 @@ Document metadata in PDF structures is stored across two channels: the document 
 \noindent\begin{minipage}{\columnwidth}
 \vspace{4pt}
 \rule{\columnwidth}{1.5pt} \\
-\textbf{Algorithm 2: ISO 32000-1 Catalog Detachment and Sanitization} \\
+\textbf{Algorithm 2: ISO 32000-1 Catalog Sanitization} \\
 \rule{\columnwidth}{0.75pt}
 \begin{footnotesize}
-\begin{enumerate}
-\item[\textbf{Input:}] In-memory document object $Doc$
-\item[\textbf{Output:}] Sanitized document object $Doc^*$
+\noindent\textbf{Input:} In-memory document object $Doc$ \\
+\noindent\textbf{Output:} Sanitized document object $Doc^*$
+\begin{enumerate}[leftmargin=14pt, topsep=2pt, itemsep=1pt]
 \item $Context \leftarrow Doc.\text{context}$
 \item $Trailer \leftarrow Doc.\text{trailer}$
 \item $Trailer.\text{delete}(\text{PDFName.of}(\text{'Info'}))$
@@ -176,7 +177,7 @@ HandleMyFile is implemented in TypeScript and modern JavaScript. Heavy operation
 \section{Empirical Evaluation}
 \subsection{Experimental Testbed and Corpus}
 All physical benchmarks were executed on a dedicated client testbed:
-\begin{itemize}
+\begin{itemize}[leftmargin=12pt, topsep=2pt, itemsep=1pt]
 \item \textbf{Processor:} 12th Gen Intel Core i3-1215U (6 cores: 2 Performance cores, 4 Efficient cores, 8 threads, up to 4.40 GHz Max Turbo).
 \item \textbf{Memory:} 16 GB DDR4 RAM running at 3200 MT/s.
 \item \textbf{Storage:} 512 GB NVMe SSD.
@@ -217,7 +218,7 @@ As detailed in Table \ref{tab_hypothesis}, the observed test statistic of $t(489
 
 \subsection{Latency Distribution and Tail Percentiles}
 Evaluating execution across tail percentiles proves the stability of in-browser execution:
-\begin{itemize}
+\begin{itemize}[leftmargin=12pt, topsep=2pt, itemsep=1pt]
 \item \textbf{Median (p50):} Client WASM achieves 6.55 ms vs. Cloud 7.55 ms.
 \item \textbf{90th Percentile (p90):} Client WASM achieves 22.06 ms vs. Cloud 31.84 ms.
 \item \textbf{99th Percentile (p99):} Client WASM achieves 68.27 ms vs. Cloud 83.67 ms.
@@ -226,7 +227,7 @@ The client-side architecture maintains lower variance and avoids the heavy long-
 
 \subsection{Network Constraints and Speedup Scaling}
 Under simulated real-world network constraints, the transit latency term in (2) becomes dominant:
-\begin{itemize}
+\begin{itemize}[leftmargin=12pt, topsep=2pt, itemsep=1pt]
 \item \textbf{Simulated Wi-Fi (25 Mbps Uplink / 15 ms RTT):} Speedup scales from 13.95x on 1 MB payloads to 24.84x on 10 MB payloads.
 \item \textbf{Simulated Mobile 4G (5 Mbps Uplink / 50 ms RTT):} Speedup scales from 32.20x on 1 MB payloads to 61.97x on 10 MB payloads.
 \end{itemize}
