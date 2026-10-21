@@ -23,8 +23,8 @@
 \thanks{K. N. Fadhlillah is with the Department of Information Systems, Universitas Ary Ginanjar, Jakarta, Indonesia (e-mail: dev@khairan.tech). Preprint archived on Zenodo (CERN Open Access Repository). Code replication artifacts and empirical benchmark datasets are openly available at https://github.com/codesbykhairannoor/zero-egress-document-benchmark and the production implementation is deployed at https://handlemyfile.com.}%
 }
 
-\markboth{Zenodo Open Research Manuscript $\cdot$ CERN Open Access Repository $\cdot$ HandleMyFile Architecture}%
-{Fadhlillah: Zero-Egress Document Systems Using Client-Side WebAssembly}
+\markboth{K. N. Fadhlillah: Zero-Egress Document Systems Using Client-Side WebAssembly}%
+{K. N. Fadhlillah: Zero-Egress Document Systems Using Client-Side WebAssembly}
 
 \maketitle
 
@@ -79,21 +79,19 @@ Earlier investigations by Byers \cite{byers2004information} and Castiglione et a
 \centering
 \caption{Threat Model and Attack Surface Comparison}
 \label{tab_threat_comparison}
-\resizebox{\columnwidth}{!}{%
-\begin{tabular}{lll}
+\begin{tabular}{p{2.2cm}p{2.4cm}p{2.6cm}}
 \toprule
-\textbf{Architectural Dimension} & \textbf{Remote Cloud SaaS Model} & \textbf{HandleMyFile (Zero-Egress)} \\
+\textbf{Dimension} & \textbf{Cloud SaaS} & \textbf{HandleMyFile} \\
 \midrule
-Network Payload Transit & Full Document Stream ($S_{\text{in}} > 0$) & Zero Outbound Socket ($|\text{Net}_{\text{out}}| = 0$) \\
-Transit Vulnerability & MITM, TLS Proxy Inspection & Not Applicable (Localhost Only) \\
-Cloud Server Retention & Ephemeral Disk and Swap Logs & Zero Server Involvement \\
-Data Breach Liability & High (GDPR Art. 33 / HIPAA) & Mathematically Impossible \\
-Third-Party Trust Boundary & Cloud Operator + Subprocessors & Client Sandbox Only \\
-Metadata Exposure & Dependent on Server Backend & Client-Side Catalog Detachment \\
-Offline Operation & Unavailable & Fully Functional Offline \\
+Network Transit & $S_{\text{in}} > 0$ bytes sent & $|\text{Net}_{\text{out}}| = 0$ \\
+Transit Vulnerability & MITM, TLS Proxy & Not applicable \\
+Server Retention & Ephemeral disk logs & Zero server involvement \\
+Breach Liability & High (GDPR/HIPAA) & Mathematically impossible \\
+Trust Boundary & Cloud + subprocessors & Client sandbox only \\
+Metadata Exposure & Server-dependent & Catalog detachment \\
+Offline Support & Unavailable & Fully functional \\
 \bottomrule
-\end{tabular}%
-}
+\end{tabular}
 \end{table}
 
 \subsection{Adversary and Network Model}
@@ -192,17 +190,16 @@ When the main thread transfers an \texttt{ArrayBuffer} to a worker via \texttt{p
       \quad\quad $op: Op, config: C \}, [ArrayBuf])$ \\
       \quad\quad $\triangleright$ \textit{Zero-copy transferable buffer}
 \item \textbf{upon} message receipt from $Worker$ \textbf{do}
-\item \quad \textbf{if} $Op \in \{\text{Structural}, \text{Compression}, \text{Security}\}$ \textbf{then}
-\item \quad\quad $Doc \leftarrow \text{PDFDocument.load}(ArrayBuf,$ \\
-      \quad\quad\quad\quad $\{ \text{ignoreEncryption}: \text{true} \})$
-\item \quad\quad $ResultBytes \leftarrow \text{Engine.execute}(Doc, Op, C)$
-\item \quad \textbf{else if} $Op == \text{OCR}$ \textbf{then}
-\item \quad\quad $ResultBytes \leftarrow \text{TesseractWasm.run}(ArrayBuf)$
-\item \quad \textbf{end if}
-\item \quad $OutBlob \leftarrow \text{Blob.create}([ResultBytes], \{ \text{type}: Op \})$
-\item \quad $DownloadLink \leftarrow \text{URL.createObjectURL}(OutBlob)$
-\item \quad $Worker.\text{terminate}()$ $\triangleright$ \textit{Immediate memory reclamation}
-\item \quad \textbf{return} $DownloadLink$
+\item[] \hspace{14pt} \textbf{if} $Op \in \{\text{Structural}, \text{Compression}, \text{Security}\}$ \textbf{then}
+\item[] \hspace{28pt} $Doc \leftarrow \text{PDFDocument.load}(ArrayBuf, \{\text{ignoreEncryption}: \text{true}\})$
+\item[] \hspace{28pt} $ResultBytes \leftarrow \text{Engine.execute}(Doc, Op, C)$
+\item[] \hspace{14pt} \textbf{else if} $Op = \text{OCR}$ \textbf{then}
+\item[] \hspace{28pt} $ResultBytes \leftarrow \text{TesseractWasm.run}(ArrayBuf)$
+\item[] \hspace{14pt} \textbf{end if}
+\item[] \hspace{14pt} $OutBlob \leftarrow \text{Blob.create}([ResultBytes], \{\text{type}: Op\})$
+\item[] \hspace{14pt} $DownloadLink \leftarrow \text{URL.createObjectURL}(OutBlob)$
+\item[] \hspace{14pt} $Worker.\text{terminate}()$ $\triangleright$ \textit{Immediate memory reclamation}
+\item[] \hspace{14pt} \textbf{return} $DownloadLink$
 \end{enumerate}
 \end{footnotesize}
 \vspace{-4pt}
@@ -237,8 +234,8 @@ To systematically eliminate hidden data leakages identified in Section II, Handl
 \item $Catalog.\text{delete}(\text{PDFName.of}(\text{'PieceInfo'}))$
 \item $Catalog.\text{delete}(\text{PDFName.of}(\text{'Names'}))$
 \item \textbf{for all} $Page \in Doc.\text{getPages}()$ \textbf{do}
-\item \quad $Page.\text{node}.\text{delete}(\text{PDFName.of}(\text{'PieceInfo'}))$
-\item \quad $Page.\text{node}.\text{delete}(\text{PDFName.of}(\text{'Metadata'}))$
+\item[] \hspace{14pt} $Page.\text{node}.\text{delete}(\text{PDFName.of}(\text{'PieceInfo'}))$
+\item[] \hspace{14pt} $Page.\text{node}.\text{delete}(\text{PDFName.of}(\text{'Metadata'}))$
 \item \textbf{end for}
 \item $Doc^* \leftarrow Doc.\text{save}(\{ \text{useObjectStreams}: \text{true} \})$
 \item \textbf{return} $Doc^*$
@@ -278,7 +275,10 @@ where $T_{\text{local\_compute}}$ is the WebAssembly bytecode execution time and
 \subsection{Breakeven Inflection Point Analysis}
 The operational speedup ratio is defined as:
 \begin{equation}
-\text{Speedup}(Doc) = \frac{T_{\text{cloud}}(Doc)}{T_{\text{wasm}}(Doc)} = \frac{RTT_{\text{net}} + \frac{S_{\text{in}}}{BW_{\text{up}}} + T_{\text{server\_compute}} + \frac{S_{\text{out}}}{BW_{\text{down}}}}{T_{\text{local\_compute}} + T_{\text{DOM\_hydration}}}
+\text{Speedup}(Doc) = \frac{T_{\text{cloud}}(Doc)}{T_{\text{wasm}}(Doc)}
+\end{equation}
+\begin{equation}
+= \frac{RTT_{\text{net}} + \frac{S_{\text{in}}}{BW_{\text{up}}} + T_{\text{server\_compute}} + \frac{S_{\text{out}}}{BW_{\text{down}}}}{T_{\text{local\_compute}} + T_{\text{DOM\_hydration}}}
 \end{equation}
 Setting $\text{Speedup}(Doc) > 1$ yields the breakeven condition where local client execution outpaces remote cloud infrastructure:
 \begin{equation}
