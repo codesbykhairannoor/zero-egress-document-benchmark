@@ -9,7 +9,8 @@
 This repository hosts the official open-source **Artifact Evaluation Package**, experimental harnesses, and empirical datasets for the research paper:
 
 > **"Zero-Egress Document Systems Using Client-Side WebAssembly"**  
-> *Author:* Khairan Noor (Independent Researcher)
+> *Author:* Khairan Noor Fadhlillah (Independent Researcher, Jakarta, Indonesia)  
+> *Contact:* dev@khairan.tech
 
 ---
 
@@ -98,6 +99,7 @@ npm run benchmark:security
 ## 📊 Summary of Verified Empirical Findings
 
 ### 1. Multi-Tool Domain Parity (WASM vs. Cloud)
+
 | Tool Domain | Tested Files | WASM Latency | Cloud Server | Cloud Wi-Fi | Speedup (Wi-Fi) | Speedup (Mobile 4G) |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | **Rotate PDF (Structural)** | 57 | **$8.46\text{ ms}$** | $8.10\text{ ms}$ | $104.23\text{ ms}$ | **$17.03\times$** | **$42.05\times$** |
@@ -122,8 +124,8 @@ npm run benchmark:security
 If you use this benchmark suite, empirical data, or architecture in academic research, please cite:
 
 ```bibtex
-@article{noor2026zeroegress,
-  author    = {Khairan Noor},
+@article{fadhlillah2026zeroegress,
+  author    = {Khairan Noor Fadhlillah},
   title     = {Zero-Egress Document Systems Using Client-Side WebAssembly},
   journal   = {IEEE Transactions on Dependable and Secure Computing (Under Review)},
   year      = {2026},
