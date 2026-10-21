@@ -3,10 +3,12 @@ message: "If you use this benchmark suite, empirical data, or architecture in yo
 authors:
   - family-names: "Fadhlillah"
     given-names: "Khairan Noor"
+    orcid: "https://orcid.org/0009-0001-8967-3425"
     email: "dev@khairan.tech"
-    affiliation: "Independent Researcher, Jakarta, Indonesia"
+    affiliation: "Universitas Ary Ginanjar, Jakarta, Indonesia"
 title: "Zero-Egress Document Systems Using Client-Side WebAssembly"
 version: 1.0.0
+doi: "10.5281/zenodo.23537570"
 date-released: 2026-10-21
 url: "https://github.com/codesbykhairannoor/zero-egress-document-benchmark"
 keywords:
@@ -21,8 +23,10 @@ preferred-citation:
   authors:
     - family-names: "Fadhlillah"
       given-names: "Khairan Noor"
+      orcid: "https://orcid.org/0009-0001-8967-3425"
       email: "dev@khairan.tech"
-      affiliation: "Independent Researcher, Jakarta, Indonesia"
+      affiliation: "Universitas Ary Ginanjar, Jakarta, Indonesia"
   title: "Zero-Egress Document Systems Using Client-Side WebAssembly"
   year: 2026
-  url: "https://github.com/codesbykhairannoor/zero-egress-document-benchmark"
+  doi: "10.5281/zenodo.23537570"
+  url: "https://doi.org/10.5281/zenodo.23537570"
