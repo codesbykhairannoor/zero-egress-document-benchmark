@@ -271,7 +271,11 @@ To quantitatively model the latency dynamics between cloud SaaS architectures an
 
 Under a remote cloud conversion architecture, total user-perceived turnaround time $T_{\text{cloud}}(Doc)$ encompasses five sequential phases:
 \begin{equation}
-T_{\text{cloud}}(Doc) = T_{\text{dns}} + RTT_{\text{tls}} + \frac{S_{\text{in}}}{BW_{\text{up}}} + T_{\text{server\_compute}}(Doc) + \frac{S_{\text{out}}}{BW_{\text{down}}}
+\label{eq_tcloud}
+\begin{split}
+T_{\text{cloud}}(Doc) &= T_{\text{dns}} + RTT_{\text{tls}} + \frac{S_{\text{in}}}{BW_{\text{up}}} \\
+&\quad + T_{\text{server\_compute}}(Doc) + \frac{S_{\text{out}}}{BW_{\text{down}}}
+\end{split}
 \end{equation}
 where $T_{\text{dns}}$ is domain resolution latency, $RTT_{\text{tls}}$ is TCP and TLS 1.3 handshake time (typically $2 \times RTT$), $BW_{\text{up}}$ is client uplink transmission bandwidth, $T_{\text{server\_compute}}$ is the server-side CPU processing latency, and $BW_{\text{down}}$ is client downlink bandwidth.
 
@@ -395,7 +399,7 @@ Multi-Tool Chained Pipeline & 5 & 14.32 ms & 16.20 ms & 22.40 ms & 112.80 ms & 2
 \subsection{Multi-Domain Workload Benchmark}
 To verify that client-side performance holds across varied operational tasks, we evaluated 6 distinct functional categories across 290 total workload executions. Table \ref{tab_multitool} reports mean latencies across three network conditions: Localhost (ideal baseline), Broadband Wi-Fi (25 Mbps uplink / 15 ms RTT), and Mobile 4G (5 Mbps uplink / 50 ms RTT).
 
-Across every operational domain, client-side WebAssembly execution outperforms localhost cloud endpoints, achieving speedups ranging from 1.68x on compression up to 1.99x on metadata removal. Under simulated 4G mobile connectivity, the network transit overhead dominates total cloud turnaround time, expanding client-side speedups up to 61.97x.
+Across every operational domain, client-side WebAssembly execution outperforms localhost cloud endpoints, achieving speedups ranging from 1.68x on compression up to 1.99x on metadata removal. Under broadband Wi-Fi, client execution achieves an aggregate 10.68x speedup (scaling up to 14.48x on metadata sanitization). Under simulated 4G mobile connectivity, the network transit overhead dominates total cloud turnaround time, expanding client-side speedups to an aggregate 37.86x and peaking at 61.97x.
 
 \begin{table}[!t]
 \centering
@@ -487,7 +491,7 @@ Current 32-bit WebAssembly runtimes enforce a 4 GB virtual address space ceiling
 Client-side WebAssembly execution shifts compute load from cloud datacenters to end-user hardware. On high-performance desktop testbeds, this shift yields substantial speedups. On resource-constrained mobile hardware, intensive operations like continuous optical character recognition (OCR) can accelerate battery consumption and trigger thermal CPU throttling. Future iterations will incorporate WebGPU compute shaders to distribute OCR tensor calculations across mobile graphical processing units.
 
 \section{Conclusion}
-In this paper, we introduced HandleMyFile, a zero-egress document processing architecture executing entirely within client browser runtimes via WebAssembly and Web Worker pipelines. We established formal non-interference guarantees under the Dolev-Yao threat model, proving that document processing requires zero outbound socket transit. Physical benchmark evaluations across 490 real-world documents from the Mozilla corpus confirmed a statistically significant 1.88x localhost speedup ($t(489) = 8.29, p < 0.0001$), scaling up to 61.97x on mobile 4G networks, with verified 0.00 MB network egress and 99.71\% metadata elimination. By eliminating remote transmission risks, HandleMyFile proves that edge-native browser architectures provide a secure, high-throughput foundation for modern document workflows.
+In this paper, we introduced HandleMyFile, a zero-egress document processing architecture executing entirely within client browser runtimes via WebAssembly and Web Worker pipelines. We established formal non-interference guarantees under the Dolev-Yao threat model, proving that document processing requires zero outbound socket transit. Physical benchmark evaluations across 490 real-world documents from the Mozilla corpus confirmed a statistically significant 1.88x localhost speedup ($t(489) = 8.29, p < 0.0001$), scaling to an aggregate 10.68x on broadband Wi-Fi (up to 14.48x) and 37.86x on mobile 4G networks (up to 61.97x), with verified 0.00 MB network egress and 99.71\% metadata elimination. By eliminating remote transmission risks, HandleMyFile proves that edge-native browser architectures provide a secure, high-throughput foundation for modern document workflows.
 
 \section*{Open Science and Artifact Availability}
 To support verifiable open science and empirical replication, all raw benchmark datasets (CSV and JSON execution traces), automated Playwright and Puppeteer test harnesses, statistical hypothesis testing scripts, and LaTeX manuscript sources are publicly archived on Zenodo and GitHub under permissive open-source licensing at \url{https://github.com/codesbykhairannoor/zero-egress-document-benchmark}.
