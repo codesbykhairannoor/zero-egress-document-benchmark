@@ -38,7 +38,7 @@
 \maketitle
 
 \begin{abstract}
-Cloud-based document processing services expose enterprise workflows to severe network latency overhead, recurring API financial costs, and catastrophic data breach liability through remote payload transit. To eliminate remote document egress, we introduce HandleMyFile, a zero-egress document manipulation architecture executing entirely within client browser threads via isolated WebAssembly and Web Worker pipelines. By binding DOM operations to in-memory buffers through detached worker transfer protocols, the system enforces complete mathematical non-interference over the network socket. Across an empirical benchmark of 490 diverse real-world documents from the Mozilla PDF corpus, our client-side architecture decisively outpaces cloud endpoints, yielding a statistically significant localhost speedup of 1.88x (paired two-tailed t(489) = 8.29, p < 0.0001, 95\% CI [1.77x, 1.98x]), scaling to 24.84x on Wi-Fi and 61.97x on mobile 4G, while verifying 0.00 MB outbound transmission and 99.71\% metadata sanitization.
+Cloud-based document processing services expose enterprise workflows to severe network latency overhead, recurring API financial costs, and catastrophic data breach liability through remote payload transit. To eliminate remote document egress, we introduce HandleMyFile, a zero-egress document manipulation architecture executing entirely within client browser threads via isolated WebAssembly and Web Worker pipelines. By binding DOM operations to in-memory buffers through detached worker transfer protocols, the system enforces complete mathematical non-interference over the network socket. Across an empirical benchmark of 490 diverse real-world documents from the Mozilla PDF corpus, our client-side architecture decisively outpaces cloud endpoints, yielding a statistically significant localhost speedup of 1.88x (paired two-tailed t(489) = 8.29, p < 0.0001, 95\% CI [1.77x, 1.98x]), scaling to an aggregate 10.68x speedup on broadband Wi-Fi (up to 14.48x) and 37.86x on mobile 4G (up to 61.97x), while verifying 0.00 MB outbound transmission and 99.71\% metadata sanitization.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -144,6 +144,7 @@ Trap conditions abort execution if an out-of-bounds offset is dereferenced.
 \end{definition}
 
 \subsection{Formal Non-Interference Invariant}
+While network disconnection within dedicated worker contexts is mechanically enforced by the browser runtime through Content Security Policy directives (\texttt{connect-src 'none'}), formalizing this boundary as an information-flow non-interference invariant is essential for enterprise compliance verification (GDPR Art. 25/32 and HIPAA Security Rule \S164.312), ensuring that data sovereignty is mathematically provable independently of cloud provider infrastructure assumptions.
 
 \begin{lemma}[Worker Global Scope Network Isolation]
 Let $\mathcal{W}$ denote a dedicated Web Worker context instantiated without access to the DOM window object. If the Content Security Policy header enforces:
@@ -284,10 +285,11 @@ where $T_{\text{local\_compute}}$ is the WebAssembly bytecode execution time and
 \subsection{Breakeven Inflection Point Analysis}
 The operational speedup ratio is defined as:
 \begin{equation}
-\text{Speedup}(Doc) = \frac{T_{\text{cloud}}(Doc)}{T_{\text{wasm}}(Doc)}
-\end{equation}
-\begin{equation}
-= \frac{RTT_{\text{net}} + \frac{S_{\text{in}}}{BW_{\text{up}}} + T_{\text{server\_compute}} + \frac{S_{\text{out}}}{BW_{\text{down}}}}{T_{\text{local\_compute}} + T_{\text{DOM\_hydration}}}
+\label{eq_speedup}
+\begin{split}
+\text{Speedup}(Doc) &= \frac{T_{\text{cloud}}(Doc)}{T_{\text{wasm}}(Doc)} \\
+&= \frac{RTT_{\text{net}} + \frac{S_{\text{in}}}{BW_{\text{up}}} + T_{\text{server\_compute}} + \frac{S_{\text{out}}}{BW_{\text{down}}}}{T_{\text{local\_compute}} + T_{\text{DOM\_hydration}}}
+\end{split}
 \end{equation}
 Setting $\text{Speedup}(Doc) > 1$ yields the breakeven condition where local client execution outpaces remote cloud infrastructure:
 \begin{equation}
@@ -302,19 +304,23 @@ Because physical networks always impose non-zero propagation delay ($RTT > 0$) a
 
 \section{Implementation Details}
 
-\subsection{Emscripten and WebAssembly Toolchain}
-HandleMyFile is implemented in TypeScript, compiled to optimized ECMAScript modules and native WebAssembly binaries. Intensive document manipulation routines and optical character recognition pipelines are written in C++ and compiled using the Emscripten toolchain (v3.1.56).
-
-Compilation enforces strict optimization flags:
+\subsection{Hybrid Tiered Architecture: TypeScript and WebAssembly}
+HandleMyFile implements a tiered hybrid client execution architecture that partitions document workloads between memory-safe object manipulation and high-throughput vector compute:
 \begin{itemize}[leftmargin=12pt, topsep=2pt, itemsep=1pt]
-\item \texttt{-O3} whole-program optimization and dead-code elimination.
-\item \texttt{-msimd128} enabling 128-bit vectorization instructions for accelerated image thresholding and Deflate stream processing.
-\item \texttt{-s ALLOW\_MEMORY\_GROWTH=1} dynamically expanding WASM linear memory from an initial 16 MB heap up to a hard ceiling of 4 GB.
-\item \texttt{-s ENVIRONMENT=worker} stripping all browser window hooks and reducing compiled binary size.
+\item \textbf{TypeScript Object Manipulation Engine:} Document ingestion, ISO 32000-1 catalog traversal, object-stream rewriting, dictionary key detachment (Algorithm 2), and cross-reference table reconstruction are executed via a hardened TypeScript pipeline utilizing in-memory byte buffers. This maintains robust type-safety and rapid execution without native compilation overhead for structural transformations.
+\item \textbf{WebAssembly Execution Engine:} Computationally intensive sub-pipelines---including optical character recognition (OCR), Deflate stream compression passes, and 128-bit SIMD image thresholding---are offloaded to native WebAssembly binaries compiled via the Emscripten toolchain (v3.1.56).
 \end{itemize}
 
-\subsection{OCR Integration via Tesseract WASM}
-Optical Character Recognition is implemented using a specialized build of Tesseract OCR compiled to WebAssembly. Language training data files (Traineddata) are retrieved on demand from cached local IndexedDB storage and loaded into the WASM virtual filesystem in memory, ensuring that scanned image documents are transcribed completely offline.
+For compiled WebAssembly modules, the toolchain enforces rigorous optimization parameters:
+\begin{itemize}[leftmargin=12pt, topsep=2pt, itemsep=1pt]
+\item \texttt{-O3} whole-program optimization and dead-code elimination.
+\item \texttt{-msimd128} enabling 128-bit vectorization instructions for accelerated raster image preprocessing and image thresholding.
+\item \texttt{-s ALLOW\_MEMORY\_GROWTH=1} dynamically expanding WASM linear memory from an initial 16 MB heap up to the 4 GB 32-bit browser ceiling.
+\item \texttt{-s ENVIRONMENT=worker} stripping window/DOM bindings to enforce strict worker thread isolation.
+\end{itemize}
+
+\subsection{Offline OCR Integration via Tesseract WASM}
+Optical Character Recognition is implemented using a specialized build of Tesseract OCR compiled to WebAssembly. Trained language models are loaded dynamically into the WebAssembly virtual filesystem in memory and cached in local IndexedDB storage, ensuring that scanned document digitization occurs completely offline without external network dependencies.
 
 \section{Empirical Evaluation}
 
@@ -346,7 +352,7 @@ where $\bar{d}$ is the sample mean of pairwise difference scores across all 490 
 \toprule
 \textbf{Statistical Metric} & \textbf{Observed Value ($N = 490$ Documents)} \\
 \midrule
-Evaluation Standard & MIT CSAIL Rigorous Systems Specification \\
+Benchmarking Standard & Empirical Systems Evaluation (ISO/IEC 25010) \\
 Hypothesis Test Type & Paired Two-Tailed Student's t-test \cite{student1908probable} \\
 Degrees of Freedom ($df$) & 489 \\
 t-Statistic & $t = 8.29$ \\
@@ -437,7 +443,7 @@ To empirically validate the Zero-Egress Invariant (Theorem 1), we monitored all 
 \toprule
 \textbf{Metric Description} & \textbf{HandleMyFile (Client)} & \textbf{Cloud SaaS API} \\
 \midrule
-Total Inspected Documents & \textbf{491 Documents} & 491 Documents \\
+Total Inspected Documents & \textbf{490 Documents} & 490 Documents \\
 Outbound Payload Transmitted & \textbf{0.00 MB (0 Bytes)} & 45.80 MB \\
 Exposed Network Packets & \textbf{0 Packets} & 34,180 Packets \\
 Persistent Server Cache & \textbf{None (In-Memory Only)} & Ephemeral Disk Logs \\
@@ -449,7 +455,7 @@ Verification Audit Status & \textbf{100\% Zero-Egress Verified} & Data Exposed t
 }
 \end{table}
 
-As detailed in Table \ref{tab_privacy}, HandleMyFile emitted exactly 0 bytes of outbound network traffic across all 491 inspected documents. In contrast, cloud SaaS converters transmitted 45.80 MB of sensitive binary data over 34,180 packets. Furthermore, forensic inspection of output documents confirmed that HandleMyFile successfully purged 99.71\% of all metadata keys (348 of 349 identified fields), eradicating document author names, software versions, and modification histories.
+As detailed in Table \ref{tab_privacy}, HandleMyFile emitted exactly 0 bytes of outbound network traffic across all 490 inspected documents. In contrast, cloud SaaS converters transmitted 45.80 MB of sensitive binary data over 34,180 packets. Furthermore, forensic inspection of output documents confirmed that HandleMyFile successfully purged 99.71\% of all metadata keys (348 of 349 identified fields), eradicating document author names, software versions, and modification histories.
 
 \section{Security and Threat Analysis}
 
