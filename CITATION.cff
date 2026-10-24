@@ -6,7 +6,7 @@ authors:
     orcid: "https://orcid.org/0009-0001-8967-3425"
     email: "dev@khairan.tech"
     affiliation: "Universitas Ary Ginanjar, Jakarta, Indonesia"
-title: "Zero-Egress Document Systems Using Client-Side WebAssembly"
+title: "Zero-Egress Document Processing Systems Using Client-Side WebAssembly and Web Workers"
 version: 1.0.0
 doi: "10.5281/zenodo.23537570"
 date-released: 2026-10-21
@@ -26,7 +26,7 @@ preferred-citation:
       orcid: "https://orcid.org/0009-0001-8967-3425"
       email: "dev@khairan.tech"
       affiliation: "Universitas Ary Ginanjar, Jakarta, Indonesia"
-  title: "Zero-Egress Document Systems Using Client-Side WebAssembly"
+  title: "Zero-Egress Document Processing Systems Using Client-Side WebAssembly and Web Workers"
   year: 2026
   doi: "10.5281/zenodo.23537570"
   url: "https://doi.org/10.5281/zenodo.23537570"
