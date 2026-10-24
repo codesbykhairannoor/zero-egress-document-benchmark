@@ -9,10 +9,10 @@
 \usepackage{microtype}
 \usepackage{enumitem}
 \usepackage[
-  pdftitle={Zero-Egress Document Systems Using Client-Side WebAssembly},
+  pdftitle={Zero-Egress Document Processing Systems Using Client-Side WebAssembly and Web Workers},
   pdfauthor={Khairan Noor Fadhlillah},
   pdfsubject={WebAssembly, privacy-preserving systems, in-browser document processing},
-  pdfkeywords={WebAssembly, zero-egress architecture, privacy-preserving systems, client-side computing, document security, ISO 32000-1},
+  pdfkeywords={WebAssembly, zero-egress architecture, privacy-preserving systems, client-side computing, document security, ISO 32000-1, Web Workers},
   pdfcreator={pdfLaTeX with IEEEtran},
   colorlinks=false,
   hidelinks
@@ -25,20 +25,21 @@
 \hyphenation{op-tical net-works semi-conduc-tor}
 
 \begin{document}
+\raggedbottom
 
-\title{Zero-Egress Document Systems Using Client-Side WebAssembly}
+\title{Zero-Egress Document Processing Systems Using Client-Side WebAssembly and Web Workers}
 
 \author{Khairan~Noor~Fadhlillah%
 \thanks{K. N. Fadhlillah is with the Department of Information Systems, Universitas Ary Ginanjar, Jakarta, Indonesia (e-mail: dev@khairan.tech). Preprint archived on Zenodo (CERN Open Access Repository). Code replication artifacts and empirical benchmark datasets are openly available at https://github.com/codesbykhairannoor/zero-egress-document-benchmark and the production implementation is deployed at https://handlemyfile.com.}%
 }
 
-\markboth{K. N. Fadhlillah: Zero-Egress Document Systems Using Client-Side WebAssembly}%
-{K. N. Fadhlillah: Zero-Egress Document Systems Using Client-Side WebAssembly}
+\markboth{K. N. Fadhlillah: Zero-Egress Document Processing Systems Using Client-Side WebAssembly and Web Workers}%
+{K. N. Fadhlillah: Zero-Egress Document Processing Systems Using Client-Side WebAssembly and Web Workers}
 
 \maketitle
 
 \begin{abstract}
-Cloud-based document processing services expose enterprise workflows to severe network latency overhead, recurring API financial costs, and catastrophic data breach liability through remote payload transit. To eliminate remote document egress, we introduce HandleMyFile, a zero-egress document manipulation architecture executing entirely within client browser threads via isolated WebAssembly and Web Worker pipelines. By binding DOM operations to in-memory buffers through detached worker transfer protocols, the system enforces complete mathematical non-interference over the network socket. Across an empirical benchmark of 490 diverse real-world documents from the Mozilla PDF corpus, our client-side architecture decisively outpaces cloud endpoints, yielding a statistically significant localhost speedup of 1.88x (paired two-tailed t(489) = 8.29, p < 0.0001, 95\% CI [1.77x, 1.98x]), scaling to an aggregate 10.68x speedup on broadband Wi-Fi (up to 14.48x) and 37.86x on mobile 4G (up to 61.97x), while verifying 0.00 MB outbound transmission and 99.71\% metadata sanitization.
+Cloud-based document processing services expose enterprise workflows to severe network latency overhead, recurring API financial costs, and catastrophic data breach liability through remote payload transit. To eliminate remote document egress, we introduce HandleMyFile, a zero-egress document manipulation architecture executing entirely within client browser threads via isolated WebAssembly and Web Worker pipelines. By binding DOM operations to in-memory buffers through detached worker transfer protocols, the system enforces complete mathematical non-interference over the network socket across all operational workflows. Across an empirical benchmark of 490 diverse real-world documents from the Mozilla PDF corpus, our client-side architecture decisively outpaces cloud endpoints, yielding a statistically significant localhost speedup of 1.88x (paired two-tailed t(489) = 8.29, p < 0.0001, 95\% CI [1.77x, 1.98x]), scaling to an aggregate 10.68x speedup on broadband Wi-Fi (up to 14.48x) and 37.86x on mobile 4G (up to 61.97x), while verifying 0.00 MB outbound transmission across all operations, with 99.71\% metadata sanitization achieved by its specialized security engine.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -61,11 +62,11 @@ The explicit contributions of this work are:
 \item \textbf{Zero-Egress Architectural Design:} We formalize an in-browser execution architecture that guarantees zero network egress ($|\text{Net}_{\text{out}}| = 0$) during document parsing, manipulation, OCR, and cryptographic sanitization.
 \item \textbf{Formal Security Guarantees:} We model document privacy under the Dolev-Yao network adversary model and prove non-interference over the client socket interface.
 \item \textbf{Mathematical Transit Latency Model:} We formulate an analytical model characterizing the performance inflection point between cloud transit overhead and client-side WebAssembly execution.
-\item \textbf{Rigorous Empirical Evaluation:} We evaluate 490 real-world documents from the standardized Mozilla corpus \cite{mozilla2024corpus}, confirming a statistically significant 1.88x speedup on localhost ($t(489) = 8.29, p < 0.0001$), up to 61.97x on constrained networks, 0.00 MB egress, and 99.71\% metadata elimination across multiple functional operations.
+\item \textbf{Rigorous Empirical Evaluation:} We evaluate 490 real-world documents from the standardized Mozilla corpus \cite{mozilla2024corpus}, confirming a statistically significant 1.88x speedup on localhost ($t(489) = 8.29, p < 0.0001$), up to 61.97x on constrained networks, 0.00 MB egress across all functional operations, and 99.71\% metadata elimination within its specialized sanitization module.
 \item \textbf{Open Research Artifact:} We publish all raw benchmark harnesses, datasets, statistical test scripts, and execution traces in an open-access repository \cite{fadhlillah2026artifact}.
 \end{itemize}
 
-The remainder of this paper is structured as follows. Section II details the adversary model and structural vulnerabilities of PDF files. Section III formalizes zero-egress non-interference with mathematical proofs. Section IV describes the system architecture and worker pipeline. Section V presents the ISO 32000-1 catalog sanitization engine. Section VI derives the analytical transit latency model. Section VII details implementation challenges. Section VIII presents physical benchmark evaluations. Section IX conducts a security and threat analysis. Section X reviews related work. Section XI discusses limitations, and Section XII concludes the paper.
+The remainder of this paper is structured as follows. Section II details the adversary model and structural vulnerabilities of PDF files. Section III formalizes zero-egress non-interference with mathematical proofs. Section IV describes the system architecture and worker pipeline. Section V presents the specialized in-browser document sanitization engine. Section VI derives the analytical transit latency model. Section VII details implementation challenges. Section VIII presents physical benchmark evaluations. Section IX conducts a security and threat analysis. Section X reviews related work. Section XI discusses limitations, and Section XII concludes the paper.
 
 \section{Background and Threat Model}
 
@@ -222,10 +223,10 @@ Local document exports are delivered through ephemeral Object URLs bound to brow
 
 Once the user initiates the download or navigates away from the active tab, HandleMyFile executes \texttt{URL.revokeObjectURL(url)}, instantly releasing the blob handle from browser memory. When rendering interactive previews, page rasterization is performed via \texttt{OffscreenCanvas} inside the worker, transferring bitmap image data back to the UI thread for instant paint operations.
 
-\section{ISO 32000-1 Catalog Sanitization Engine}
+\section{Specialized In-Browser Document Sanitization Engine}
 
 \subsection{Document Catalog Structure and Object Streams}
-To systematically eliminate hidden data leakages identified in Section II, HandleMyFile implements a dedicated sanitization engine adhering strictly to ISO 32000-1 specification. The PDF document catalog (referenced by the root indirect object) serves as the entry point for all high-level document structures, including page trees, interactive form fields, outlines, and metadata descriptors.
+While the zero-egress architecture guarantees network isolation ($|\text{Net}_{\text{out}}| = 0$) across all general system operations (such as page rotation, splitting, merging, compression, and vector watermarking), HandleMyFile additionally incorporates a dedicated metadata sanitization engine adhering strictly to ISO 32000-1 specifications for users requiring proactive forensic redaction of document descriptors. The PDF document catalog (referenced by the root indirect object) serves as the entry point for all high-level document structures, including page trees, interactive form fields, outlines, and metadata descriptors.
 
 \noindent\begin{minipage}{\columnwidth}
 \vspace{4pt}
@@ -459,7 +460,7 @@ Verification Audit Status & \textbf{100\% Zero-Egress Verified} & Data Exposed t
 }
 \end{table}
 
-As detailed in Table \ref{tab_privacy}, HandleMyFile emitted exactly 0 bytes of outbound network traffic across all 490 inspected documents. In contrast, cloud SaaS converters transmitted 45.80 MB of sensitive binary data over 34,180 packets. Furthermore, forensic inspection of output documents confirmed that HandleMyFile successfully purged 99.71\% of all metadata keys (348 of 349 identified fields), eradicating document author names, software versions, and modification histories.
+As detailed in Table \ref{tab_privacy}, HandleMyFile emitted exactly 0 bytes of outbound network traffic across all 490 inspected documents across all operational workflows. When evaluating the dedicated privacy sanitization engine, forensic inspection of output documents confirmed that HandleMyFile successfully purged 99.71\% of all metadata keys (348 of 349 identified fields), eradicating document author names, software versions, and modification histories.
 
 \section{Security and Threat Analysis}
 
@@ -491,7 +492,12 @@ Current 32-bit WebAssembly runtimes enforce a 4 GB virtual address space ceiling
 Client-side WebAssembly execution shifts compute load from cloud datacenters to end-user hardware. On high-performance desktop testbeds, this shift yields substantial speedups. On resource-constrained mobile hardware, intensive operations like continuous optical character recognition (OCR) can accelerate battery consumption and trigger thermal CPU throttling. Future iterations will incorporate WebGPU compute shaders to distribute OCR tensor calculations across mobile graphical processing units.
 
 \section{Conclusion}
-In this paper, we introduced HandleMyFile, a zero-egress document processing architecture executing entirely within client browser runtimes via WebAssembly and Web Worker pipelines. We established formal non-interference guarantees under the Dolev-Yao threat model, proving that document processing requires zero outbound socket transit. Physical benchmark evaluations across 490 real-world documents from the Mozilla corpus confirmed a statistically significant 1.88x localhost speedup ($t(489) = 8.29, p < 0.0001$), scaling to an aggregate 10.68x on broadband Wi-Fi (up to 14.48x) and 37.86x on mobile 4G networks (up to 61.97x), with verified 0.00 MB network egress and 99.71\% metadata elimination. By eliminating remote transmission risks, HandleMyFile proves that edge-native browser architectures provide a secure, high-throughput foundation for modern document workflows.
+In this paper, we introduced HandleMyFile, a zero-egress document processing architecture executing entirely within client browser runtimes via WebAssembly and Web Worker pipelines. We established formal non-interference guarantees under the Dolev-Yao threat model, proving that document processing requires zero outbound socket transit across all operational domains. Physical benchmark evaluations across 490 real-world documents from the Mozilla corpus confirmed a statistically significant 1.88x localhost speedup ($t(489) = 8.29, p < 0.0001$), scaling to an aggregate 10.68x on broadband Wi-Fi (up to 14.48x) and 37.86x on mobile 4G networks (up to 61.97x), with verified 0.00 MB network egress across all operations and 99.71\% metadata elimination in dedicated sanitization passes. By eliminating remote transmission risks, HandleMyFile proves that edge-native browser architectures provide a secure, high-throughput foundation for modern document workflows.
+
+\section*{Acknowledgment and Generative AI Disclosure}
+The author thanks the open-source software communities of Mozilla PDF.js, pdf-lib, and Tesseract.js for providing the architectural foundations for browser-based document systems.
+
+\noindent\textbf{Declaration of Generative AI in Scientific Writing:} During the preparation of this work, the author utilized large language model AI assistants (Google Antigravity / Gemini) for technical drafting assistance, language refinement, mathematical typesetting, and LaTeX document formatting. The author independently conceived the system architecture, developed the software implementation (HandleMyFile), designed and executed all empirical benchmarks, analyzed the experimental results, and reviewed and verified all content in this manuscript. The author takes full intellectual responsibility for the veracity, rigor, and integrity of the published work.
 
 \section*{Open Science and Artifact Availability}
 To support verifiable open science and empirical replication, all raw benchmark datasets (CSV and JSON execution traces), automated Playwright and Puppeteer test harnesses, statistical hypothesis testing scripts, and LaTeX manuscript sources are publicly archived on Zenodo and GitHub under permissive open-source licensing at \url{https://github.com/codesbykhairannoor/zero-egress-document-benchmark}.
