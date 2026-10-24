@@ -9,10 +9,10 @@
 \usepackage{microtype}
 \usepackage{enumitem}
 \usepackage[
-  pdftitle={Zero-Egress Document Processing Systems Using Client-Side WebAssembly and Web Workers},
+  pdftitle={Zero-Egress Document Processing Systems Using Client-Side Web Workers and WebAssembly},
   pdfauthor={Khairan Noor Fadhlillah},
-  pdfsubject={WebAssembly, privacy-preserving systems, in-browser document processing},
-  pdfkeywords={WebAssembly, zero-egress architecture, privacy-preserving systems, client-side computing, document security, ISO 32000-1, Web Workers},
+  pdfsubject={Web Workers, WebAssembly, privacy-preserving systems, in-browser document processing},
+  pdfkeywords={Zero-egress architecture, Web Workers, WebAssembly, privacy-preserving systems, client-side computing, document security, ISO 32000-1},
   pdfcreator={pdfLaTeX with IEEEtran},
   colorlinks=false,
   hidelinks
@@ -27,23 +27,23 @@
 \begin{document}
 \raggedbottom
 
-\title{Zero-Egress Document Processing Systems Using Client-Side WebAssembly and Web Workers}
+\title{Zero-Egress Document Processing Systems Using Client-Side Web Workers and WebAssembly}
 
 \author{Khairan~Noor~Fadhlillah%
 \thanks{K. N. Fadhlillah is with the Department of Information Systems, Universitas Ary Ginanjar, Jakarta, Indonesia (e-mail: dev@khairan.tech). Preprint archived on Zenodo (CERN Open Access Repository). Code replication artifacts and empirical benchmark datasets are openly available at https://github.com/codesbykhairannoor/zero-egress-document-benchmark and the production implementation is deployed at https://handlemyfile.com.}%
 }
 
-\markboth{K. N. Fadhlillah: Zero-Egress Document Processing Systems Using Client-Side WebAssembly and Web Workers}%
-{K. N. Fadhlillah: Zero-Egress Document Processing Systems Using Client-Side WebAssembly and Web Workers}
+\markboth{K. N. Fadhlillah: Zero-Egress Document Processing Systems Using Client-Side Web Workers and WebAssembly}%
+{K. N. Fadhlillah: Zero-Egress Document Processing Systems Using Client-Side Web Workers and WebAssembly}
 
 \maketitle
 
 \begin{abstract}
-Cloud-based document processing services expose enterprise workflows to severe network latency overhead, recurring API financial costs, and catastrophic data breach liability through remote payload transit. To eliminate remote document egress, we introduce HandleMyFile, a zero-egress document manipulation architecture executing entirely within client browser threads via isolated WebAssembly and Web Worker pipelines. By binding DOM operations to in-memory buffers through detached worker transfer protocols, the system enforces complete mathematical non-interference over the network socket across all operational workflows. Across an empirical benchmark of 490 diverse real-world documents from the Mozilla PDF corpus, our client-side architecture decisively outpaces cloud endpoints, yielding a statistically significant localhost speedup of 1.88x (paired two-tailed t(489) = 8.29, p < 0.0001, 95\% CI [1.77x, 1.98x]), scaling to an aggregate 10.68x speedup on broadband Wi-Fi (up to 14.48x) and 37.86x on mobile 4G (up to 61.97x), while verifying 0.00 MB outbound transmission across all operations, with 99.71\% metadata sanitization achieved by its specialized security engine.
+Cloud-based document processing services expose enterprise workflows to severe network latency overhead, recurring API financial costs, and catastrophic data breach liability through remote payload transit. To eliminate remote document egress, we introduce HandleMyFile, a zero-egress document manipulation architecture executing entirely within client browser threads via isolated Web Worker and WebAssembly pipelines. By binding DOM operations to in-memory buffers through detached worker transfer protocols, the system enforces complete mathematical non-interference over the network socket across all operational workflows. Across an empirical benchmark of 490 diverse real-world documents from the Mozilla PDF corpus, our client-side architecture decisively outpaces cloud endpoints, yielding a statistically significant localhost speedup of 1.88x (paired two-tailed t(489) = 8.29, p < 0.0001, 95\% CI [1.77x, 1.98x]), scaling to an aggregate 10.68x speedup on broadband Wi-Fi (up to 14.48x) and 37.86x on mobile 4G (up to 61.97x), while verifying 0.00 MB outbound transmission across all operations, with 99.71\% metadata sanitization achieved by its specialized security engine.
 \end{abstract}
 
 \begin{IEEEkeywords}
-WebAssembly, zero-egress architecture, privacy-preserving systems, client-side computing, document security, ISO 32000-1, in-browser execution.
+Zero-egress architecture, Web Workers, WebAssembly, privacy-preserving systems, client-side computing, document security, ISO 32000-1, in-browser execution.
 \end{IEEEkeywords}
 
 \IEEEpeerreviewmaketitle
@@ -53,9 +53,9 @@ WebAssembly, zero-egress architecture, privacy-preserving systems, client-side c
 
 Regulatory frameworks including the European Union General Data Protection Regulation (GDPR) Articles 25 and 32, as well as the Health Insurance Portability and Accountability Act (HIPAA), impose severe financial penalties (up to 20 million EUR or 4\% of global annual turnover) for unauthorized document exposure. Cloud document converters inevitably persist files in ephemeral server storage, exposing records to disk forensic recovery \cite{garfinkel2003remembrance}, multi-tenant container leaks, and insider snooping. Furthermore, forensic studies on document artifacts confirm that residual metadata, historical revisions, and hidden object streams frequently leak confidential corporate information \cite{byers2004information, castiglione2010security}.
 
-Recent advancements in WebAssembly (WASM) and browser sandboxing \cite{haas2017bringing, w3c2023wasm} provide a mechanism to shift intensive compute directly to edge clients. Shifting computation from remote server clusters to client browser execution environments offers a fundamental paradigm shift: by keeping data resident in local memory, network transmission overhead is eliminated and data sovereignty is preserved \cite{satyanarayanan2017emergence, kleppmann2019local}. However, naive browser implementations frequently fail due to JavaScript single-threaded UI freezes, garbage collection pauses, and browser memory quotas.
+Recent advancements in client-side web sandboxing and isolated compute runtimes \cite{haas2017bringing, w3c2023wasm} provide a mechanism to shift intensive compute directly to edge clients. Shifting computation from remote server clusters to client browser execution environments offers a fundamental paradigm shift: by keeping data resident in local memory, network transmission overhead is eliminated and data sovereignty is preserved \cite{satyanarayanan2017emergence, kleppmann2019local}. However, naive browser implementations frequently fail due to JavaScript single-threaded UI freezes, garbage collection pauses, and browser memory quotas.
 
-In this paper, we introduce \textbf{HandleMyFile}, a production-tested zero-egress document processing system that executes comprehensive PDF workflows directly inside the client browser. By leveraging dedicated Web Workers with zero-copy \texttt{ArrayBuffer} transfers and isolated WebAssembly runtimes, HandleMyFile executes complex operations without transmitting a single byte of user data over the network.
+In this paper, we introduce \textbf{HandleMyFile}, a production-tested zero-egress document processing system that executes comprehensive PDF workflows directly inside the client browser. By leveraging dedicated Web Workers with zero-copy \texttt{ArrayBuffer} transfers and isolated WebAssembly runtimes for intensive compute, HandleMyFile executes complex operations without transmitting a single byte of user data over the network.
 
 The explicit contributions of this work are:
 \begin{itemize}[leftmargin=12pt, topsep=2pt, itemsep=2pt]
@@ -120,7 +120,7 @@ We formalize document privacy using language-based information flow and non-inte
 \begin{equation}
 \sigma = \langle S, \mathcal{M}, \Sigma, \mathcal{N} \rangle
 \end{equation}
-where $S$ denotes the program counter and instruction stream, $\mathcal{M}$ represents the WebAssembly linear memory address space, $\Sigma$ is the local document object state, and $\mathcal{N}$ represents the set of network socket output streams.
+where $S$ denotes the program counter and instruction stream, $\mathcal{M}$ represents the in-memory client buffer space (including JavaScript \texttt{ArrayBuffer} heap and WebAssembly linear memory for OCR pipelines), $\Sigma$ is the local document object state, and $\mathcal{N}$ represents the set of network socket output streams.
 
 A transition between execution states is denoted by $\sigma \xrightarrow{\alpha} \sigma'$, where $\alpha \in \mathcal{A}$ is an action label. The action set $\mathcal{A}$ partitions into internal computational actions $\mathcal{A}_{\text{int}}$ (arithmetic, pointer manipulation, canvas rasterization) and external socket I/O actions $\mathcal{A}_{\text{ext}}$ (HTTP POST requests, WebSocket frames, WebRTC packets).
 
@@ -137,7 +137,7 @@ Let $\text{Net}_{\text{out}}(Doc)$ denote the network trace projection function 
 \end{definition}
 
 \begin{definition}[WebAssembly Linear Memory Isolation]
-Let $\mathcal{M}_{\text{wasm}} = [0, M_{\text{max}}-1]$ denote the isolated byte array allocated to the WebAssembly instance. All load and store instructions $i \in S_{\text{wasm}}$ satisfy:
+Let $\mathcal{M}_{\text{wasm}} = [0, M_{\text{max}}-1]$ denote the isolated byte array allocated to the WebAssembly instance during intensive OCR passes. All load and store instructions $i \in S_{\text{wasm}}$ satisfy:
 \begin{equation}
 \forall addr \in \text{Addr}(i), \quad 0 \le addr < M_{\text{max}}
 \end{equation}
@@ -156,7 +156,7 @@ then the action set of worker $\mathcal{W}$ satisfies $\mathcal{A}(\mathcal{W}) 
 \end{lemma}
 
 \begin{IEEEproof}
-By W3C Web Worker specification, dedicated workers have no reference to the DOM \texttt{window.document} object. When \texttt{connect-src} is restricted to \texttt{'none'}, all invocations of networking APIs (\texttt{fetch}, \texttt{XMLHttpRequest}, \texttt{WebSocket}, \texttt{EventSource}) fail synchronously with a security exception. Because the WebAssembly bytecode runtime linked within $\mathcal{W}$ contains zero imported host functions matching network signatures, no instruction in the transition relation can transition the worker into a state that generates an $\alpha \in \mathcal{A}_{\text{ext}}$ action. Thus, $\mathcal{A}(\mathcal{W}) \cap \mathcal{A}_{\text{ext}} = \emptyset$.
+By W3C Web Worker specification, dedicated workers have no reference to the DOM \texttt{window.document} object. When \texttt{connect-src} is restricted to \texttt{'none'}, all invocations of networking APIs (\texttt{fetch}, \texttt{XMLHttpRequest}, \texttt{WebSocket}, \texttt{EventSource}) fail synchronously with a security exception. Because the worker execution runtime linked within $\mathcal{W}$ contains zero imported host functions matching network signatures, no instruction in the transition relation can transition the worker into a state that generates an $\alpha \in \mathcal{A}_{\text{ext}}$ action. Thus, $\mathcal{A}(\mathcal{W}) \cap \mathcal{A}_{\text{ext}} = \emptyset$.
 \end{IEEEproof}
 
 \begin{theorem}[Zero-Egress Non-Interference]
@@ -167,7 +167,7 @@ Under the HandleMyFile architecture, for any document $Doc \in \mathcal{D}$ and 
 \end{theorem}
 
 \begin{IEEEproof}
-Let execution begin at state $\sigma_0 = \langle S_0, \mathcal{M}_0, Doc, \emptyset \rangle$. Document ingestion occurs via the local HTML5 File API into an in-memory \texttt{ArrayBuffer}. This buffer is transferred to dedicated worker $\mathcal{W}$ via zero-copy structured serialization. By Lemma 1, $\mathcal{W}$ possesses no transitions emitting network actions. Computational manipulation ($Op$) modifies exclusively $\mathcal{M}_{\text{wasm}}$ within the bounds $[0, M_{\text{max}}-1]$. Upon completion, the result buffer is transferred back to the UI thread, which constructs an ephemeral Object URL via \texttt{URL.createObjectURL(blob)}. Because no step along the operational execution trajectory invokes an action $\alpha_i \in \mathcal{A}_{\text{ext}}$, the summation in (2) evaluates to identically zero:
+Let execution begin at state $\sigma_0 = \langle S_0, \mathcal{M}_0, Doc, \emptyset \rangle$. Document ingestion occurs via the local HTML5 File API into an in-memory \texttt{ArrayBuffer}. This buffer is transferred to dedicated worker $\mathcal{W}$ via zero-copy structured serialization. By Lemma 1, $\mathcal{W}$ possesses no transitions emitting network actions. Computational manipulation ($Op$) modifies exclusively local in-memory buffers $\mathcal{M}$ (either JavaScript typed arrays or sandboxed WebAssembly linear memory for OCR). Upon completion, the result buffer is transferred back to the UI thread, which constructs an ephemeral Object URL via \texttt{URL.createObjectURL(blob)}. Because no step along the operational execution trajectory invokes an action $\alpha_i \in \mathcal{A}_{\text{ext}}$, the summation in (2) evaluates to identically zero:
 \begin{equation}
 |\text{Net}_{\text{out}}(Doc)| = \sum_{i=1}^k 0 = 0 \text{ bytes}
 \end{equation}
@@ -280,19 +280,19 @@ T_{\text{cloud}}(Doc) &= T_{\text{dns}} + RTT_{\text{tls}} + \frac{S_{\text{in}}
 \end{equation}
 where $T_{\text{dns}}$ is domain resolution latency, $RTT_{\text{tls}}$ is TCP and TLS 1.3 handshake time (typically $2 \times RTT$), $BW_{\text{up}}$ is client uplink transmission bandwidth, $T_{\text{server\_compute}}$ is the server-side CPU processing latency, and $BW_{\text{down}}$ is client downlink bandwidth.
 
-\subsection{In-Browser WebAssembly Latency Formulation}
-Under the client-side HandleMyFile architecture, network transit terms are identically zero because no bytes cross the physical network interface. Turnaround time $T_{\text{wasm}}(Doc)$ depends exclusively on local computation:
+\subsection{In-Browser Client Latency Formulation}
+Under the client-side HandleMyFile architecture, network transit terms are identically zero because no bytes cross the physical network interface. Turnaround time $T_{\text{client}}(Doc)$ depends exclusively on local computation:
 \begin{equation}
-T_{\text{wasm}}(Doc) = T_{\text{local\_compute}}(Doc) + T_{\text{DOM\_hydration}}
+T_{\text{client}}(Doc) = T_{\text{local\_compute}}(Doc) + T_{\text{DOM\_hydration}}
 \end{equation}
-where $T_{\text{local\_compute}}$ is the WebAssembly bytecode execution time and $T_{\text{DOM\_hydration}}$ is the local blob instantiation and UI render time.
+where $T_{\text{local\_compute}}$ is the local in-browser computation latency (in-memory JavaScript/TypeScript manipulation or WebAssembly execution for OCR) and $T_{\text{DOM\_hydration}}$ is the local blob instantiation and UI render time.
 
 \subsection{Breakeven Inflection Point Analysis}
 The operational speedup ratio is defined as:
 \begin{equation}
 \label{eq_speedup}
 \begin{split}
-\text{Speedup}(Doc) &= \frac{T_{\text{cloud}}(Doc)}{T_{\text{wasm}}(Doc)} \\
+\text{Speedup}(Doc) &= \frac{T_{\text{cloud}}(Doc)}{T_{\text{client}}(Doc)} \\
 &= \frac{RTT_{\text{net}} + \frac{S_{\text{in}}}{BW_{\text{up}}} + T_{\text{server\_compute}} + \frac{S_{\text{out}}}{BW_{\text{down}}}}{T_{\text{local\_compute}} + T_{\text{DOM\_hydration}}}
 \end{split}
 \end{equation}
@@ -301,7 +301,7 @@ Setting $\text{Speedup}(Doc) > 1$ yields the breakeven condition where local cli
 RTT_{\text{net}} + \frac{S_{\text{in}}}{BW_{\text{up}}} + \frac{S_{\text{out}}}{BW_{\text{down}}} > T_{\text{local\_compute}} - T_{\text{server\_compute}}
 \end{equation}
 
-When server compute time is comparable to client compute time ($T_{\text{local\_compute}} \approx T_{\text{server\_compute}}$ due to modern multi-core V8 WebAssembly compilation), client-side execution is unconditionally faster whenever:
+When server compute time is comparable to client compute time ($T_{\text{local\_compute}} \approx T_{\text{server\_compute}}$ due to modern multi-core V8 execution engines), client-side execution is unconditionally faster whenever:
 \begin{equation}
 RTT_{\text{net}} + \frac{S_{\text{in}}}{BW_{\text{up}}} + \frac{S_{\text{out}}}{BW_{\text{down}}} > 0
 \end{equation}
@@ -340,7 +340,7 @@ All physical benchmarks were executed on a dedicated client testbed representati
 \end{itemize}
 
 \subsection{Statistical Hypothesis Testing (Paired Two-Tailed t-Test)}
-To establish empirical superiority with formal statistical significance, we formulate the null hypothesis $H_0$ that mean turnaround latency under client-side WebAssembly matches cloud endpoint latency ($\mu_{\text{wasm}} = \mu_{\text{cloud}}$), tested against the alternative hypothesis $H_1$ that client-side execution provides superior turnaround speed ($\mu_{\text{wasm}} < \mu_{\text{cloud}}$).
+To establish empirical superiority with formal statistical significance, we formulate the null hypothesis $H_0$ that mean turnaround latency under client-side in-browser execution matches cloud endpoint latency ($\mu_{\text{client}} = \mu_{\text{cloud}}$), tested against the alternative hypothesis $H_1$ that client-side execution provides superior turnaround speed ($\mu_{\text{client}} < \mu_{\text{cloud}}$).
 
 The paired two-tailed Student's t-statistic is computed as:
 \begin{equation}
@@ -381,7 +381,7 @@ As documented in Table \ref{tab_hypothesis}, the observed test statistic of $t(4
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{lrrrrrrrr}
 \toprule
-\textbf{Functional Operation} & \textbf{Sample} & \textbf{Client WASM} & \textbf{Cloud Server} & \textbf{Localhost Total} & \textbf{Wi-Fi Total} & \textbf{4G Mobile Total} & \textbf{Speedup (Local)} & \textbf{Speedup (4G Mobile)} \\
+\textbf{Functional Operation} & \textbf{Sample} & \textbf{Client (In-Browser)} & \textbf{Cloud Server} & \textbf{Localhost Total} & \textbf{Wi-Fi Total} & \textbf{4G Mobile Total} & \textbf{Speedup (Local)} & \textbf{Speedup (4G Mobile)} \\
 \textbf{Domain} & \textbf{Count ($N$)} & \textbf{Mean Latency} & \textbf{Compute Mean} & \textbf{Mean (RTT 0ms)} & \textbf{Mean (25Mbps)} & \textbf{Mean (5Mbps)} & \textbf{Mean Factor} & \textbf{Mean Factor} \\
 \midrule
 Rotate PDF (Structural) & 57 & 8.46 ms & 8.10 ms & 13.00 ms & 104.23 ms & 250.92 ms & 1.79x & 42.05x \\
@@ -400,7 +400,7 @@ Multi-Tool Chained Pipeline & 5 & 14.32 ms & 16.20 ms & 22.40 ms & 112.80 ms & 2
 \subsection{Multi-Domain Workload Benchmark}
 To verify that client-side performance holds across varied operational tasks, we evaluated 6 distinct functional categories across 290 total workload executions. Table \ref{tab_multitool} reports mean latencies across three network conditions: Localhost (ideal baseline), Broadband Wi-Fi (25 Mbps uplink / 15 ms RTT), and Mobile 4G (5 Mbps uplink / 50 ms RTT).
 
-Across every operational domain, client-side WebAssembly execution outperforms localhost cloud endpoints, achieving speedups ranging from 1.68x on compression up to 1.99x on metadata removal. Under broadband Wi-Fi, client execution achieves an aggregate 10.68x speedup (scaling up to 14.48x on metadata sanitization). Under simulated 4G mobile connectivity, the network transit overhead dominates total cloud turnaround time, expanding client-side speedups to an aggregate 37.86x and peaking at 61.97x.
+Across every operational domain, client-side in-browser execution outperforms localhost cloud endpoints, achieving speedups ranging from 1.68x on compression up to 1.99x on metadata removal. Under broadband Wi-Fi, client execution achieves an aggregate 10.68x speedup (scaling up to 14.48x on metadata sanitization). Under simulated 4G mobile connectivity, the network transit overhead dominates total cloud turnaround time, expanding client-side speedups to an aggregate 37.86x and peaking at 61.97x.
 
 \begin{table}[!t]
 \centering
@@ -409,7 +409,7 @@ Across every operational domain, client-side WebAssembly execution outperforms l
 \resizebox{\columnwidth}{!}{%
 \begin{tabular}{lrrrr}
 \toprule
-\textbf{Percentile Metric} & \textbf{Client WASM} & \textbf{Cloud SaaS API} & \textbf{Absolute Delta} & \textbf{Percent Advantage} \\
+\textbf{Percentile Metric} & \textbf{Client (In-Browser)} & \textbf{Cloud SaaS API} & \textbf{Absolute Delta} & \textbf{Percent Advantage} \\
 \midrule
 10th Percentile (p10) & \textbf{0.85 ms} & 1.42 ms & 0.57 ms faster & 40.14\% lower latency \\
 25th Percentile (p25) & \textbf{1.32 ms} & 2.32 ms & 1.00 ms faster & 43.10\% lower latency \\
@@ -429,10 +429,10 @@ Standard Deviation ($\sigma$) & \textbf{37.07 ms} & 41.66 ms & 4.59 ms lower & H
 \subsection{Long-Tail Latency Distribution}
 Predictable response latency is crucial for enterprise document workflows. Table \ref{tab_percentiles} summarizes the tail latency distributions across all 490 documents.
 
-At the median (p50), client WASM achieves 2.35 ms compared to 4.09 ms for cloud endpoints. Even at the 99th percentile (p99), representing complex multi-hundred-page documents, client WASM completes processing in 164.16 ms versus 200.37 ms for cloud services. Furthermore, client-side execution exhibits a lower standard deviation ($\sigma = 37.07$ ms vs. $\sigma = 41.66$ ms), verifying superior operational predictability.
+At the median (p50), HandleMyFile in-browser execution achieves 2.35 ms compared to 4.09 ms for cloud endpoints. Even at the 99th percentile (p99), representing complex multi-hundred-page documents, client-side execution completes processing in 164.16 ms versus 200.37 ms for cloud services. Furthermore, client-side execution exhibits a lower standard deviation ($\sigma = 37.07$ ms vs. $\sigma = 41.66$ ms), verifying superior operational predictability.
 
 \subsection{Memory Footprint and Worker Lifecycle}
-To evaluate client browser resource consumption, we monitored JavaScript heap allocation and WebAssembly linear memory growth across continuous batch operations. 
+To evaluate client browser resource consumption, we monitored JavaScript heap allocation and WebAssembly linear memory growth (during OCR passes) across continuous batch operations. 
 
 During single-document execution, average peak memory consumption across the worker pool remained under 48.2 MB for typical documents ($< 10$ MB file size). For massive documents ($> 30$ MB), peak memory climbed to 184.6 MB. Crucially, upon invocation of \texttt{Worker.terminate()} (Algorithm 1, line 13), browser memory profilers confirmed that all allocated worker heap pages were reclaimed within 12 ms, preventing accumulated memory leakage across long-running browser sessions.
 
@@ -470,12 +470,12 @@ Microarchitectural side-channel attacks (e.g., Spectre and Meltdown) exploit hig
 HandleMyFile operates within standard isolated Web Workers. Because workers execute in separate operating system threads and do not share mutable address spaces with host DOM contexts, cross-tab speculative cache attacks are structurally mitigated by browser process-per-tab isolation.
 
 \subsection{Memory Bounds and Linear Address Safety}
-WebAssembly guarantees memory safety through sandboxed linear memory \cite{haas2017bringing}. WASM bytecode cannot manufacture raw memory pointers or dereference arbitrary host operating system addresses. Pointer operations are compiled to offsets within a contiguous array buffer, and all memory access instructions are bounds-checked at hardware or compiler level. Even in the event of a buffer overflow within the compiled C++ engine, corruption is strictly confined to the local WASM instance, preventing arbitrary code execution on the user workstation.
+For compute-intensive optical character recognition (OCR) sub-pipelines offloaded to WebAssembly, sandboxed linear memory guarantees memory safety \cite{haas2017bringing}. WASM bytecode cannot manufacture raw memory pointers or dereference arbitrary host operating system addresses. Pointer operations are compiled to offsets within a contiguous array buffer, and all memory access instructions are bounds-checked at hardware or compiler level. Even in the event of an unhandled fault within the compiled OCR engine, corruption is strictly confined to the local WASM instance, preventing arbitrary code execution on the user workstation.
 
 \section{Related Work}
 
 \subsection{WebAssembly and In-Browser Sandboxing}
-Since its standardization by the W3C \cite{w3c2023wasm}, WebAssembly has emerged as a premier target for executing performance-critical software directly inside web clients \cite{haas2017bringing}. Jang et al. \cite{jang2012quark} established formal browser security kernels demonstrating that browser isolation shims provide provable safety guarantees. Banescu et al. \cite{banescu2016code} analyzed binary obfuscation and sandboxing techniques against symbolic execution. HandleMyFile builds on these foundations by demonstrating that comprehensive enterprise document engineering can be completely relocated into sandboxed client WebAssembly runtimes.
+Since its standardization by the W3C \cite{w3c2023wasm}, WebAssembly has emerged as a premier target for executing performance-critical software directly inside web clients \cite{haas2017bringing}. Jang et al. \cite{jang2012quark} established formal browser security kernels demonstrating that browser isolation shims provide provable safety guarantees. Banescu et al. \cite{banescu2016code} analyzed binary obfuscation and sandboxing techniques against symbolic execution. HandleMyFile builds on these foundations by demonstrating that comprehensive enterprise document engineering can be completely relocated into client-side browser runtimes leveraging isolated Web Workers and targeted WebAssembly compute engines.
 
 \subsection{Document Forensics and Metadata Leakage}
 Information leakage in published digital documents represents a persistent enterprise vulnerability. Garfinkel and Shelat \cite{garfinkel2003remembrance} demonstrated that non-volatile storage media routinely retain sensitive records. Byers \cite{byers2004information} uncovered widespread unintentional disclosures in government and legal PDF filings. Castiglione et al. \cite{castiglione2010security} presented a comprehensive security analysis of PDF object structures, highlighting the risks of incremental updates and embedded object streams. HandleMyFile addresses these foundational vulnerabilities by providing an automated, mathematically verified in-browser sanitization engine.
