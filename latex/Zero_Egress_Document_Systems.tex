@@ -9,10 +9,10 @@
 \usepackage{microtype}
 \usepackage{enumitem}
 \usepackage[
-  pdftitle={Zero-Egress Document Processing Systems Using Client-Side Web Workers and WebAssembly},
+  pdftitle={Zero-Egress In-Browser Document Processing Systems},
   pdfauthor={Khairan Noor Fadhlillah},
   pdfsubject={Web Workers, WebAssembly, privacy-preserving systems, in-browser document processing},
-  pdfkeywords={Zero-egress architecture, Web Workers, WebAssembly, privacy-preserving systems, client-side computing, document security, ISO 32000-1},
+  pdfkeywords={Zero-egress architecture, Web Workers, WebAssembly, privacy-preserving systems, client-side computing, document security, ISO 32000-1, in-browser execution},
   pdfcreator={pdfLaTeX with IEEEtran},
   colorlinks=false,
   hidelinks
@@ -27,14 +27,14 @@
 \begin{document}
 \raggedbottom
 
-\title{Zero-Egress Document Processing Systems Using Client-Side Web Workers and WebAssembly}
+\title{Zero-Egress In-Browser Document Processing Systems}
 
 \author{Khairan~Noor~Fadhlillah%
 \thanks{K. N. Fadhlillah is with the Department of Information Systems, Universitas Ary Ginanjar, Jakarta, Indonesia (e-mail: dev@khairan.tech). Preprint archived on Zenodo (CERN Open Access Repository). Code replication artifacts and empirical benchmark datasets are openly available at https://github.com/codesbykhairannoor/zero-egress-document-benchmark and the production implementation is deployed at https://handlemyfile.com.}%
 }
 
-\markboth{K. N. Fadhlillah: Zero-Egress Document Processing Systems Using Client-Side Web Workers and WebAssembly}%
-{K. N. Fadhlillah: Zero-Egress Document Processing Systems Using Client-Side Web Workers and WebAssembly}
+\markboth{K. N. Fadhlillah: Zero-Egress In-Browser Document Processing Systems}%
+{K. N. Fadhlillah: Zero-Egress In-Browser Document Processing Systems}
 
 \maketitle
 
@@ -61,7 +61,7 @@ The explicit contributions of this work are:
 \begin{itemize}[leftmargin=12pt, topsep=2pt, itemsep=2pt]
 \item \textbf{Zero-Egress Architectural Design:} We formalize an in-browser execution architecture that guarantees zero network egress ($|\text{Net}_{\text{out}}| = 0$) during document parsing, manipulation, OCR, and cryptographic sanitization.
 \item \textbf{Formal Security Guarantees:} We model document privacy under the Dolev-Yao network adversary model and prove non-interference over the client socket interface.
-\item \textbf{Mathematical Transit Latency Model:} We formulate an analytical model characterizing the performance inflection point between cloud transit overhead and client-side WebAssembly execution.
+\item \textbf{Mathematical Transit Latency Model:} We formulate an analytical model characterizing the performance inflection point between cloud transit overhead and client-side in-browser execution.
 \item \textbf{Rigorous Empirical Evaluation:} We evaluate 490 real-world documents from the standardized Mozilla corpus \cite{mozilla2024corpus}, confirming a statistically significant 1.88x speedup on localhost ($t(489) = 8.29, p < 0.0001$), up to 61.97x on constrained networks, 0.00 MB egress across all functional operations, and 99.71\% metadata elimination within its specialized sanitization module.
 \item \textbf{Open Research Artifact:} We publish all raw benchmark harnesses, datasets, statistical test scripts, and execution traces in an open-access repository \cite{fadhlillah2026artifact}.
 \end{itemize}
@@ -182,7 +182,7 @@ A critical failure mode of naive browser document utilities is the freezing of t
 As illustrated in Algorithm 1, the main thread acts strictly as a lightweight event dispatcher. It coordinates drag-and-drop file inputs, renders responsive canvas previews via offscreen transfer, and manages state machines. All binary processing, decompression, layout parsing, and cryptographic serialization are offloaded to an asynchronous pool of dedicated Web Workers.
 
 \subsection{Zero-Copy Transferable Buffer Protocols}
-When passing multi-megabyte document payloads between browser threads, standard structured cloning performs an internal memory copy, doubling RAM utilization and triggering garbage collection stalls. HandleMyFile overcomes this overhead using \textit{Transferable Objects} \cite{w3c2023wasm}.
+When passing multi-megabyte document payloads between browser threads, standard structured cloning performs an internal memory copy, doubling RAM utilization and triggering garbage collection stalls. HandleMyFile overcomes this overhead using \textit{Transferable Objects} \cite{whatwg2024workers}.
 
 When the main thread transfers an \texttt{ArrayBuffer} to a worker via \texttt{postMessage(msg, [ArrayBuf])}, the JavaScript runtime detaches the buffer from the sender context. The underlying physical memory address is mapped directly into the worker address space in $\mathcal{O}(1)$ time without memory copying. Once transferred, the sender buffer byte length becomes zero, preventing concurrent race conditions. Upon completion of the operation, the transformed buffer is returned to the main thread through the same zero-copy mechanism.
 
@@ -268,7 +268,7 @@ As formalized in Algorithm 2, the sanitization pipeline operates through three s
 \section{Mathematical Transit Latency Model}
 
 \subsection{Analytical Formulation of Cloud Turnaround Time}
-To quantitatively model the latency dynamics between cloud SaaS architectures and client-side WebAssembly execution, we establish an analytical queuing model. Let $Doc$ denote a document of input byte size $S_{\text{in}}$ that produces an output payload of size $S_{\text{out}}$.
+To quantitatively model the latency dynamics between cloud SaaS architectures and client-side in-browser execution, we establish an analytical queuing model. Let $Doc$ denote a document of input byte size $S_{\text{in}}$ that produces an output payload of size $S_{\text{out}}$.
 
 Under a remote cloud conversion architecture, total user-perceived turnaround time $T_{\text{cloud}}(Doc)$ encompasses five sequential phases:
 \begin{equation}
@@ -474,8 +474,8 @@ For compute-intensive optical character recognition (OCR) sub-pipelines offloade
 
 \section{Related Work}
 
-\subsection{WebAssembly and In-Browser Sandboxing}
-Since its standardization by the W3C \cite{w3c2023wasm}, WebAssembly has emerged as a premier target for executing performance-critical software directly inside web clients \cite{haas2017bringing}. Jang et al. \cite{jang2012quark} established formal browser security kernels demonstrating that browser isolation shims provide provable safety guarantees. Banescu et al. \cite{banescu2016code} analyzed binary obfuscation and sandboxing techniques against symbolic execution. HandleMyFile builds on these foundations by demonstrating that comprehensive enterprise document engineering can be completely relocated into client-side browser runtimes leveraging isolated Web Workers and targeted WebAssembly compute engines.
+\subsection{Web Workers and In-Browser Sandboxing}
+Since the standardization of Web Workers \cite{whatwg2024workers} and WebAssembly \cite{w3c2023wasm}, client-side isolation primitives have emerged as a premier foundation for executing performance-critical software directly inside web clients \cite{haas2017bringing}. Jang et al. \cite{jang2012quark} established formal browser security kernels demonstrating that browser isolation shims provide provable safety guarantees. Banescu et al. \cite{banescu2016code} analyzed binary obfuscation and sandboxing techniques against symbolic execution. HandleMyFile builds on these foundations by demonstrating that comprehensive enterprise document engineering can be completely relocated into client-side browser runtimes leveraging isolated Web Workers and targeted WebAssembly compute engines.
 
 \subsection{Document Forensics and Metadata Leakage}
 Information leakage in published digital documents represents a persistent enterprise vulnerability. Garfinkel and Shelat \cite{garfinkel2003remembrance} demonstrated that non-volatile storage media routinely retain sensitive records. Byers \cite{byers2004information} uncovered widespread unintentional disclosures in government and legal PDF filings. Castiglione et al. \cite{castiglione2010security} presented a comprehensive security analysis of PDF object structures, highlighting the risks of incremental updates and embedded object streams. HandleMyFile addresses these foundational vulnerabilities by providing an automated, mathematically verified in-browser sanitization engine.
@@ -486,13 +486,13 @@ Satyanarayanan \cite{satyanarayanan2017emergence} formulated the principles of e
 \section{Discussion and Limitations}
 
 \subsection{Virtual Memory Address Ceilings}
-Current 32-bit WebAssembly runtimes enforce a 4 GB virtual address space ceiling per browser tab. While this capacity is more than adequate for 99.8\% of enterprise documents (which rarely exceed 100 MB), processing massive multi-gigabyte archival scans or architectural blueprints can approach browser heap thresholds. Ongoing standardization of the 64-bit Memory64 WebAssembly extension will lift this ceiling, enabling browser tabs to address multi-gigabyte memory spaces natively.
+Current 32-bit browser runtime heaps enforce a 4 GB virtual address space ceiling per browser tab. While this capacity is more than adequate for 99.8\% of enterprise documents (which rarely exceed 100 MB), processing massive multi-gigabyte archival scans or architectural blueprints can approach browser heap thresholds. Ongoing standardization of the 64-bit Memory64 WebAssembly extension will lift this ceiling, enabling browser tabs to address multi-gigabyte memory spaces natively.
 
 \subsection{Mobile Thermal and Battery Profiles}
-Client-side WebAssembly execution shifts compute load from cloud datacenters to end-user hardware. On high-performance desktop testbeds, this shift yields substantial speedups. On resource-constrained mobile hardware, intensive operations like continuous optical character recognition (OCR) can accelerate battery consumption and trigger thermal CPU throttling. Future iterations will incorporate WebGPU compute shaders to distribute OCR tensor calculations across mobile graphical processing units.
+Client-side in-browser execution shifts compute load from cloud datacenters to end-user hardware. On high-performance desktop testbeds, this shift yields substantial speedups. On resource-constrained mobile hardware, intensive operations like continuous optical character recognition (OCR) can accelerate battery consumption and trigger thermal CPU throttling. Future iterations will incorporate WebGPU compute shaders to distribute OCR tensor calculations across mobile graphical processing units.
 
 \section{Conclusion}
-In this paper, we introduced HandleMyFile, a zero-egress document processing architecture executing entirely within client browser runtimes via WebAssembly and Web Worker pipelines. We established formal non-interference guarantees under the Dolev-Yao threat model, proving that document processing requires zero outbound socket transit across all operational domains. Physical benchmark evaluations across 490 real-world documents from the Mozilla corpus confirmed a statistically significant 1.88x localhost speedup ($t(489) = 8.29, p < 0.0001$), scaling to an aggregate 10.68x on broadband Wi-Fi (up to 14.48x) and 37.86x on mobile 4G networks (up to 61.97x), with verified 0.00 MB network egress across all operations and 99.71\% metadata elimination in dedicated sanitization passes. By eliminating remote transmission risks, HandleMyFile proves that edge-native browser architectures provide a secure, high-throughput foundation for modern document workflows.
+In this paper, we introduced HandleMyFile, a zero-egress in-browser document processing architecture executing entirely within client browser runtimes via Web Worker and WebAssembly pipelines. We established formal non-interference guarantees under the Dolev-Yao threat model, proving that document processing requires zero outbound socket transit across all operational domains. Physical benchmark evaluations across 490 real-world documents from the Mozilla corpus confirmed a statistically significant 1.88x localhost speedup ($t(489) = 8.29, p < 0.0001$), scaling to an aggregate 10.68x on broadband Wi-Fi (up to 14.48x) and 37.86x on mobile 4G networks (up to 61.97x), with verified 0.00 MB network egress across all operations and 99.71\% metadata elimination in dedicated sanitization passes. By eliminating remote transmission risks, HandleMyFile proves that edge-native browser architectures provide a secure, high-throughput foundation for modern document workflows.
 
 \section*{Acknowledgment and Generative AI Disclosure}
 The author thanks the open-source software communities of Mozilla PDF.js, pdf-lib, and Tesseract.js for providing the architectural foundations for browser-based document systems.
