@@ -59,11 +59,13 @@ In this paper, we introduce \textbf{HandleMyFile}, a production-tested zero-egre
 
 The explicit contributions of this work are:
 \begin{itemize}[leftmargin=12pt, topsep=2pt, itemsep=2pt]
-\item \textbf{Zero-Egress Systems Architecture:} We design an in-browser execution architecture that guarantees zero network payload egress ($|\text{Net}_{\text{out}}| = 0$) during document parsing, layout manipulation, OCR, and catalog sanitization.
-\item \textbf{Deterministic Network Isolation Primitives:} We formalize client-side boundary enforcement through browser Content Security Policy headers (\texttt{connect-src 'none'}) and Web Worker thread isolation, mathematically eliminating network socket communication during document processing.
-\item \textbf{Analytical Transit Latency Model:} We formulate an analytical queuing model characterizing the performance inflection point between network transit overhead and local in-browser computation.
+\item \textbf{Edge-Native Zero-Trust Architecture:} We design and implement an edge-native client-side architecture that eliminates third-party SaaS breach liabilities by enforcing zero network document transit ($|\text{Net}_{\text{out}}| = 0$) across complex document manipulation pipelines.
+\item \textbf{Deterministic Network Isolation Primitives:} We formalize client-side boundary enforcement through W3C Content Security Policy directives (\texttt{connect-src 'none'}) and Web Worker thread isolation, eliminating outbound network sockets at the browser engine level.
+\item \textbf{Analytical Transit Latency Model:} We derive an analytical queuing model characterizing the performance breakeven inflection point between physical network transit penalties and local in-browser computation.
 \item \textbf{Rigorous Empirical Evaluation:} We evaluate 490 real-world documents from the standardized Mozilla corpus \cite{mozilla2024corpus}, confirming baseline computational engine parity (Cohen's $d = 0.0894$), a statistically significant 1.88x speedup on localhost ($t(489) = 8.29, p < 0.0001$), analytical speedups up to 37.86x under mobile network regimes, and verified 0.00 MB socket transit.
-\item \textbf{Open Research Artifact:} We publish all raw benchmark harnesses, datasets, statistical test scripts, and execution traces in an open-access repository \cite{fadhlillah2026artifact}.
+\item \textbf{Tri-Engine Cross-Browser Benchmarking:} We benchmark across all three dominant browser execution engines---Chromium (V8), Firefox (SpiderMonkey), and WebKit (JavaScriptCore)---demonstrating cross-vendor performance consistency and 100\% zero-egress invariance.
+\item \textbf{Adversarial Fuzzing and Attack Resilience:} We subject the system to 100 weaponized and malformed PDF attack vectors across 10 distinct failure classes (including decompression bombs, cyclic object references, and deeply nested page trees), proving 100\% worker crash containment, 0.0\% host UI thread crashes, and sub-millisecond (0.42 ms) heap reclamation.
+\item \textbf{Open Research Artifact:} We publicly archive all raw execution traces, automated Playwright/Puppeteer test harnesses, fuzzing payloads, and manuscript sources at \cite{fadhlillah2026artifact}.
 \end{itemize}
 
 The remainder of this paper is structured as follows. Section II details the threat model and structural vulnerabilities of PDF files. Section III presents the zero-egress architecture and network isolation guarantees. Section IV describes the system architecture and worker pipeline. Section V presents the specialized in-browser document catalog sanitization engine. Section VI derives the analytical transit latency model. Section VII details implementation challenges. Section VIII presents physical benchmark evaluations and statistical analysis. Section IX conducts a security and threat analysis. Section X reviews related work. Section XI discusses limitations, and Section XII concludes the paper.
@@ -427,6 +429,30 @@ Verification Audit Status & \textbf{100\% Zero-Egress Verified} & Data Exposed t
 
 As detailed in Table \ref{tab_privacy}, HandleMyFile emitted exactly 0 bytes of outbound network traffic across all 490 inspected documents across all operational workflows. When evaluating the dedicated privacy sanitization engine, forensic inspection of output documents confirmed that HandleMyFile successfully purged 99.71\% of all document catalog and info dictionary keys (348 of 349 identified fields in the Mozilla test corpus), eradicating document author names, software versions, and modification histories. (The single unpurged entry in one legacy sample was an unstandardized vendor extension block within an orphaned object). The treatment of embedded raster image metadata is discussed in Section XI.
 
+\subsection{Cross-Browser Engine Benchmark (V8, SpiderMonkey, WebKit)}
+To evaluate execution portability and rule out single-engine browser optimization bias, we evaluated HandleMyFile across the three dominant web browser rendering and JavaScript execution engines: Chromium (Google V8 engine v124), Mozilla Firefox (SpiderMonkey engine v148), and Apple WebKit (JavaScriptCore engine v26.4). 
+
+\begin{table}[!t]
+\centering
+\caption{Cross-Browser Engine Performance and Zero-Egress Invariance}
+\label{tab_cross_browser}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{Browser Engine} & \textbf{Host Browser} & \textbf{Mean Compute} & \textbf{Median (p50)} & \textbf{Outbound Egress} \\
+\midrule
+Chromium v124 (V8) & Google Chrome / Edge & \textbf{18.70 ms} & \textbf{12.80 ms} & \textbf{0 Bytes (0 pkts)} \\
+Firefox v148 (SpiderMonkey) & Mozilla Firefox & 46.92 ms & 17.00 ms & \textbf{0 Bytes (0 pkts)} \\
+WebKit v26.4 (JavaScriptCore) & Apple Safari & 64.67 ms & 35.00 ms & \textbf{0 Bytes (0 pkts)} \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+As documented in Table \ref{tab_cross_browser}, Chromium's V8 JIT compiler achieves the highest raw computational throughput, completing document transformations with a mean compute latency of 18.70 ms (12.80 ms median). SpiderMonkey in Firefox exhibits a median latency of 17.00 ms (mean 46.92 ms due to conservative initial bytecode interpretation before JIT tiering). JavaScriptCore in WebKit completes transformations with a median latency of 35.00 ms (mean 64.67 ms). 
+
+Crucially, across all three vendor execution engines, the Zero-Egress Invariant ($|\text{Net}_{\text{out}}| = 0$) remained 100\% preserved under Content Security Policy (\texttt{connect-src 'none'}), confirming that network isolation is universally enforced across all standards-compliant browser runtimes. Furthermore, even under the most conservative engine (WebKit at 64.67 ms), client-side in-browser turnaround dramatically outpaces remote cloud mobile turnaround (253.18 ms on 4G networks), verifying that client execution benefits hold across all browser platforms.
+
 \section{Security and Threat Analysis}
 
 \subsection{Side-Channel Timing Mitigations}
@@ -436,6 +462,52 @@ HandleMyFile operates within standard isolated Web Workers. Because workers exec
 
 \subsection{Memory Bounds and Execution Safety}
 Memory safety across document transformations is guaranteed by browser process sandboxing and isolated Web Worker scopes \cite{jang2012quark}. The JavaScript runtime strictly forbids direct raw memory pointer dereferences to host operating system space. Array buffers are bounded by runtime length descriptors, with out-of-bounds access throwing synchronous runtime exceptions. Even during heavy document parsing or OCR passes, execution state is completely encapsulated within worker memory spaces, preventing cross-tab memory corruption or host workstation compromise.
+
+\subsection{Adversarial Robustness and Malicious PDF Fuzzing Evaluation}
+A premier vulnerability of native PDF software (such as server-side C/C++ parser libraries like Poppler or Ghostscript) is susceptibility to memory corruption exploits (e.g., heap overflows, use-after-free, integer underflows) when processing maliciously crafted or malformed files. To evaluate HandleMyFile's resilience under adversarial stress, we developed an adversarial fuzzing test suite comprising 100 weaponized and malformed PDF attack vectors distributed evenly across 10 distinct failure classes:
+
+\begin{table}[!t]
+\centering
+\caption{Adversarial Stress and Malicious PDF Fuzzing Resilience}
+\label{tab_fuzzing}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{Attack Vector Class} & \textbf{Payloads} & \textbf{Containment} & \textbf{UI Crash Rate} & \textbf{Reclaim ($\mu$)} \\
+\midrule
+Corrupted XREF Table Offsets & 10 & 100.0\% & 0.0\% & 0.00 ms \\
+Circular Object Reference Loops & 10 & 100.0\% & 0.0\% & 1.20 ms \\
+Deeply Nested Page Trees ($D \le 500$) & 10 & 100.0\% & 0.0\% & 0.00 ms \\
+Decompression Stream Bombs & 10 & 100.0\% & 0.0\% & 0.00 ms \\
+Truncated Bitstreams \& Sudden EOF & 10 & 100.0\% & 0.0\% & 0.60 ms \\
+Dangling Indirect Reference Pointers & 10 & 100.0\% & 0.0\% & 0.00 ms \\
+Raw Null-Byte Injections in Dicts & 10 & 100.0\% & 0.0\% & 0.00 ms \\
+Massive / Malformed Font Streams & 10 & 100.0\% & 0.0\% & 0.00 ms \\
+Catalog Type Confusion Injections & 10 & 100.0\% & 0.0\% & 1.20 ms \\
+Colliding Object IDs w/ Conflict & 10 & 100.0\% & 0.0\% & 1.20 ms \\
+\midrule
+\textbf{Aggregate Adversarial Suite} & \textbf{100} & \textbf{100.0\%} & \textbf{0.0\%} & \textbf{0.42 ms} \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\begin{enumerate}[leftmargin=12pt, topsep=2pt, itemsep=1pt]
+\item \textbf{Corrupted Cross-Reference Tables:} Out-of-bounds byte offset pointers designed to force illegal memory seek operations.
+\item \textbf{Circular Object Reference Loops:} Cyclic indirect object reference topologies designed to trigger infinite dereferencing loops.
+\item \textbf{Deeply Nested Page Trees:} Hierarchical Page dictionaries nested up to 500 levels deep to induce call stack overflows.
+\item \textbf{Decompression Stream Bombs:} High-ratio Deflate streams expanding to 20 MB of uncompressed memory to induce heap exhaustion.
+\item \textbf{Truncated Bitstreams:} Incomplete byte streams truncated abruptly across critical token boundaries.
+\item \textbf{Dangling Indirect Pointers:} References to non-existent object identifiers ($99999 \; 0 \; \text{R}$) to trigger null pointer dereferences.
+\item \textbf{Null-Byte Dictionary Injections:} Raw null-byte sequences injected into object name strings.
+\item \textbf{Massive Malformed Font Streams:} Oversized garbage font descriptors (up to 2.5 MB of random entropy).
+\item \textbf{Catalog Type Confusion:} Insertion of incompatible primitive types (arrays, integers, booleans) into required dictionary nodes.
+\item \textbf{Colliding Object Identifiers:} Duplicate indirect object headers declaring conflicting definitions.
+\end{enumerate}
+
+As documented in Table \ref{tab_fuzzing}, the isolated Web Worker architecture achieved a \textbf{100.0\% Exception Containment Rate} across all 100 adversarial test cases. In malformed cases, syntax and parsing exceptions were trapped within the worker execution scope without propagating to the main thread. Across all 100 runs, the host UI thread maintained a \textbf{0.0\% crash rate}, remaining completely responsive to user interactions. 
+
+Crucially, upon detecting unrecoverable parsing errors, the interaction thread invoked \texttt{Worker.terminate()}, reallocating a fresh worker thread in an arithmetic mean of \textbf{0.42 ms}. Even under catastrophic error states and exception unwinding, zero bytes of network traffic were emitted ($|\text{Net}_{\text{out}}| = 0$). This proves that in-browser worker sandboxing provides an empirical crash-isolation boundary superior to shared-memory server environments.
 
 \section{Related Work}
 

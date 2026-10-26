@@ -1,0 +1,614 @@
+{
+  "Chromium (V8)": {
+    "sampleCount": 24,
+    "meanComputeMs": 18.7,
+    "medianComputeMs": 12.8,
+    "p95ComputeMs": 71.5,
+    "meanTotalMs": 22.31,
+    "medianTotalMs": 13.5,
+    "outboundNetworkRequests": 0,
+    "zeroEgressPreserved": true,
+    "detailedRecords": [
+      {
+        "document": "Surat Rekomendasi.pdf",
+        "sizeBytes": 13205,
+        "operation": "rotate",
+        "computeLatencyMs": 12.799999999813735,
+        "totalExecutionMs": 13.400000000372529,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Surat Rekomendasi.pdf",
+        "sizeBytes": 13205,
+        "operation": "sanitize",
+        "computeLatencyMs": 3.7999999998137355,
+        "totalExecutionMs": 4.1000000005587935,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Surat Rekomendasi.pdf",
+        "sizeBytes": 13205,
+        "operation": "watermark",
+        "computeLatencyMs": 17.5,
+        "totalExecutionMs": 17.799999999813735,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Khairan_NoorFadhlillah-1770637639441.pdf",
+        "sizeBytes": 53839,
+        "operation": "rotate",
+        "computeLatencyMs": 7.1000000005587935,
+        "totalExecutionMs": 8.300000000745058,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Khairan_NoorFadhlillah-1770637639441.pdf",
+        "sizeBytes": 53839,
+        "operation": "sanitize",
+        "computeLatencyMs": 2.5,
+        "totalExecutionMs": 3.2000000001862645,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Khairan_NoorFadhlillah-1770637639441.pdf",
+        "sizeBytes": 53839,
+        "operation": "watermark",
+        "computeLatencyMs": 3.300000000745058,
+        "totalExecutionMs": 3.900000000372529,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "4.-Surat-Permohonan-Rekomendasi.pdf",
+        "sizeBytes": 199791,
+        "operation": "rotate",
+        "computeLatencyMs": 6.599999999627471,
+        "totalExecutionMs": 8.900000000372529,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "4.-Surat-Permohonan-Rekomendasi.pdf",
+        "sizeBytes": 199791,
+        "operation": "sanitize",
+        "computeLatencyMs": 4.1000000005587935,
+        "totalExecutionMs": 6.300000000745058,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "4.-Surat-Permohonan-Rekomendasi.pdf",
+        "sizeBytes": 199791,
+        "operation": "watermark",
+        "computeLatencyMs": 6.5,
+        "totalExecutionMs": 9.900000000372529,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "ktm.pdf",
+        "sizeBytes": 281197,
+        "operation": "rotate",
+        "computeLatencyMs": 3.5,
+        "totalExecutionMs": 6.5,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "ktm.pdf",
+        "sizeBytes": 281197,
+        "operation": "sanitize",
+        "computeLatencyMs": 2.7000000001862645,
+        "totalExecutionMs": 4,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "ktm.pdf",
+        "sizeBytes": 281197,
+        "operation": "watermark",
+        "computeLatencyMs": 3.8999999994412065,
+        "totalExecutionMs": 4.8999999994412065,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Esai_Khairan Noor Fadhlillah_Universitas Ary Ginanjar.pdf",
+        "sizeBytes": 409824,
+        "operation": "rotate",
+        "computeLatencyMs": 14.099999999627471,
+        "totalExecutionMs": 16.399999999441206,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Esai_Khairan Noor Fadhlillah_Universitas Ary Ginanjar.pdf",
+        "sizeBytes": 409824,
+        "operation": "sanitize",
+        "computeLatencyMs": 15.299999999813735,
+        "totalExecutionMs": 18.299999999813735,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Esai_Khairan Noor Fadhlillah_Universitas Ary Ginanjar.pdf",
+        "sizeBytes": 409824,
+        "operation": "watermark",
+        "computeLatencyMs": 20.700000000186265,
+        "totalExecutionMs": 23.799999999813735,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Khairan Noor Fadhlillah_Esai_PHF IV.pdf",
+        "sizeBytes": 671817,
+        "operation": "rotate",
+        "computeLatencyMs": 9,
+        "totalExecutionMs": 11.900000000372529,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Khairan Noor Fadhlillah_Esai_PHF IV.pdf",
+        "sizeBytes": 671817,
+        "operation": "sanitize",
+        "computeLatencyMs": 11,
+        "totalExecutionMs": 13.5,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Khairan Noor Fadhlillah_Esai_PHF IV.pdf",
+        "sizeBytes": 671817,
+        "operation": "watermark",
+        "computeLatencyMs": 18.5,
+        "totalExecutionMs": 22.09999999962747,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Khairan Noor Fadhlillah_BARAKAHQUEST TRANSFORMASI LITERASI KEUANGAN SYARIAH BAGI GEN-Z MELALUI PLATFORM EDUKASI BERBASIS GAMIFIKASI_Universitas Ary Ginanjar.pdf",
+        "sizeBytes": 924091,
+        "operation": "rotate",
+        "computeLatencyMs": 28.5,
+        "totalExecutionMs": 37.90000000037253,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Khairan Noor Fadhlillah_BARAKAHQUEST TRANSFORMASI LITERASI KEUANGAN SYARIAH BAGI GEN-Z MELALUI PLATFORM EDUKASI BERBASIS GAMIFIKASI_Universitas Ary Ginanjar.pdf",
+        "sizeBytes": 924091,
+        "operation": "sanitize",
+        "computeLatencyMs": 26.399999999441206,
+        "totalExecutionMs": 37.39999999944121,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Khairan Noor Fadhlillah_BARAKAHQUEST TRANSFORMASI LITERASI KEUANGAN SYARIAH BAGI GEN-Z MELALUI PLATFORM EDUKASI BERBASIS GAMIFIKASI_Universitas Ary Ginanjar.pdf",
+        "sizeBytes": 924091,
+        "operation": "watermark",
+        "computeLatencyMs": 55,
+        "totalExecutionMs": 58.200000000186265,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Esai_Khairan Noor Fadhlillah_Universitas Ary Ginanjar_Khairan Noor Fadhlillah_Melindungi Hutan dengan Teknologi Inovasi Artificial Intelligence dan Citizen Science untuk Mitigasi Bencana Lingkungan.pdf",
+        "sizeBytes": 1083049,
+        "operation": "rotate",
+        "computeLatencyMs": 71.5,
+        "totalExecutionMs": 82.1000000005588,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Esai_Khairan Noor Fadhlillah_Universitas Ary Ginanjar_Khairan Noor Fadhlillah_Melindungi Hutan dengan Teknologi Inovasi Artificial Intelligence dan Citizen Science untuk Mitigasi Bencana Lingkungan.pdf",
+        "sizeBytes": 1083049,
+        "operation": "sanitize",
+        "computeLatencyMs": 76,
+        "totalExecutionMs": 90.20000000018626,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Esai_Khairan Noor Fadhlillah_Universitas Ary Ginanjar_Khairan Noor Fadhlillah_Melindungi Hutan dengan Teknologi Inovasi Artificial Intelligence dan Citizen Science untuk Mitigasi Bencana Lingkungan.pdf",
+        "sizeBytes": 1083049,
+        "operation": "watermark",
+        "computeLatencyMs": 28.399999999441206,
+        "totalExecutionMs": 32.39999999944121,
+        "outboundNetworkRequests": 0
+      }
+    ]
+  },
+  "Firefox (SpiderMonkey)": {
+    "sampleCount": 24,
+    "meanComputeMs": 46.92,
+    "medianComputeMs": 17,
+    "p95ComputeMs": 245,
+    "meanTotalMs": 49.88,
+    "medianTotalMs": 18,
+    "outboundNetworkRequests": 0,
+    "zeroEgressPreserved": true,
+    "detailedRecords": [
+      {
+        "document": "Surat Rekomendasi.pdf",
+        "sizeBytes": 13205,
+        "operation": "rotate",
+        "computeLatencyMs": 12,
+        "totalExecutionMs": 13,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Surat Rekomendasi.pdf",
+        "sizeBytes": 13205,
+        "operation": "sanitize",
+        "computeLatencyMs": 6,
+        "totalExecutionMs": 6,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Surat Rekomendasi.pdf",
+        "sizeBytes": 13205,
+        "operation": "watermark",
+        "computeLatencyMs": 25,
+        "totalExecutionMs": 25,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Khairan_NoorFadhlillah-1770637639441.pdf",
+        "sizeBytes": 53839,
+        "operation": "rotate",
+        "computeLatencyMs": 17,
+        "totalExecutionMs": 18,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Khairan_NoorFadhlillah-1770637639441.pdf",
+        "sizeBytes": 53839,
+        "operation": "sanitize",
+        "computeLatencyMs": 8,
+        "totalExecutionMs": 8,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Khairan_NoorFadhlillah-1770637639441.pdf",
+        "sizeBytes": 53839,
+        "operation": "watermark",
+        "computeLatencyMs": 13,
+        "totalExecutionMs": 13,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "4.-Surat-Permohonan-Rekomendasi.pdf",
+        "sizeBytes": 199791,
+        "operation": "rotate",
+        "computeLatencyMs": 16,
+        "totalExecutionMs": 17,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "4.-Surat-Permohonan-Rekomendasi.pdf",
+        "sizeBytes": 199791,
+        "operation": "sanitize",
+        "computeLatencyMs": 12,
+        "totalExecutionMs": 14,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "4.-Surat-Permohonan-Rekomendasi.pdf",
+        "sizeBytes": 199791,
+        "operation": "watermark",
+        "computeLatencyMs": 12,
+        "totalExecutionMs": 13,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "ktm.pdf",
+        "sizeBytes": 281197,
+        "operation": "rotate",
+        "computeLatencyMs": 6,
+        "totalExecutionMs": 9,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "ktm.pdf",
+        "sizeBytes": 281197,
+        "operation": "sanitize",
+        "computeLatencyMs": 8,
+        "totalExecutionMs": 10,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "ktm.pdf",
+        "sizeBytes": 281197,
+        "operation": "watermark",
+        "computeLatencyMs": 9,
+        "totalExecutionMs": 10,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Esai_Khairan Noor Fadhlillah_Universitas Ary Ginanjar.pdf",
+        "sizeBytes": 409824,
+        "operation": "rotate",
+        "computeLatencyMs": 19,
+        "totalExecutionMs": 23,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Esai_Khairan Noor Fadhlillah_Universitas Ary Ginanjar.pdf",
+        "sizeBytes": 409824,
+        "operation": "sanitize",
+        "computeLatencyMs": 26,
+        "totalExecutionMs": 29,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Esai_Khairan Noor Fadhlillah_Universitas Ary Ginanjar.pdf",
+        "sizeBytes": 409824,
+        "operation": "watermark",
+        "computeLatencyMs": 49,
+        "totalExecutionMs": 52,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Khairan Noor Fadhlillah_Esai_PHF IV.pdf",
+        "sizeBytes": 671817,
+        "operation": "rotate",
+        "computeLatencyMs": 14,
+        "totalExecutionMs": 18,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Khairan Noor Fadhlillah_Esai_PHF IV.pdf",
+        "sizeBytes": 671817,
+        "operation": "sanitize",
+        "computeLatencyMs": 13,
+        "totalExecutionMs": 16,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Khairan Noor Fadhlillah_Esai_PHF IV.pdf",
+        "sizeBytes": 671817,
+        "operation": "watermark",
+        "computeLatencyMs": 18,
+        "totalExecutionMs": 22,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Khairan Noor Fadhlillah_BARAKAHQUEST TRANSFORMASI LITERASI KEUANGAN SYARIAH BAGI GEN-Z MELALUI PLATFORM EDUKASI BERBASIS GAMIFIKASI_Universitas Ary Ginanjar.pdf",
+        "sizeBytes": 924091,
+        "operation": "rotate",
+        "computeLatencyMs": 83,
+        "totalExecutionMs": 87,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Khairan Noor Fadhlillah_BARAKAHQUEST TRANSFORMASI LITERASI KEUANGAN SYARIAH BAGI GEN-Z MELALUI PLATFORM EDUKASI BERBASIS GAMIFIKASI_Universitas Ary Ginanjar.pdf",
+        "sizeBytes": 924091,
+        "operation": "sanitize",
+        "computeLatencyMs": 78,
+        "totalExecutionMs": 88,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Khairan Noor Fadhlillah_BARAKAHQUEST TRANSFORMASI LITERASI KEUANGAN SYARIAH BAGI GEN-Z MELALUI PLATFORM EDUKASI BERBASIS GAMIFIKASI_Universitas Ary Ginanjar.pdf",
+        "sizeBytes": 924091,
+        "operation": "watermark",
+        "computeLatencyMs": 107,
+        "totalExecutionMs": 112,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Esai_Khairan Noor Fadhlillah_Universitas Ary Ginanjar_Khairan Noor Fadhlillah_Melindungi Hutan dengan Teknologi Inovasi Artificial Intelligence dan Citizen Science untuk Mitigasi Bencana Lingkungan.pdf",
+        "sizeBytes": 1083049,
+        "operation": "rotate",
+        "computeLatencyMs": 246,
+        "totalExecutionMs": 254,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Esai_Khairan Noor Fadhlillah_Universitas Ary Ginanjar_Khairan Noor Fadhlillah_Melindungi Hutan dengan Teknologi Inovasi Artificial Intelligence dan Citizen Science untuk Mitigasi Bencana Lingkungan.pdf",
+        "sizeBytes": 1083049,
+        "operation": "sanitize",
+        "computeLatencyMs": 245,
+        "totalExecutionMs": 250,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Esai_Khairan Noor Fadhlillah_Universitas Ary Ginanjar_Khairan Noor Fadhlillah_Melindungi Hutan dengan Teknologi Inovasi Artificial Intelligence dan Citizen Science untuk Mitigasi Bencana Lingkungan.pdf",
+        "sizeBytes": 1083049,
+        "operation": "watermark",
+        "computeLatencyMs": 84,
+        "totalExecutionMs": 90,
+        "outboundNetworkRequests": 0
+      }
+    ]
+  },
+  "WebKit (JavaScriptCore)": {
+    "sampleCount": 24,
+    "meanComputeMs": 64.67,
+    "medianComputeMs": 35,
+    "p95ComputeMs": 259,
+    "meanTotalMs": 66.67,
+    "medianTotalMs": 38,
+    "outboundNetworkRequests": 0,
+    "zeroEgressPreserved": true,
+    "detailedRecords": [
+      {
+        "document": "Surat Rekomendasi.pdf",
+        "sizeBytes": 13205,
+        "operation": "rotate",
+        "computeLatencyMs": 14,
+        "totalExecutionMs": 15,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Surat Rekomendasi.pdf",
+        "sizeBytes": 13205,
+        "operation": "sanitize",
+        "computeLatencyMs": 3,
+        "totalExecutionMs": 3,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Surat Rekomendasi.pdf",
+        "sizeBytes": 13205,
+        "operation": "watermark",
+        "computeLatencyMs": 11,
+        "totalExecutionMs": 11,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Khairan_NoorFadhlillah-1770637639441.pdf",
+        "sizeBytes": 53839,
+        "operation": "rotate",
+        "computeLatencyMs": 4,
+        "totalExecutionMs": 4,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Khairan_NoorFadhlillah-1770637639441.pdf",
+        "sizeBytes": 53839,
+        "operation": "sanitize",
+        "computeLatencyMs": 5,
+        "totalExecutionMs": 5,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Khairan_NoorFadhlillah-1770637639441.pdf",
+        "sizeBytes": 53839,
+        "operation": "watermark",
+        "computeLatencyMs": 4.999999999999972,
+        "totalExecutionMs": 4.999999999999972,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "4.-Surat-Permohonan-Rekomendasi.pdf",
+        "sizeBytes": 199791,
+        "operation": "rotate",
+        "computeLatencyMs": 8,
+        "totalExecutionMs": 8,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "4.-Surat-Permohonan-Rekomendasi.pdf",
+        "sizeBytes": 199791,
+        "operation": "sanitize",
+        "computeLatencyMs": 5,
+        "totalExecutionMs": 6,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "4.-Surat-Permohonan-Rekomendasi.pdf",
+        "sizeBytes": 199791,
+        "operation": "watermark",
+        "computeLatencyMs": 7,
+        "totalExecutionMs": 8,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "ktm.pdf",
+        "sizeBytes": 281197,
+        "operation": "rotate",
+        "computeLatencyMs": 3,
+        "totalExecutionMs": 5,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "ktm.pdf",
+        "sizeBytes": 281197,
+        "operation": "sanitize",
+        "computeLatencyMs": 2,
+        "totalExecutionMs": 4,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "ktm.pdf",
+        "sizeBytes": 281197,
+        "operation": "watermark",
+        "computeLatencyMs": 6.000000000000057,
+        "totalExecutionMs": 8.000000000000057,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Esai_Khairan Noor Fadhlillah_Universitas Ary Ginanjar.pdf",
+        "sizeBytes": 409824,
+        "operation": "rotate",
+        "computeLatencyMs": 45,
+        "totalExecutionMs": 46,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Esai_Khairan Noor Fadhlillah_Universitas Ary Ginanjar.pdf",
+        "sizeBytes": 409824,
+        "operation": "sanitize",
+        "computeLatencyMs": 102.00000000000006,
+        "totalExecutionMs": 104.00000000000006,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Esai_Khairan Noor Fadhlillah_Universitas Ary Ginanjar.pdf",
+        "sizeBytes": 409824,
+        "operation": "watermark",
+        "computeLatencyMs": 45.000000000000114,
+        "totalExecutionMs": 47.000000000000114,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Khairan Noor Fadhlillah_Esai_PHF IV.pdf",
+        "sizeBytes": 671817,
+        "operation": "rotate",
+        "computeLatencyMs": 35,
+        "totalExecutionMs": 38,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Khairan Noor Fadhlillah_Esai_PHF IV.pdf",
+        "sizeBytes": 671817,
+        "operation": "sanitize",
+        "computeLatencyMs": 38,
+        "totalExecutionMs": 41,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Khairan Noor Fadhlillah_Esai_PHF IV.pdf",
+        "sizeBytes": 671817,
+        "operation": "watermark",
+        "computeLatencyMs": 61,
+        "totalExecutionMs": 64,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Khairan Noor Fadhlillah_BARAKAHQUEST TRANSFORMASI LITERASI KEUANGAN SYARIAH BAGI GEN-Z MELALUI PLATFORM EDUKASI BERBASIS GAMIFIKASI_Universitas Ary Ginanjar.pdf",
+        "sizeBytes": 924091,
+        "operation": "rotate",
+        "computeLatencyMs": 146,
+        "totalExecutionMs": 149,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Khairan Noor Fadhlillah_BARAKAHQUEST TRANSFORMASI LITERASI KEUANGAN SYARIAH BAGI GEN-Z MELALUI PLATFORM EDUKASI BERBASIS GAMIFIKASI_Universitas Ary Ginanjar.pdf",
+        "sizeBytes": 924091,
+        "operation": "sanitize",
+        "computeLatencyMs": 116,
+        "totalExecutionMs": 119,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Khairan Noor Fadhlillah_BARAKAHQUEST TRANSFORMASI LITERASI KEUANGAN SYARIAH BAGI GEN-Z MELALUI PLATFORM EDUKASI BERBASIS GAMIFIKASI_Universitas Ary Ginanjar.pdf",
+        "sizeBytes": 924091,
+        "operation": "watermark",
+        "computeLatencyMs": 190,
+        "totalExecutionMs": 193,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Esai_Khairan Noor Fadhlillah_Universitas Ary Ginanjar_Khairan Noor Fadhlillah_Melindungi Hutan dengan Teknologi Inovasi Artificial Intelligence dan Citizen Science untuk Mitigasi Bencana Lingkungan.pdf",
+        "sizeBytes": 1083049,
+        "operation": "rotate",
+        "computeLatencyMs": 316,
+        "totalExecutionMs": 322,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Esai_Khairan Noor Fadhlillah_Universitas Ary Ginanjar_Khairan Noor Fadhlillah_Melindungi Hutan dengan Teknologi Inovasi Artificial Intelligence dan Citizen Science untuk Mitigasi Bencana Lingkungan.pdf",
+        "sizeBytes": 1083049,
+        "operation": "sanitize",
+        "computeLatencyMs": 259,
+        "totalExecutionMs": 264,
+        "outboundNetworkRequests": 0
+      },
+      {
+        "document": "Esai_Khairan Noor Fadhlillah_Universitas Ary Ginanjar_Khairan Noor Fadhlillah_Melindungi Hutan dengan Teknologi Inovasi Artificial Intelligence dan Citizen Science untuk Mitigasi Bencana Lingkungan.pdf",
+        "sizeBytes": 1083049,
+        "operation": "watermark",
+        "computeLatencyMs": 125.99999999999955,
+        "totalExecutionMs": 131,
+        "outboundNetworkRequests": 0
+      }
+    ]
+  }
+}

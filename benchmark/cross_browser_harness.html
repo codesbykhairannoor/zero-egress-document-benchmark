@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cross-Browser Zero-Egress Benchmark Harness</title>
+  <!-- Deterministic CSP: Disallow all outbound sockets -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' blob: data:; connect-src 'none';">
+  <script src="./pdf-lib.min.js"></script>
+</head>
+<body>
+  <h1>Cross-Browser In-Browser Zero-Egress Benchmark</h1>
+  <div id="status">Ready</div>
+  <script>
+    window.__outbound_requests = 0;
+    
+    // Intercept network APIs to verify zero-egress invariant
+    const origFetch = window.fetch;
+    window.fetch = function(...args) {
+      window.__outbound_requests++;
+      return origFetch.apply(this, args);
+    };
+
+    const origXHR = window.XMLHttpRequest.prototype.open;
+    window.XMLHttpRequest.prototype.open = function(...args) {
+      window.__outbound_requests++;
+      return origXHR.apply(this, args);
+    };
+
+    // Benchmark worker simulation
+    window.executeBenchmark = async function(base64Data, operation) {
+      const t0 = performance.now();
+      
+      // 1. Decode base64 to Uint8Array
+      const binaryString = atob(base64Data);
+      const len = binaryString.length;
+      const bytes = new Uint8Array(len);
+      for (let i = 0; i < len; i++) {
+        bytes[i] = binaryString.charCodeAt(i);
+      }
+      const tTransfer = performance.now();
+
+      // 2. Load PDFDocument
+      const pdfDoc = await PDFLib.PDFDocument.load(bytes, { ignoreEncryption: true, updateMetadata: false });
+      
+      // 3. Execute targeted operational pipeline
+      if (operation === 'rotate') {
+        const pages = pdfDoc.getPages();
+        pages.forEach(p => p.setRotation(PDFLib.degrees(90)));
+      } else if (operation === 'sanitize') {
+        pdfDoc.setTitle('');
+        pdfDoc.setAuthor('');
+        pdfDoc.setSubject('');
+        pdfDoc.setCreator('');
+        pdfDoc.setProducer('');
+        pdfDoc.setKeywords([]);
+        const epoch = new Date(0);
+        pdfDoc.setCreationDate(epoch);
+        pdfDoc.setModificationDate(epoch);
+        try { pdfDoc.catalog.delete(PDFLib.PDFName.of('Metadata')); } catch(e) {}
+        try { pdfDoc.catalog.delete(PDFLib.PDFName.of('PieceInfo')); } catch(e) {}
+      } else if (operation === 'watermark') {
+        const pages = pdfDoc.getPages();
+        const font = await pdfDoc.embedFont(PDFLib.StandardFonts.HelveticaBold);
+        pages.forEach(p => {
+          const { width, height } = p.getSize();
+          p.drawText('CONFIDENTIAL ZERO-EGRESS', {
+            x: width / 4,
+            y: height / 2,
+            size: 24,
+            font,
+            color: PDFLib.rgb(0.8, 0.2, 0.2),
+            opacity: 0.35,
+            rotate: PDFLib.degrees(45)
+          });
+        });
+      }
+
+      // 4. Save transformed document
+      const outBytes = await pdfDoc.save({ useObjectStreams: true, updateMetadata: false });
+      const tEnd = performance.now();
+
+      return {
+        operation,
+        inputSizeBytes: len,
+        outputSizeBytes: outBytes.length,
+        decodeLatencyMs: tTransfer - t0,
+        computeLatencyMs: tEnd - tTransfer,
+        totalExecutionMs: tEnd - t0,
+        outboundNetworkRequests: window.__outbound_requests
+      };
+    };
+  </script>
+</body>
+</html>
