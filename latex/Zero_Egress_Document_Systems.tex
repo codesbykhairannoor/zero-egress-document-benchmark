@@ -25,7 +25,7 @@
 \hyphenation{op-tical net-works semi-conduc-tor}
 
 \begin{document}
-\raggedbottom
+\flushbottom
 
 \title{Zero-Egress In-Browser Document Processing Systems Using Web Workers}
 
@@ -161,12 +161,13 @@ When passing multi-megabyte document payloads between browser threads, standard 
 
 When the main thread transfers an \texttt{ArrayBuffer} to a worker via \texttt{postMessage(msg, [ArrayBuf])}, the JavaScript runtime detaches the buffer from the sender context. The underlying physical memory address is mapped directly into the worker address space in $\mathcal{O}(1)$ time without memory copying. Once transferred, the sender buffer byte length becomes zero, preventing concurrent race conditions. Upon completion of the operation, the transformed buffer is returned to the main thread through the same zero-copy mechanism.
 
+\begin{table}[!t]
 \noindent\begin{minipage}{\columnwidth}
-\vspace{4pt}
-\rule{\columnwidth}{1.5pt} \\
-\textbf{Algorithm 1: Reactive In-Browser Document Dispatching} \\
-\rule{\columnwidth}{0.75pt}
+\rule{\columnwidth}{0.4pt} \\[2pt]
+\textbf{\small Algorithm 1: Reactive In-Browser Document Dispatching} \\
+\rule{\columnwidth}{0.4pt}
 \begin{footnotesize}
+\raggedright
 \noindent\textbf{Input:} File $F$, Operation $Op$, Configuration $C$ \\
 \noindent\textbf{Output:} Ephemeral Object URL $DownloadLink$
 \begin{enumerate}[leftmargin=14pt, topsep=2pt, itemsep=1pt]
@@ -176,22 +177,23 @@ When the main thread transfers an \texttt{ArrayBuffer} to a worker via \texttt{p
       \quad\quad $op: Op, config: C \}, [ArrayBuf])$ \\
       \quad\quad $\triangleright$ \textit{Zero-copy transferable buffer}
 \item \textbf{upon} message receipt from $Worker$ \textbf{do}
-\item[] \hspace{14pt} \textbf{if} $Op \in \{\text{Structural}, \text{Compression}, \text{Security}\}$ \textbf{then}
-\item[] \hspace{28pt} $Doc \leftarrow \text{PDFDocument.load}(ArrayBuf, \{\text{ignoreEncryption}: \text{true}\})$
-\item[] \hspace{28pt} $ResultBytes \leftarrow \text{Engine.execute}(Doc, Op, C)$
-\item[] \hspace{14pt} \textbf{else if} $Op = \text{OCR}$ \textbf{then}
-\item[] \hspace{28pt} $ResultBytes \leftarrow \text{TesseractWorker.recognize}(ArrayBuf)$
-\item[] \hspace{14pt} \textbf{end if}
-\item[] \hspace{14pt} $OutBlob \leftarrow \text{Blob.create}([ResultBytes], \{\text{type}: Op\})$
-\item[] \hspace{14pt} $DownloadLink \leftarrow \text{URL.createObjectURL}(OutBlob)$
-\item[] \hspace{14pt} $Worker.\text{terminate}()$ $\triangleright$ \textit{Immediate memory reclamation}
-\item[] \hspace{14pt} \textbf{return} $DownloadLink$
+\item[] \hspace{10pt} \textbf{if} $Op \in \{\text{Structural}, \text{Compression}, \text{Security}\}$ \textbf{then}
+\item[] \hspace{20pt} $Doc \leftarrow \text{PDFDocument.load}(ArrayBuf, \{\text{ignoreEncryption}: \text{true}\})$
+\item[] \hspace{20pt} $ResultBytes \leftarrow \text{Engine.execute}(Doc, Op, C)$
+\item[] \hspace{10pt} \textbf{else if} $Op = \text{OCR}$ \textbf{then}
+\item[] \hspace{20pt} $ResultBytes \leftarrow \text{TesseractWorker.recognize}(ArrayBuf)$
+\item[] \hspace{10pt} \textbf{end if}
+\item[] \hspace{10pt} $OutBlob \leftarrow \text{Blob.create}([ResultBytes], \{\text{type}: Op\})$
+\item[] \hspace{10pt} $DownloadLink \leftarrow \text{URL.createObjectURL}(OutBlob)$
+\item[] \hspace{10pt} $Worker.\text{terminate}()$ $\triangleright$ \textit{Immediate memory reclamation}
+\item[] \hspace{10pt} \textbf{return} $DownloadLink$
 \end{enumerate}
 \end{footnotesize}
 \vspace{-4pt}
-\rule{\columnwidth}{1.5pt}
-\vspace{6pt}
+\rule{\columnwidth}{0.4pt}
 \end{minipage}
+\vspace{-10pt}
+\end{table}
 
 \subsection{Ephemeral Object URL and Canvas Rendering Lifecycle}
 Local document exports are delivered through ephemeral Object URLs bound to browser memory. Because \texttt{URL.createObjectURL} references an internal in-memory blob pointer, the document is never written to disk caches or persistent browser storage. 
@@ -203,16 +205,18 @@ Once the user initiates the download or navigates away from the active tab, Hand
 \subsection{Document Catalog Structure and Object Streams}
 While the zero-egress architecture guarantees network isolation ($|\text{Net}_{\text{out}}| = 0$) across all general system operations (such as page rotation, splitting, merging, compression, and vector watermarking), HandleMyFile additionally incorporates a dedicated metadata sanitization engine adhering strictly to ISO 32000-1 specifications for users requiring proactive forensic redaction of document descriptors. In the PDF specification, the document catalog (referenced by the root indirect object) serves as the primary entry point for all high-level structures, including page trees, interactive form fields, outlines, and metadata descriptors. We specifically delineate document-level structural and catalog metadata from internal raster image streams, focusing the current engine on exhaustive redaction of the Document Catalog, Information Dictionary, and XMP metadata packets.
 
+\begin{table}[!t]
 \noindent\begin{minipage}{\columnwidth}
-\vspace{4pt}
-\rule{\columnwidth}{1.5pt} \\
-\textbf{Algorithm 2: ISO 32000-1 In-Memory Document Sanitization} \\
-\rule{\columnwidth}{0.75pt}
+\rule{\columnwidth}{0.4pt} \\[2pt]
+\textbf{\small Algorithm 2: ISO 32000-1 In-Memory Document Sanitization} \\
+\rule{\columnwidth}{0.4pt}
 \begin{footnotesize}
+\raggedright
 \noindent\textbf{Input:} In-memory document buffer $ArrayBuf$ \\
 \noindent\textbf{Output:} Sanitized document bitstream $Bytes^*$
 \begin{enumerate}[leftmargin=14pt, topsep=2pt, itemsep=1pt]
-\item $Doc \leftarrow \text{PDFDocument.load}(ArrayBuf, \{\text{ignoreEncryption}: \text{true}, \text{updateMetadata}: \text{false}\})$
+\item $Doc \leftarrow \text{PDFDocument.load}(ArrayBuf,$ \\
+      \quad\quad $\{\text{ignoreEncryption}: \text{true}, \text{updateMetadata}: \text{false}\})$
 \item $Doc.\text{setTitle}(\text{''}); \; Doc.\text{setAuthor}(\text{''}); \; Doc.\text{setSubject}(\text{''})$
 \item $Doc.\text{setCreator}(\text{''}); \; Doc.\text{setProducer}(\text{''}); \; Doc.\text{setKeywords}([])$
 \item $Epoch \leftarrow \text{Date}(0)$ $\triangleright$ \textit{Reset timestamps to 1970-01-01}
@@ -220,14 +224,16 @@ While the zero-egress architecture guarantees network isolation ($|\text{Net}_{\
 \item $Catalog \leftarrow Doc.\text{catalog}$
 \item $Catalog.\text{delete}(\text{PDFName.of}(\text{'Metadata'}))$ $\triangleright$ \textit{Purge XMP XML packet}
 \item $Catalog.\text{delete}(\text{PDFName.of}(\text{'PieceInfo'}))$ $\triangleright$ \textit{Purge vendor metadata}
-\item $Bytes^* \leftarrow Doc.\text{save}(\{ \text{useObjectStreams}: \text{true}, \text{updateMetadata}: \text{false} \})$
+\item $Bytes^* \leftarrow Doc.\text{save}(\{\text{useObjectStreams}: \text{true},$ \\
+      \quad\quad $\text{updateMetadata}: \text{false}\})$
 \item \textbf{return} $Bytes^*$
 \end{enumerate}
 \end{footnotesize}
 \vspace{-4pt}
-\rule{\columnwidth}{1.5pt}
-\vspace{6pt}
+\rule{\columnwidth}{0.4pt}
 \end{minipage}
+\vspace{-10pt}
+\end{table}
 
 \subsection{Catalog Detachment and Stream Purging}
 As formalized in Algorithm 2, the in-browser sanitization pipeline operates through three deterministic stages:
@@ -401,7 +407,7 @@ At the median (p50), HandleMyFile in-browser execution achieves 2.35 ms compared
 \subsection{Memory Footprint and Worker Lifecycle}
 To evaluate client browser resource consumption, we monitored JavaScript heap allocation and Web Worker memory footprints across continuous batch operations. 
 
-During single-document execution, average peak memory consumption across the worker pool remained under 48.2 MB for typical documents ($< 10$ MB file size). For massive documents ($> 30$ MB), peak memory climbed to 184.6 MB. Crucially, upon invocation of \texttt{Worker.terminate()} (Algorithm 1, line 15), browser memory profilers confirmed that all allocated worker heap pages were reclaimed within 12 ms, preventing accumulated memory leakage across long-running browser sessions.
+During single-document execution, average peak memory consumption across the worker pool remained under 48.2 MB for typical documents ($< 10$ MB file size). For massive documents ($> 30$ MB), peak memory climbed to 184.6 MB. Crucially, upon invocation of \texttt{Worker.terminate()} (Algorithm 1, line 4), browser memory profilers confirmed that all allocated worker heap pages were reclaimed within 12 ms, preventing accumulated memory leakage across long-running browser sessions.
 
 \subsection{Forensic Privacy and Network Egress Audit}
 To empirically validate the Zero-Egress Invariant (Definition 1), we monitored all TCP, UDP, and TLS sockets using Wireshark and Chromium DevTools Protocol (\texttt{Network.requestWillBeSent}) interception throughout the execution of the full benchmark suite.
