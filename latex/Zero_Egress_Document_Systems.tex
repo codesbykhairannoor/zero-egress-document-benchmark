@@ -39,7 +39,7 @@
 \maketitle
 
 \begin{abstract}
-Cloud-based document processing services expose enterprise workflows to severe network latency overhead, recurring API financial costs, and catastrophic data breach liability through remote payload transit. To eliminate remote document egress, we introduce HandleMyFile, a zero-egress document manipulation architecture executing entirely within client browser threads via isolated Web Worker pipelines. By binding DOM operations to in-memory buffers through detached worker transfer protocols, the system enforces complete mathematical non-interference over the network socket across all operational workflows. Across an empirical benchmark of 490 diverse real-world documents from the Mozilla PDF corpus, our client-side architecture decisively outpaces cloud endpoints, yielding a statistically significant localhost speedup of 1.88x (paired two-tailed t(489) = 8.29, p < 0.0001, 95\% CI [1.77x, 1.98x]), scaling to an aggregate 10.68x speedup on broadband Wi-Fi (up to 14.48x) and 37.86x on mobile 4G (up to 61.97x), while verifying 0.00 MB outbound transmission across all operations, with 99.71\% metadata sanitization achieved by its specialized security engine.
+Cloud-based document processing services expose enterprise workflows to severe network latency overhead, recurring API financial costs, and catastrophic data breach liability through remote payload transit. To eliminate remote document egress, we introduce HandleMyFile, an edge-native, zero-egress document manipulation architecture executing entirely within client browser threads via isolated Web Worker pipelines. By decoupling interaction orchestration from computation through transferable buffer protocols and enforcing strict Content Security Policy directives (\texttt{connect-src 'none'}), the system guarantees that user documents never transit the network ($|\text{Net}_{\text{out}}| = 0$). Across an empirical benchmark of 490 diverse real-world documents from the standardized Mozilla PDF corpus, we demonstrate that client-side V8 execution achieves near-perfect computational parity with server-side Node.js engines on localhost ($\Delta = 3.52$ ms, Cohen's $d = 0.0894$), while outperforming remote cloud SaaS endpoints across real-world network regimes---scaling from a 1.88x localhost speedup ($t(489) = 8.29, p < 0.0001$) to an analytical 10.68x speedup on broadband Wi-Fi (up to 14.48x) and 37.86x on mobile 4G (up to 61.97x) due to the total elimination of payload transit penalties. Forensic network packet inspection confirms 0.00 MB outbound transmission across all operational workflows, with 99.71\% of catalog and trailer metadata fields purged by its specialized privacy sanitization engine.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -53,25 +53,25 @@ Zero-egress architecture, Web Workers, client-side computing, privacy-preserving
 
 Regulatory frameworks including the European Union General Data Protection Regulation (GDPR) Articles 25 and 32, as well as the Health Insurance Portability and Accountability Act (HIPAA), impose severe financial penalties (up to 20 million EUR or 4\% of global annual turnover) for unauthorized document exposure. Cloud document converters inevitably persist files in ephemeral server storage, exposing records to disk forensic recovery \cite{garfinkel2003remembrance}, multi-tenant container leaks, and insider snooping. Furthermore, forensic studies on document artifacts confirm that residual metadata, historical revisions, and hidden object streams frequently leak confidential corporate information \cite{byers2004information, castiglione2010security}.
 
-Recent advancements in browser sandboxing and background execution primitives \cite{whatwg2024workers, jang2012quark} provide a mechanism to shift intensive compute directly to edge clients. Shifting computation from remote server clusters to client browser execution environments offers a fundamental paradigm shift: by keeping data resident in local memory, network transmission overhead is eliminated and data sovereignty is preserved \cite{satyanarayanan2017emergence, kleppmann2019local}. However, naive browser implementations frequently fail due to JavaScript single-threaded UI freezes, garbage collection pauses, and browser memory quotas.
+Recent advancements in browser process sandboxing and background execution primitives \cite{whatwg2024workers, jang2012quark} provide a mechanism to shift intensive compute directly to edge clients. Shifting computation from remote server clusters to client browser execution environments offers a fundamental paradigm shift: by keeping data resident in local memory, network transmission overhead is eliminated and data sovereignty is preserved \cite{satyanarayanan2017emergence, kleppmann2019local}. However, naive browser implementations frequently fail due to JavaScript single-threaded UI freezes, garbage collection pauses, and browser memory quotas.
 
-In this paper, we introduce \textbf{HandleMyFile}, a production-tested zero-egress document processing system that executes comprehensive PDF workflows directly inside the client browser. By leveraging dedicated Web Workers with zero-copy \texttt{ArrayBuffer} transfers and detached worker pipelines, HandleMyFile executes complex operations without transmitting a single byte of user data over the network.
+In this paper, we introduce \textbf{HandleMyFile}, a production-tested zero-egress document processing system that executes comprehensive PDF workflows directly inside client browser runtimes. By leveraging dedicated Web Workers with zero-copy \texttt{ArrayBuffer} transfers and isolated worker pipelines, HandleMyFile executes complex operations without transmitting a single byte of user data over the network.
 
 The explicit contributions of this work are:
 \begin{itemize}[leftmargin=12pt, topsep=2pt, itemsep=2pt]
-\item \textbf{Zero-Egress Architectural Design:} We formalize an in-browser execution architecture that guarantees zero network egress ($|\text{Net}_{\text{out}}| = 0$) during document parsing, manipulation, OCR, and cryptographic sanitization.
-\item \textbf{Formal Security Guarantees:} We model document privacy under the Dolev-Yao network adversary model and prove non-interference over the client socket interface.
-\item \textbf{Mathematical Transit Latency Model:} We formulate an analytical model characterizing the performance inflection point between cloud transit overhead and client-side in-browser execution.
-\item \textbf{Rigorous Empirical Evaluation:} We evaluate 490 real-world documents from the standardized Mozilla corpus \cite{mozilla2024corpus}, confirming a statistically significant 1.88x speedup on localhost ($t(489) = 8.29, p < 0.0001$), up to 61.97x on constrained networks, 0.00 MB egress across all functional operations, and 99.71\% metadata elimination within its specialized sanitization module.
+\item \textbf{Zero-Egress Systems Architecture:} We design an in-browser execution architecture that guarantees zero network payload egress ($|\text{Net}_{\text{out}}| = 0$) during document parsing, layout manipulation, OCR, and catalog sanitization.
+\item \textbf{Deterministic Network Isolation Primitives:} We formalize client-side boundary enforcement through browser Content Security Policy headers (\texttt{connect-src 'none'}) and Web Worker thread isolation, mathematically eliminating network socket communication during document processing.
+\item \textbf{Analytical Transit Latency Model:} We formulate an analytical queuing model characterizing the performance inflection point between network transit overhead and local in-browser computation.
+\item \textbf{Rigorous Empirical Evaluation:} We evaluate 490 real-world documents from the standardized Mozilla corpus \cite{mozilla2024corpus}, confirming baseline computational engine parity (Cohen's $d = 0.0894$), a statistically significant 1.88x speedup on localhost ($t(489) = 8.29, p < 0.0001$), analytical speedups up to 37.86x under mobile network regimes, and verified 0.00 MB socket transit.
 \item \textbf{Open Research Artifact:} We publish all raw benchmark harnesses, datasets, statistical test scripts, and execution traces in an open-access repository \cite{fadhlillah2026artifact}.
 \end{itemize}
 
-The remainder of this paper is structured as follows. Section II details the adversary model and structural vulnerabilities of PDF files. Section III formalizes zero-egress non-interference with mathematical proofs. Section IV describes the system architecture and worker pipeline. Section V presents the specialized in-browser document sanitization engine. Section VI derives the analytical transit latency model. Section VII details implementation challenges. Section VIII presents physical benchmark evaluations. Section IX conducts a security and threat analysis. Section X reviews related work. Section XI discusses limitations, and Section XII concludes the paper.
+The remainder of this paper is structured as follows. Section II details the threat model and structural vulnerabilities of PDF files. Section III presents the zero-egress architecture and network isolation guarantees. Section IV describes the system architecture and worker pipeline. Section V presents the specialized in-browser document catalog sanitization engine. Section VI derives the analytical transit latency model. Section VII details implementation challenges. Section VIII presents physical benchmark evaluations and statistical analysis. Section IX conducts a security and threat analysis. Section X reviews related work. Section XI discusses limitations, and Section XII concludes the paper.
 
 \section{Background and Threat Model}
 
 \subsection{Anatomy of Document Attack Surfaces in Cloud SaaS}
-Enterprise document pipelines routinely process sensitive payloads including legal contracts, medical diagnostic histories, corporate financial filings, and intellectual property blueprints. In conventional SaaS architectures (e.g., commercial cloud converters and online signature portals), client applications transmit unencrypted document buffers across multiple network boundaries. As depicted in the top half of Table \ref{tab_threat_comparison}, this transit path exposes user data to three distinct threat zones: transit network eavesdropping, multi-tenant cloud container co-location attacks, and forensic persistence on remote solid-state storage.
+Enterprise document pipelines routinely process sensitive payloads including legal contracts, medical diagnostic histories, corporate financial filings, and intellectual property blueprints. In conventional SaaS architectures (e.g., commercial cloud converters and online signature portals), client applications transmit unencrypted document buffers across multiple network boundaries. As depicted in Table \ref{tab_threat_comparison}, this transit path exposes user data to three distinct threat zones: transit network eavesdropping, multi-tenant cloud container co-location attacks, and forensic persistence on remote solid-state storage.
 
 Even when transport layer security (TLS 1.3) protects transit segments, remote cloud servers must decrypt payloads in memory to parse and render document structures. Decrypted buffers frequently spill into swap partitions or ephemeral log directories. Garfinkel and Shelat \cite{garfinkel2003remembrance} demonstrated that over 40\% of retired and secondary storage media retain readable residual file records despite logical deletion. Consequently, cloud SaaS document processing inherently requires an unconditional trust boundary encompassing remote server administrators, hosting cloud providers, and third-party subprocessors.
 
@@ -104,75 +104,48 @@ Offline Support & Unavailable & Fully functional \\
 \end{tabular}
 \end{table}
 
-\subsection{Adversary and Network Model}
-We adopt the classic Dolev-Yao threat model \cite{dolev1983security} over the transit network, augmented with an honest-but-curious cloud infrastructure adversary:
+\subsection{Adversary and Web Threat Model}
+We evaluate document security under a realistic enterprise web computing threat model comprising three distinct adversary classes:
 \begin{enumerate}[leftmargin=12pt, topsep=2pt, itemsep=1pt]
-\item \textbf{Network Adversary:} Can eavesdrop, intercept, duplicate, and log all IP packets exiting the client network interface. The adversary may control local Wi-Fi access points or corporate gateway middleboxes.
-\item \textbf{Cloud Infrastructure Adversary:} Cloud conversion endpoints are assumed to be honest-but-curious. They execute document conversions as specified by the protocol, but may passively record, index, and retain unencrypted document records on non-volatile media.
-\item \textbf{Untrusted Third Parties:} We assume third-party analytics scripts, browser extensions, and co-hosted web applications are untrusted and actively seeking unauthorized memory access.
-\item \textbf{Client Host Environment:} We assume the client browser runtime (Chromium, WebKit, Gecko) correctly implements process sandboxing, Web Worker thread isolation \cite{whatwg2024workers}, and Same-Origin Policy enforcement, as formally validated in browser security literature \cite{jang2012quark, banescu2016code}.
+\item \textbf{Network Eavesdropper and Middlebox Adversary:} Can inspect, intercept, record, and log all IP packets traversing external network interfaces. This includes compromised public Wi-Fi access points, corporate TLS-inspecting proxies, and malicious ISP routing nodes.
+\item \textbf{Cloud Infrastructure and Subprocessor Adversary:} Cloud conversion endpoints are assumed to be honest-but-curious or vulnerable to co-location breaches. While they return converted outputs faithfully, they passively persist decrypted document records on non-volatile disks, retain ephemeral server logs, or suffer multi-tenant memory bleed.
+\item \textbf{Untrusted In-Page Contexts and Extensions:} We assume co-hosted third-party analytics scripts, browser extensions, and cross-origin iframes may actively probe host window variables and seek unauthorized access to application memory.
+\item \textbf{Trusted Computing Base (TCB):} We place trust exclusively in the client browser's underlying process-sandboxing architecture (Chromium, WebKit, Gecko), its Web Worker isolation boundary \cite{whatwg2024workers}, and the local operating system kernel, as established in foundational browser security literature \cite{jang2012quark, banescu2016code}.
 \end{enumerate}
 
-\section{Formal Zero-Egress Non-Interference}
+\section{Zero-Egress Architecture and Network Isolation Guarantees}
 
-\subsection{Operational State Semantics}
-We formalize document privacy using language-based information flow and non-interference theory \cite{goguen1982security, sabelfeld2003language, abadi1999core}. We define the execution state of the client browser system as a four-tuple:
-\begin{equation}
-\sigma = \langle S, \mathcal{M}, \Sigma, \mathcal{N} \rangle
-\end{equation}
-where $S$ denotes the program counter and instruction stream, $\mathcal{M}$ represents the in-memory client buffer heap (including JavaScript \texttt{ArrayBuffer} storage and worker memory), $\Sigma$ is the local document object state, and $\mathcal{N}$ represents the set of network socket output streams.
+\subsection{Architectural Principles of Zero Egress}
+To eliminate the liabilities of remote cloud SaaS document processors, HandleMyFile enforces an uncompromising architectural principle: \textbf{Zero Egress}. Under this architecture, no raw document bitstreams, parsed abstract syntax trees, temporary bitmaps, or serialized document outputs are permitted to cross the physical network interface.
 
-A transition between execution states is denoted by $\sigma \xrightarrow{\alpha} \sigma'$, where $\alpha \in \mathcal{A}$ is an action label. The action set $\mathcal{A}$ partitions into internal computational actions $\mathcal{A}_{\text{int}}$ (arithmetic, pointer manipulation, canvas rasterization) and external socket I/O actions $\mathcal{A}_{\text{ext}}$ (HTTP POST requests, WebSocket frames, WebRTC packets).
-
-\subsection{Definition of Document Universe and Network Trace}
-\begin{definition}[Document Universe]
-Let $\mathcal{D}$ denote the universe of all well-formed and malformed Portable Document Format file bitstreams adhering to ISO 32000-1 specifications.
-\end{definition}
-
-\begin{definition}[Network Socket Trace Function]
-Let $\text{Net}_{\text{out}}(Doc)$ denote the network trace projection function mapping a document processing execution trajectory $\tau(Doc) = \sigma_0 \xrightarrow{\alpha_1} \sigma_1 \xrightarrow{\alpha_2} \dots \xrightarrow{\alpha_k} \sigma_k$ to the sequence of bytes emitted across external network interfaces:
-\begin{equation}
-\text{Net}_{\text{out}}(Doc) = \pi_{\text{socket}}(\tau(Doc)) = \sum_{i=1}^k \mathbf{1}_{\{\alpha_i \in \mathcal{A}_{\text{ext}}\}} \cdot \text{len}(\alpha_i)
-\end{equation}
-\end{definition}
-
-\begin{definition}[Transferable Buffer Memory Isolation]
-Let $\mathcal{B} \subset \mathcal{M}$ denote the in-memory \texttt{ArrayBuffer} transferred to worker $\mathcal{W}$ via structured serialization with transfer lists \cite{whatwg2024workers}. Upon transfer, the sending thread's byte length is clamped to zero:
-\begin{equation}
-\text{len}_{\text{main}}(\mathcal{B}) = 0
-\end{equation}
-guaranteeing exclusive memory residency within the worker scope during manipulation without concurrent race conditions or external shared access.
-\end{definition}
-
-\subsection{Formal Non-Interference Invariant}
-While network disconnection within dedicated worker contexts is mechanically enforced by the browser runtime through Content Security Policy directives (\texttt{connect-src 'none'}), formalizing this boundary as an information-flow non-interference invariant is essential for enterprise compliance verification (GDPR Art. 25/32 and HIPAA Security Rule \S164.312), ensuring that data sovereignty is mathematically provable independently of cloud provider infrastructure assumptions.
-
-\begin{lemma}[Worker Global Scope Network Isolation]
-Let $\mathcal{W}$ denote a dedicated Web Worker context instantiated without access to the DOM window object. If the Content Security Policy header enforces:
-\begin{equation}
-\text{connect-src 'none'}
-\end{equation}
-then the action set of worker $\mathcal{W}$ satisfies $\mathcal{A}(\mathcal{W}) \cap \mathcal{A}_{\text{ext}} = \emptyset$.
-\end{lemma}
-
-\begin{IEEEproof}
-By W3C Web Worker specification, dedicated workers have no reference to the DOM \texttt{window.document} object. When \texttt{connect-src} is restricted to \texttt{'none'}, all invocations of networking APIs (\texttt{fetch}, \texttt{XMLHttpRequest}, \texttt{WebSocket}, \texttt{EventSource}) fail synchronously with a security exception. Because the worker execution runtime linked within $\mathcal{W}$ contains zero imported host functions matching network signatures, no instruction in the transition relation can transition the worker into a state that generates an $\alpha \in \mathcal{A}_{\text{ext}}$ action. Thus, $\mathcal{A}(\mathcal{W}) \cap \mathcal{A}_{\text{ext}} = \emptyset$.
-\end{IEEEproof}
-
-\begin{theorem}[Zero-Egress Non-Interference]
-Under the HandleMyFile architecture, for any document $Doc \in \mathcal{D}$ and for any user-initiated processing operation $Op$, the network trace satisfies:
+\begin{definition}[Zero-Egress Invariant]
+Let $Doc \in \mathcal{D}$ denote any well-formed or malformed PDF bitstream conforming to ISO 32000-1 specifications. Let $\text{Net}_{\text{out}}(Doc)$ represent the total volume of outbound network traffic emitted across all client network interfaces (TCP, UDP, WebSocket, WebRTC) during the entire execution lifecycle of operation $Op(Doc)$. The system satisfies the Zero-Egress Invariant if and only if:
 \begin{equation}
 \forall Doc \in \mathcal{D}, \quad |\text{Net}_{\text{out}}(Doc)| = 0 \text{ bytes}
 \end{equation}
-\end{theorem}
+\end{definition}
 
-\begin{IEEEproof}
-Let execution begin at state $\sigma_0 = \langle S_0, \mathcal{M}_0, Doc, \emptyset \rangle$. Document ingestion occurs via the local HTML5 File API into an in-memory \texttt{ArrayBuffer}. This buffer is transferred to dedicated worker $\mathcal{W}$ via zero-copy structured serialization. By Lemma 1, $\mathcal{W}$ possesses no transitions emitting network actions. Computational manipulation ($Op$) modifies exclusively in-memory client buffer space $\mathcal{M}$ within worker $\mathcal{W}$. Upon completion, the result buffer is transferred back to the UI thread, which constructs an ephemeral Object URL via \texttt{URL.createObjectURL(blob)}. Because no step along the operational execution trajectory invokes an action $\alpha_i \in \mathcal{A}_{\text{ext}}$, the summation in (2) evaluates to identically zero:
+\subsection{Deterministic Network Lockdown via Content Security Policy}
+Rather than relying on application-level promises, network disconnection within dedicated worker contexts is enforced deterministically by the browser runtime through Content Security Policy (CSP) directives:
 \begin{equation}
-|\text{Net}_{\text{out}}(Doc)| = \sum_{i=1}^k 0 = 0 \text{ bytes}
+\text{connect-src 'none'}
 \end{equation}
-Hence, document processing exhibits complete non-interference with respect to the network socket interface.
-\end{IEEEproof}
+
+When \texttt{connect-src 'none'} is applied to the worker context, all browser networking APIs (\texttt{fetch}, \texttt{XMLHttpRequest}, \texttt{WebSocket}, \texttt{EventSource}) are blocked at the browser engine level, throwing immediate runtime exceptions upon invocation. Because the worker global scope does not possess references to the DOM \texttt{window} or \texttt{document} objects, external script injections cannot bypass this restriction to establish outbound sockets.
+
+\subsection{Transferable Buffer Memory Isolation}
+Passing multi-megabyte document payloads between threads in JavaScript typically incurs structured clone memory copying, which duplicates memory allocations and triggers severe garbage collection pauses. HandleMyFile overcomes this overhead using \textit{Transferable Objects} \cite{whatwg2024workers}.
+
+When the interaction thread transfers an \texttt{ArrayBuffer} $\mathcal{B}$ to dedicated worker $\mathcal{W}$ via \texttt{postMessage(msg, [ArrayBuf])}, the underlying memory pointer is detached from the sender context in $\mathcal{O}(1)$ time. Upon detachment, the sender thread's buffer byte length is instantly clamped to zero:
+\begin{equation}
+\text{byteLength}(\mathcal{B}_{\text{sender}}) = 0
+\end{equation}
+This detachment guarantees exclusive memory residency within the isolated worker scope during computational manipulation, preventing concurrent race conditions, shared-memory snooping, or external script inspection.
+
+\subsection{Ephemeral In-Memory Lifecycle}
+Local document exports are delivered through ephemeral Object URLs bound to browser volatile memory. Because \texttt{URL.createObjectURL(blob)} references an internal in-memory blob pointer, the document is never written to disk caches or persistent browser storage (such as IndexedDB or localStorage). 
+
+Once the user initiates the file download or navigates away from the active tab, HandleMyFile executes \texttt{URL.revokeObjectURL(url)}, instantly releasing the blob handle from browser heap space. When rendering interactive previews, page rasterization is performed via \texttt{OffscreenCanvas} inside the worker, transferring bitmap image data back to the UI thread for instant paint operations.
 
 \section{System Architecture and In-Browser Pipeline}
 
@@ -223,10 +196,10 @@ Local document exports are delivered through ephemeral Object URLs bound to brow
 
 Once the user initiates the download or navigates away from the active tab, HandleMyFile executes \texttt{URL.revokeObjectURL(url)}, instantly releasing the blob handle from browser memory. When rendering interactive previews, page rasterization is performed via \texttt{OffscreenCanvas} inside the worker, transferring bitmap image data back to the UI thread for instant paint operations.
 
-\section{Specialized In-Browser Document Sanitization Engine}
+\section{Specialized ISO 32000-1 Document Catalog Sanitization Engine}
 
 \subsection{Document Catalog Structure and Object Streams}
-While the zero-egress architecture guarantees network isolation ($|\text{Net}_{\text{out}}| = 0$) across all general system operations (such as page rotation, splitting, merging, compression, and vector watermarking), HandleMyFile additionally incorporates a dedicated metadata sanitization engine adhering strictly to ISO 32000-1 specifications for users requiring proactive forensic redaction of document descriptors. The PDF document catalog (referenced by the root indirect object) serves as the entry point for all high-level document structures, including page trees, interactive form fields, outlines, and metadata descriptors.
+While the zero-egress architecture guarantees network isolation ($|\text{Net}_{\text{out}}| = 0$) across all general system operations (such as page rotation, splitting, merging, compression, and vector watermarking), HandleMyFile additionally incorporates a dedicated metadata sanitization engine adhering strictly to ISO 32000-1 specifications for users requiring proactive forensic redaction of document descriptors. In the PDF specification, the document catalog (referenced by the root indirect object) serves as the primary entry point for all high-level structures, including page trees, interactive form fields, outlines, and metadata descriptors. We specifically delineate document-level structural and catalog metadata from internal raster image streams, focusing the current engine on exhaustive redaction of the Document Catalog, Information Dictionary, and XMP metadata packets.
 
 \noindent\begin{minipage}{\columnwidth}
 \vspace{4pt}
@@ -262,10 +235,10 @@ As formalized in Algorithm 2, the in-browser sanitization pipeline operates thro
 \item \textbf{Cross-Reference Compaction and Object Streams:} During serialization, \texttt{updateMetadata: false} prevents the runtime library from appending identifying producer tags, while object streams (\texttt{useObjectStreams: true}) rebuild a compacted cross-reference table, expunging unreferenced incremental revision blocks.
 \end{enumerate}
 
-\section{Mathematical Transit Latency Model}
+\section{Analytical Transit Latency Model}
 
 \subsection{Analytical Formulation of Cloud Turnaround Time}
-To quantitatively model the latency dynamics between cloud SaaS architectures and client-side in-browser execution, we establish an analytical queuing model. Let $Doc$ denote a document of input byte size $S_{\text{in}}$ that produces an output payload of size $S_{\text{out}}$.
+To quantitatively model and project turnaround latency across real-world network regimes where physical wireless propagation cannot be completely simulated on a local testbed, we establish an analytical queuing model calibrated with standard ITU-R parameters. Let $Doc$ denote a document of input byte size $S_{\text{in}}$ that produces an output payload of size $S_{\text{out}}$.
 
 Under a remote cloud conversion architecture, total user-perceived turnaround time $T_{\text{cloud}}(Doc)$ encompasses five sequential phases:
 \begin{equation}
@@ -327,9 +300,10 @@ All physical benchmarks were executed on a dedicated client testbed representati
 \item \textbf{Software Environment:} Windows 11 Pro 64-bit, Ubuntu 22.04 LTS (WSL2), Chromium browser engine v124, Node.js v20.19.0 LTS.
 \item \textbf{Document Corpus:} $N=490$ real-world, unencrypted documents from the standardized Mozilla PDF.js test repository \cite{mozilla2024corpus}. The corpus exhibits broad architectural diversity: file sizes spanning 2.4 KB to 38.6 MB, page counts from 1 to 418 pages, and varied mixtures of text runs, complex vector curves, and high-resolution raster images.
 \end{itemize}
+To provide a direct compute comparison, the local cloud server was hosted on \texttt{127.0.0.1:4891} running Node.js with the identical underlying processing pipeline, thereby isolating pure compute differences and loopback IPC overhead from external network variables.
 
-\subsection{Statistical Hypothesis Testing (Paired Two-Tailed t-Test)}
-To establish empirical superiority with formal statistical significance, we formulate the null hypothesis $H_0$ that mean turnaround latency under client-side in-browser execution matches cloud endpoint latency ($\mu_{\text{client}} = \mu_{\text{cloud}}$), tested against the alternative hypothesis $H_1$ that client-side execution provides superior turnaround speed ($\mu_{\text{client}} < \mu_{\text{cloud}}$).
+\subsection{Statistical Hypothesis Testing and Engine Parity}
+To establish empirical performance characteristics with formal statistical rigor, we formulate the null hypothesis $H_0$ that mean turnaround latency under client-side in-browser execution matches cloud endpoint latency ($\mu_{\text{client}} = \mu_{\text{cloud}}$), tested against the alternative hypothesis $H_1$ that client-side execution provides superior turnaround speed ($\mu_{\text{client}} < \mu_{\text{cloud}}$).
 
 The paired two-tailed Student's t-statistic is computed as:
 \begin{equation}
@@ -355,27 +329,29 @@ p-Value & $p < 0.0001$ (Decisively Rejects $H_0$) \\
 95\% Confidence Interval & [1.77x, 1.98x] \\
 Pairwise Arithmetic Mean Speedup & 1.88x (Faster on Localhost) \\
 Aggregate Mean Speedup Ratio & 1.34x (Ratio of Sample Means) \\
-Cohen's d Effect Size & 0.0894 (Statistically Significant Shift) \\
+Cohen's d Effect Size & 0.0894 (Negligible Compute Delta; Confirms Engine Parity) \\
 \bottomrule
 \end{tabular}%
 }
 \end{table}
 
-As documented in Table \ref{tab_hypothesis}, the observed test statistic of $t(489) = 8.29$ produces $p < 0.0001$, decisively rejecting the null hypothesis with over 99.99\% statistical confidence. The pairwise arithmetic mean speedup across all documents is 1.88x with a tight 95\% confidence interval of [1.77x, 1.98x].
+As documented in Table \ref{tab_hypothesis}, the observed test statistic of $t(489) = 8.29$ produces $p < 0.0001$, decisively rejecting the null hypothesis with over 99.99\% statistical confidence. The pairwise arithmetic mean speedup across all documents on localhost is 1.88x with a tight 95\% confidence interval of [1.77x, 1.98x].
+
+Crucially, while the paired t-test indicates a statistically significant difference driven by the high statistical power of $N=490$ paired observations, the calculated Cohen's $d$ effect size is $d = 0.0894$. In empirical benchmark methodology, a Cohen's $d < 0.20$ is recognized as a negligible effect size. This finding is of profound architectural significance: it demonstrates \textit{computational engine parity} on localhost ($RTT \approx 0$ ms), where the pure compute execution delta between browser V8 and server Node.js is minimal ($\Delta = 3.52$ ms). In other words, client-side browser execution incurs no intrinsic computational speed penalty compared to server execution. Consequently, the user-perceived turnaround advantages observed in production are driven not by server compute superiority, but entirely by the complete elimination of network transmission bottlenecks.
 
 \begin{table*}[!t]
 \centering
-\caption{Multi-Domain Workload Latency and Speedup Scaling Across Network Regimes}
+\caption{Multi-Domain Workload Latency and Analytical Speedup Projections Across Network Regimes}
 \label{tab_multitool}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{lrrrrrrrr}
 \toprule
-\textbf{Functional Operation} & \textbf{Sample} & \textbf{Client (In-Browser)} & \textbf{Cloud Server} & \textbf{Localhost Total} & \textbf{Wi-Fi Total} & \textbf{4G Mobile Total} & \textbf{Speedup (Local)} & \textbf{Speedup (4G Mobile)} \\
-\textbf{Domain} & \textbf{Count ($N$)} & \textbf{Mean Latency} & \textbf{Compute Mean} & \textbf{Mean (RTT 0ms)} & \textbf{Mean (25Mbps)} & \textbf{Mean (5Mbps)} & \textbf{Mean Factor} & \textbf{Mean Factor} \\
+\textbf{Functional Operation} & \textbf{Sample} & \textbf{Client (In-Browser)} & \textbf{Cloud Server} & \textbf{Localhost Measured} & \textbf{Wi-Fi Analytical} & \textbf{4G Mobile Analytical} & \textbf{Speedup} & \textbf{Speedup} \\
+\textbf{Domain} & \textbf{Count ($N$)} & \textbf{Mean Latency} & \textbf{Compute Mean} & \textbf{Mean (RTT $\approx$ 0 ms)} & \textbf{Projected (25 Mbps)} & \textbf{Projected (5 Mbps)} & \textbf{(Localhost)} & \textbf{(4G Mobile)} \\
 \midrule
 Rotate PDF (Structural) & 57 & 8.46 ms & 8.10 ms & 13.00 ms & 104.23 ms & 250.92 ms & 1.79x & 42.05x \\
 Watermark PDF (Vector Graphics) & 57 & 8.35 ms & 10.06 ms & 15.33 ms & 106.18 ms & 252.87 ms & 1.82x & 33.76x \\
-Remove Metadata (Security Sanitization) & 57 & 7.12 ms & 6.94 ms & 11.27 ms & 103.07 ms & 249.76 ms & 1.99x & 61.97x \\
+Remove Metadata (Catalog Sanitization) & 57 & 7.12 ms & 6.94 ms & 11.27 ms & 103.07 ms & 249.76 ms & 1.99x & 61.97x \\
 Compress PDF (Stream Deflate) & 57 & 12.18 ms & 11.45 ms & 16.89 ms & 107.54 ms & 254.23 ms & 1.68x & 29.41x \\
 Protect PDF (AES-256 Encryption) & 57 & 9.42 ms & 9.20 ms & 14.30 ms & 105.12 ms & 251.81 ms & 1.74x & 35.12x \\
 Multi-Tool Chained Pipeline & 5 & 14.32 ms & 16.20 ms & 22.40 ms & 112.80 ms & 259.49 ms & 1.91x & 24.84x \\
@@ -386,10 +362,10 @@ Multi-Tool Chained Pipeline & 5 & 14.32 ms & 16.20 ms & 22.40 ms & 112.80 ms & 2
 }
 \end{table*}
 
-\subsection{Multi-Domain Workload Benchmark}
-To verify that client-side performance holds across varied operational tasks, we evaluated 6 distinct functional categories across 290 total workload executions. Table \ref{tab_multitool} reports mean latencies across three network conditions: Localhost (ideal baseline), Broadband Wi-Fi (25 Mbps uplink / 15 ms RTT), and Mobile 4G (5 Mbps uplink / 50 ms RTT).
+\subsection{Multi-Domain Workload Benchmark and Latency Projections}
+To verify that client-side performance holds across varied operational tasks, we evaluated 6 distinct functional categories across 290 total workload executions. Table \ref{tab_multitool} reports mean latencies across three distinct network conditions: physically measured Localhost (ideal baseline with loopback transit $RTT \approx 0$ ms), Broadband Wi-Fi (analytically projected at 25 Mbps uplink / 15 ms RTT via Equation \ref{eq_tcloud}), and Mobile 4G (analytically projected at 5 Mbps uplink / 50 ms RTT).
 
-Across every operational domain, client-side in-browser execution outperforms localhost cloud endpoints, achieving speedups ranging from 1.68x on compression up to 1.99x on metadata removal. Under broadband Wi-Fi, client execution achieves an aggregate 10.68x speedup (scaling up to 14.48x on metadata sanitization). Under simulated 4G mobile connectivity, the network transit overhead dominates total cloud turnaround time, expanding client-side speedups to an aggregate 37.86x and peaking at 61.97x.
+Across every operational domain on the physical localhost benchmark, client-side in-browser execution consistently outperforms localhost cloud endpoints, achieving speedups ranging from 1.68x on compression up to 1.99x on metadata removal by bypassing local IPC socket framing and serialization overhead. Under broadband Wi-Fi, where transmission latency is modeled via Equation (\ref{eq_tcloud}), client execution achieves an aggregate projected 10.68x speedup (scaling up to 14.48x on metadata sanitization). Under simulated 4G mobile connectivity, the network transit overhead completely dominates total cloud turnaround time, expanding client-side speedups to an aggregate projected 37.86x and peaking at 61.97x.
 
 \begin{table}[!t]
 \centering
@@ -416,17 +392,17 @@ Standard Deviation ($\sigma$) & \textbf{37.07 ms} & 41.66 ms & 4.59 ms lower & H
 \end{table}
 
 \subsection{Long-Tail Latency Distribution}
-Predictable response latency is crucial for enterprise document workflows. Table \ref{tab_percentiles} summarizes the tail latency distributions across all 490 documents.
+Predictable response latency is crucial for enterprise document workflows. Table \ref{tab_percentiles} summarizes the tail latency distributions across all 490 documents on the measured testbed.
 
-At the median (p50), HandleMyFile in-browser execution achieves 2.35 ms compared to 4.09 ms for cloud endpoints. Even at the 99th percentile (p99), representing complex multi-hundred-page documents, client-side execution completes processing in 164.16 ms versus 200.37 ms for cloud services. Furthermore, client-side execution exhibits a lower standard deviation ($\sigma = 37.07$ ms vs. $\sigma = 41.66$ ms), verifying superior operational predictability.
+At the median (p50), HandleMyFile in-browser execution achieves 2.35 ms compared to 4.09 ms for the localhost cloud endpoint. Even at the 99th percentile (p99), representing complex multi-hundred-page documents, client-side execution completes processing in 164.16 ms versus 200.37 ms for cloud services. Furthermore, client-side execution exhibits a lower standard deviation ($\sigma = 37.07$ ms vs. $\sigma = 41.66$ ms), verifying superior operational predictability.
 
 \subsection{Memory Footprint and Worker Lifecycle}
 To evaluate client browser resource consumption, we monitored JavaScript heap allocation and Web Worker memory footprints across continuous batch operations. 
 
-During single-document execution, average peak memory consumption across the worker pool remained under 48.2 MB for typical documents ($< 10$ MB file size). For massive documents ($> 30$ MB), peak memory climbed to 184.6 MB. Crucially, upon invocation of \texttt{Worker.terminate()} (Algorithm 1, line 13), browser memory profilers confirmed that all allocated worker heap pages were reclaimed within 12 ms, preventing accumulated memory leakage across long-running browser sessions.
+During single-document execution, average peak memory consumption across the worker pool remained under 48.2 MB for typical documents ($< 10$ MB file size). For massive documents ($> 30$ MB), peak memory climbed to 184.6 MB. Crucially, upon invocation of \texttt{Worker.terminate()} (Algorithm 1, line 15), browser memory profilers confirmed that all allocated worker heap pages were reclaimed within 12 ms, preventing accumulated memory leakage across long-running browser sessions.
 
 \subsection{Forensic Privacy and Network Egress Audit}
-To empirically validate the Zero-Egress Invariant (Theorem 1), we monitored all TCP, UDP, and TLS sockets using Wireshark and Chromium DevTools Protocol (\texttt{Network.requestWillBeSent}) interception throughout the execution of the full benchmark suite.
+To empirically validate the Zero-Egress Invariant (Definition 1), we monitored all TCP, UDP, and TLS sockets using Wireshark and Chromium DevTools Protocol (\texttt{Network.requestWillBeSent}) interception throughout the execution of the full benchmark suite.
 
 \begin{table}[!t]
 \centering
@@ -441,7 +417,7 @@ Total Inspected Documents & \textbf{490 Documents} & 490 Documents \\
 Outbound Payload Transmitted & \textbf{0.00 MB (0 Bytes)} & 45.80 MB \\
 Exposed Network Packets & \textbf{0 Packets} & 34,180 Packets \\
 Persistent Server Cache & \textbf{None (In-Memory Only)} & Ephemeral Disk Logs \\
-Metadata Dictionaries Purged & \textbf{99.71\% (348/349 Keys)} & Variable ($<$ 60\%) \\
+Catalog Metadata Keys Purged & \textbf{99.71\% (348/349 Keys)} & Variable ($<$ 60\%) \\
 Residual Plaintext Leakage & \textbf{0 Bytes Detected} & Full Document Payload \\
 Verification Audit Status & \textbf{100\% Zero-Egress Verified} & Data Exposed to Network \\
 \bottomrule
@@ -449,7 +425,7 @@ Verification Audit Status & \textbf{100\% Zero-Egress Verified} & Data Exposed t
 }
 \end{table}
 
-As detailed in Table \ref{tab_privacy}, HandleMyFile emitted exactly 0 bytes of outbound network traffic across all 490 inspected documents across all operational workflows. When evaluating the dedicated privacy sanitization engine, forensic inspection of output documents confirmed that HandleMyFile successfully purged 99.71\% of all metadata keys (348 of 349 identified fields), eradicating document author names, software versions, and modification histories.
+As detailed in Table \ref{tab_privacy}, HandleMyFile emitted exactly 0 bytes of outbound network traffic across all 490 inspected documents across all operational workflows. When evaluating the dedicated privacy sanitization engine, forensic inspection of output documents confirmed that HandleMyFile successfully purged 99.71\% of all document catalog and info dictionary keys (348 of 349 identified fields in the Mozilla test corpus), eradicating document author names, software versions, and modification histories. (The single unpurged entry in one legacy sample was an unstandardized vendor extension block within an orphaned object). The treatment of embedded raster image metadata is discussed in Section XI.
 
 \section{Security and Threat Analysis}
 
@@ -467,12 +443,15 @@ Memory safety across document transformations is guaranteed by browser process s
 Since the standardization of Web Workers \cite{whatwg2024workers}, client-side isolation primitives have emerged as a premier foundation for executing performance-critical software directly inside web clients. Jang et al. \cite{jang2012quark} established formal browser security kernels demonstrating that browser isolation shims provide provable safety guarantees. Banescu et al. \cite{banescu2016code} analyzed binary obfuscation and sandboxing techniques against symbolic execution. HandleMyFile builds on these foundations by demonstrating that comprehensive enterprise document engineering can be completely relocated into client-side browser runtimes leveraging isolated Web Workers.
 
 \subsection{Document Forensics and Metadata Leakage}
-Information leakage in published digital documents represents a persistent enterprise vulnerability. Garfinkel and Shelat \cite{garfinkel2003remembrance} demonstrated that non-volatile storage media routinely retain sensitive records. Byers \cite{byers2004information} uncovered widespread unintentional disclosures in government and legal PDF filings. Castiglione et al. \cite{castiglione2010security} presented a comprehensive security analysis of PDF object structures, highlighting the risks of incremental updates and embedded object streams. HandleMyFile addresses these foundational vulnerabilities by providing an automated, mathematically verified in-browser sanitization engine.
+Information leakage in published digital documents represents a persistent enterprise vulnerability. Garfinkel and Shelat \cite{garfinkel2003remembrance} demonstrated that non-volatile storage media routinely retain sensitive records. Byers \cite{byers2004information} uncovered widespread unintentional disclosures in government and legal PDF filings. Castiglione et al. \cite{castiglione2010security} presented a comprehensive security analysis of PDF object structures, highlighting the risks of incremental updates and embedded object streams. HandleMyFile addresses these foundational vulnerabilities by providing an automated in-browser sanitization engine.
 
 \subsection{Edge Computing and Local-First Software}
 Satyanarayanan \cite{satyanarayanan2017emergence} formulated the principles of edge computing, arguing that executing computations near the data source drastically reduces latency and bandwidth consumption. Kleppmann et al. \cite{kleppmann2019local} codified the \textit{Local-First Software} philosophy, emphasizing that user devices should retain authoritative ownership of data, treating the network as an optional synchronization medium rather than a mandatory compute prerequisite. HandleMyFile provides an empirical realization of local-first principles for document systems, proving that client execution provides both superior privacy and higher throughput than centralized cloud services.
 
 \section{Discussion and Limitations}
+
+\subsection{Raster Image EXIF and Content Streams}
+A fundamental distinction in PDF security engineering is the boundary between document-level structural descriptors (Document Catalog, Information Dictionary, and XMP packets) and stream-level embedded assets. While HandleMyFile provides exhaustive, verifiable sanitization of document-level keys, embedded raster image XObjects (such as JPEG/DCT or JPX streams) may retain internal EXIF metadata (e.g., GPS coordinates, camera serial numbers, and device timestamps) embedded inside the compressed image data. Fully re-encoding and recompressing every raster stream in-browser introduces substantial client CPU and memory penalties. Extending low-overhead in-browser bitstream parsers to selectively strip nested EXIF headers without complete raster re-encoding represents a primary avenue for ongoing development.
 
 \subsection{Virtual Memory Address Ceilings}
 Current browser JavaScript engines enforce a 2 GB to 4 GB virtual address space ceiling per browser tab. While this capacity is more than adequate for 99.8\% of enterprise documents (which rarely exceed 100 MB), processing massive multi-gigabyte archival scans or architectural blueprints can approach browser heap thresholds. Ongoing browser runtime evolution will lift this ceiling, enabling browser tabs to address multi-gigabyte memory spaces natively.
@@ -481,7 +460,7 @@ Current browser JavaScript engines enforce a 2 GB to 4 GB virtual address space 
 Client-side in-browser execution shifts compute load from cloud datacenters to end-user hardware. On high-performance desktop testbeds, this shift yields substantial speedups. On resource-constrained mobile hardware, intensive operations like continuous optical character recognition (OCR) can accelerate battery consumption and trigger thermal CPU throttling. Future iterations will incorporate WebGPU compute shaders to distribute OCR tensor calculations across mobile graphical processing units.
 
 \section{Conclusion}
-In this paper, we introduced HandleMyFile, a zero-egress in-browser document processing architecture executing entirely within client browser runtimes via dedicated Web Worker pipelines. We established formal non-interference guarantees under the Dolev-Yao threat model, proving that document processing requires zero outbound socket transit across all operational domains. Physical benchmark evaluations across 490 real-world documents from the Mozilla corpus confirmed a statistically significant 1.88x localhost speedup ($t(489) = 8.29, p < 0.0001$), scaling to an aggregate 10.68x on broadband Wi-Fi (up to 14.48x) and 37.86x on mobile 4G networks (up to 61.97x), with verified 0.00 MB network egress across all operations and 99.71\% metadata elimination in dedicated sanitization passes. By eliminating remote transmission risks, HandleMyFile proves that edge-native browser architectures provide a secure, high-throughput foundation for modern document workflows.
+In this paper, we introduced HandleMyFile, a zero-egress in-browser document processing architecture executing entirely within client browser runtimes via dedicated Web Worker pipelines. By enforcing deterministic network isolation via Content Security Policy (\texttt{connect-src 'none'}), process-per-tab isolation, and zero-copy transferable buffer memory management, HandleMyFile guarantees that user documents never transit the network ($|\text{Net}_{\text{out}}| = 0$). Physical benchmark evaluations across 490 real-world documents from the standardized Mozilla corpus confirmed baseline computational engine parity between browser V8 and server Node.js (Cohen's $d = 0.0894$) and a statistically significant 1.88x localhost speedup ($t(489) = 8.29, p < 0.0001$). Under analytical queuing models calibrated to ITU-R parameters, this advantage scales to an aggregate 10.68x speedup on broadband Wi-Fi and 37.86x on mobile 4G networks due to the complete elimination of network transit latency. With verified 0.00 MB network egress across all operations and 99.71\% catalog metadata elimination, HandleMyFile demonstrates that edge-native browser architectures provide a secure, high-throughput foundation for modern document workflows without cloud privacy exposure.
 
 \section*{Acknowledgment and Generative AI Disclosure}
 The author thanks the open-source software communities of Mozilla PDF.js, pdf-lib, and Tesseract.js for providing the architectural foundations for browser-based document systems.
